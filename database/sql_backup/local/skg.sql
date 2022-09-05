@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 01, 2022 at 02:38 PM
+-- Generation Time: Sep 05, 2022 at 08:34 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -538,9 +538,13 @@ CREATE TABLE `bq_items` (
 --
 
 INSERT INTO `bq_items` (`id`, `variable_asset_id`, `qty`, `rate`, `project_bq_id`, `project_id`, `work_scope_id`, `created_at`, `updated_at`, `remark`) VALUES
-(2, '4', '20', '5000', '2', '2', '2', '2022-09-01 02:04:48', '2022-09-01 02:04:48', NULL),
+(2, '4', '1000', '1000', '2', '2', '2', '2022-09-05 15:39:43', '2022-09-05 15:39:43', NULL),
 (3, '429', '1', '1000', '3', '2', '1', '2022-09-01 12:34:35', '2022-09-01 12:34:35', 'UpdateIte'),
-(4, '4', '10', '10', '3', '2', '1', '2022-09-01 12:38:25', '2022-09-01 12:38:25', 'Update Info Remark');
+(4, '37', '10', '7500', '3', '2', '1', '2022-09-05 14:56:45', '2022-09-05 14:56:45', 'Update Info Remark'),
+(6, '16', '10', '1000', '4', '2', '3', '2022-09-05 14:59:33', '2022-09-05 14:59:33', '0'),
+(8, '16', '10', '1000', '5', '2', '4', '2022-09-05 15:33:25', '2022-09-05 15:33:25', '0'),
+(9, '7', '9', '2900', '5', '2', '4', '2022-09-05 15:33:25', '2022-09-05 15:33:25', '0'),
+(10, '82', '2', '1000.2', '5', '2', '4', '2022-09-05 15:33:25', '2022-09-05 15:33:25', '0');
 
 -- --------------------------------------------------------
 
@@ -568,7 +572,10 @@ CREATE TABLE `bq_temporaries` (
 INSERT INTO `bq_temporaries` (`id`, `variable_asset_id`, `qty`, `rate`, `project_id`, `session_id`, `user_id`, `created_at`, `updated_at`, `remark`) VALUES
 (3, 4, '10', '10', NULL, 'xPHdqwr4xhaCq016hB0ITQK4QSoI9aV7LfQ8Ud5H', '1', '2022-09-01 02:19:30', '2022-09-01 02:19:30', 'Item Remark'),
 (4, 25, '10', '10', NULL, 'xPHdqwr4xhaCq016hB0ITQK4QSoI9aV7LfQ8Ud5H', '1', '2022-09-01 02:19:41', '2022-09-01 02:19:41', 'Item Remark'),
-(5, 73, '2', '10', NULL, 'xPHdqwr4xhaCq016hB0ITQK4QSoI9aV7LfQ8Ud5H', '1', '2022-09-01 02:19:48', '2022-09-01 02:19:48', 'Item Remark');
+(5, 73, '2', '10', NULL, 'xPHdqwr4xhaCq016hB0ITQK4QSoI9aV7LfQ8Ud5H', '1', '2022-09-01 02:19:48', '2022-09-01 02:19:48', 'Item Remark'),
+(8, 16, '10', '1000', NULL, 'hPuQurvKDFmDnHLQJmT91KMKRNqDsot5fpDpuoF2', '1', '2022-09-05 14:59:11', '2022-09-05 14:59:11', 'No Remark'),
+(9, 7, '9', '2900', NULL, 'hPuQurvKDFmDnHLQJmT91KMKRNqDsot5fpDpuoF2', '1', '2022-09-05 14:59:31', '2022-09-05 14:59:31', 'No Remark'),
+(10, 82, '2', '1000.2', NULL, 'hPuQurvKDFmDnHLQJmT91KMKRNqDsot5fpDpuoF2', '1', '2022-09-05 15:32:49', '2022-09-05 15:32:49', 'Gi Hloolw PIPE');
 
 -- --------------------------------------------------------
 
@@ -1176,6 +1183,33 @@ INSERT INTO `labours` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `labour_costs`
+--
+
+CREATE TABLE `labour_costs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `particular` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unit` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rate` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `per` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `labour_costs`
+--
+
+INSERT INTO `labour_costs` (`id`, `project_id`, `particular`, `unit`, `quantity`, `rate`, `per`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 'No 1', 'Nos', '1000', '1000', 'Nos', 1, '2022-09-05 05:23:28', '2022-09-05 05:23:28'),
+(2, 2, 'No 1', 'Nos', '1000', '1000', 'Nos', 1, '2022-09-05 05:23:28', '2022-09-05 05:23:28');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `main_warehouses`
 --
 
@@ -1706,7 +1740,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (137, '2022_08_18_003221_add_project_id_work_scope_id_to_variable_variable_request_items_table', 30),
 (138, '2022_09_01_084618_add_remark_to_bq_temporaries_table', 31),
 (139, '2022_09_01_084715_add_remark_to_bq_items_table', 31),
-(140, '2022_09_01_084748_add_remark_to_project_bqs_table', 31);
+(140, '2022_09_01_084748_add_remark_to_project_bqs_table', 31),
+(141, '2022_09_05_225632_create_labour_costs_table', 32);
 
 -- --------------------------------------------------------
 
@@ -1889,7 +1924,13 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (25, 'structure_design_fees_view', 'web', '2022-03-07 18:17:33', '2022-03-07 18:17:33'),
 (26, 'customer_edit_delete', 'web', '2022-03-15 09:04:45', '2022-03-15 09:04:45'),
 (27, 'project_delete', 'web', '2022-03-15 09:04:51', '2022-03-15 09:04:51'),
-(28, 'project_file_delete', 'web', '2022-03-17 07:54:33', '2022-03-17 07:54:33');
+(28, 'project_file_delete', 'web', '2022-03-17 07:54:33', '2022-03-17 07:54:33'),
+(29, 'variable_accept_reject', 'web', '2022-09-05 17:41:44', '2022-09-05 17:41:44'),
+(30, 'variable_qs_team_check_pass', 'web', '2022-09-05 17:41:49', '2022-09-05 17:41:49'),
+(31, 'variable_logistics_team_check', 'web', '2022-09-05 17:41:56', '2022-09-05 17:41:56'),
+(32, 'management_accept_reject', 'web', '2022-09-05 17:42:00', '2022-09-05 17:42:00'),
+(33, 'variable_logistics_team_send', 'web', '2022-09-05 17:42:05', '2022-09-05 17:42:05'),
+(34, 'variable_actual_voucher', 'web', '2022-09-05 17:42:11', '2022-09-05 17:42:11');
 
 -- --------------------------------------------------------
 
@@ -2113,7 +2154,9 @@ CREATE TABLE `project_bqs` (
 
 INSERT INTO `project_bqs` (`id`, `project_id`, `work_scope_id`, `bq_user`, `created_at`, `updated_at`, `remark`) VALUES
 (2, 2, 2, 1, '2022-09-01 02:04:48', '2022-09-01 02:04:48', NULL),
-(3, 2, 1, 1, '2022-09-01 02:23:05', '2022-09-01 02:23:05', 'Info Remark');
+(3, 2, 1, 1, '2022-09-01 02:23:05', '2022-09-01 02:23:05', 'Info Remark'),
+(4, 2, 3, 1, '2022-09-05 14:59:33', '2022-09-05 14:59:33', NULL),
+(5, 2, 4, 1, '2022-09-05 15:33:25', '2022-09-05 15:33:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -2621,6 +2664,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (23, 6),
 (24, 6),
 (25, 6),
+(14, 8),
+(12, 9),
+(13, 9),
+(16, 9),
+(19, 0),
 (5, 7),
 (6, 7),
 (7, 7),
@@ -2645,11 +2693,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (26, 7),
 (27, 7),
 (28, 7),
-(14, 8),
-(12, 9),
-(13, 9),
-(16, 9),
-(19, 0);
+(29, 7),
+(30, 7),
+(31, 7),
+(33, 7),
+(34, 7);
 
 -- --------------------------------------------------------
 
@@ -2909,7 +2957,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `employee_id`, `phone`, `nrc_number`, `gender`, `address`, `department_id`, `contact_person`, `emergency_contact`, `passport_photo`, `join_date`, `employment_type`, `last_login_at`, `last_login_ip`, `agent`, `nrc_front`, `nrc_back`, `members_list_file`, `other_file`, `is_banned`, `leave_date`, `leave_remark`, `leave_by`) VALUES
-(1, 'Admin', 'admin@skg.com', NULL, '$2y$10$iY.PTOOlASzaLY549BHGH.aQorS3bbzjX7P9wcQ2QbJH/sGWI0aXa', NULL, '2022-02-14 04:00:05', '2022-09-01 09:09:11', 'EMP-00001', '09455165415', '-', 'male', 'YGN', 1, NULL, NULL, 'public/passport/yfI6n3suGBsHHNAoFiNDKV2fVIm4EqkN2Kdmdswg.jpg', '2022-06-01 12:00 AM', 0, '2022-09-01 15:39:11', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
+(1, 'Admin', 'admin@skg.com', NULL, '$2y$10$iY.PTOOlASzaLY549BHGH.aQorS3bbzjX7P9wcQ2QbJH/sGWI0aXa', NULL, '2022-02-14 04:00:05', '2022-09-05 14:55:55', 'EMP-00001', '09455165415', '-', 'male', 'YGN', 1, NULL, NULL, 'public/passport/yfI6n3suGBsHHNAoFiNDKV2fVIm4EqkN2Kdmdswg.jpg', '2022-06-01 12:00 AM', 0, '2022-09-05 21:25:55', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
 (2, 'U AUNG MYO HTUT', 'aungmyohtut.skgroup@gmail.com', NULL, '$2y$10$jYBSEwxV5Fv0WkfDbpwz7.8J4L5nL.qNq4AJ7LXStOWxerGMssZ.S', 'CLb9kS8OAWpQUTVj1smvl85KY7LFRhhCfzQbpo6lyG2JoG00EhBy3f6pHufo', '2022-02-14 04:00:32', '2022-07-18 03:57:55', 'EMP - 00002', '09772746336', '12/OuKaTa(N)178191', 'male', 'အမှတ် (၂၄၆)၊ ၆ လမ်း၊ ၁၁ရပ်ကွက်.‌တောင်ဉက္ကလာပမြို့နယ်၊ ရန်ကုန်မြို့', 1, NULL, NULL, 'public/passport/Ow2ZsVWJ8GcLThEMnvJsrJUY2JJYFBxLVGctygx2.jpg', '2020-12-21 12:00 AM', 0, '2022-06-01 11:51:59', '103.217.156.204', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0', 'public/photo/PJHizF8U2stJ9aTVEKMOUdNBkyCHjoOG5iVxzbbT.jpg', 'public/photo/GiyMPenfBnPMJRjUlM2VT8LNTRfvRwZVsCPpJUO4.jpg', '', NULL, 0, '2022-07-18 10:27 AM', 'Ok', '1'),
 (3, 'Daw Pearl Yadanar Soe', 'pearl.skgroup@gmail.com', NULL, '$2y$10$5ZtZj/NPdW8QTxYw8jHuT.Yt6GEd.2PSy0h.iBmGbOha9piqpfYge', 'w0qC5zZnJI4ZlSTqv1CBlLGe0LtbNpIwnVGtMcN4aS0ZoA1dBl9ky6xG8uQL', '2022-03-07 17:39:27', '2022-06-30 08:14:05', 'EMP-00003', '09751446005', '12/KaThaNa (N)050585', 'female', 'YGN', 4, NULL, NULL, 'public/passport/fQkbrpdxdMDgfzNLa5UTActUa1IKRXuHpnb3PUdA.jpg', '2022-06-03 12:00 AM', 0, '2022-06-30 15:14:05', '8.30.234.3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0', 'public/photo/7NoIpz2lecBCK0c7ieif98QD1Iyskt4K4kEYVLvA.jpg', 'public/photo/BYGiccJ0mDtxSD8E5dJWaVZyq5crrS8USdoqFWJE.jpg', '', NULL, 1, NULL, NULL, NULL),
 (4, 'Archi Myo Thet', 'myothet.skgroup@gmail.com', NULL, '$2y$10$o.55w0i12oOqRzvuJ/PZv.8ioInfp4b5LmqwFrglsMDAWmwBtl7iG', 'YwEkUw3QZI6scWBld8C7nRiNYfSV8ziKXj78C0EAlhnarfq8uqasHn8QbVyN', '2022-03-07 18:22:19', '2022-07-17 12:57:08', 'EMP-00004', '09751446090', '12/Thakata(N)180068', 'male', 'YGN', 6, NULL, NULL, 'public/passport/MPq9DwBPXDQmHdeiIJnjJ90P9x5PB8TLpNDhraIX.jpg', '2022-06-01 12:00 AM', 0, '2022-07-17 19:57:08', '45.125.4.194', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0', 'public/photo/OVHb7FxrbthLoYex1a5BdVM28pfbvKdZS9LMF1KF.jpg', 'public/photo/1BvWI4vfsZA2MaPvZxHiDUQgp84y0e3Ooep3DJ6B.jpg', '', NULL, 1, NULL, NULL, NULL),
@@ -2930,7 +2978,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (19, 'AUNG HTET PAING', 'aunghtetpaing.skgroup@gmail.com', NULL, '$2y$10$gQfTPFveu0nOs7Wob8Hb3.UYTTpz3o3gJnEQlt7sAZVCYjOb6MC9S', NULL, '2022-03-17 04:38:03', '2022-07-13 09:29:02', 'EMP - 00019', '09755155166', '12/Lathana(N)021656', 'male', 'No. 74, Min Nanda Road, Dawpone Tsp, Yangon', 1, NULL, NULL, NULL, '2022-06-07 12:00 AM', 0, '2022-07-13 16:29:02', '89.187.162.175', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36 Edg/103.0.1264.49', NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
 (20, 'Ko Moe Thae Aung', 'moethae.skgroup@gmail.com', NULL, '$2y$10$nk.ypUUuIAQy.j29wC6ciuEHR0R6Rjs40IjF93I3TdTagunEBOFf2', 'fOJxSNj2Vmct2w8T97D4H1O9x0Kx2JTfBhdfI6jm16MG5RpoM1CS9eWZhvD8', '2022-03-28 05:09:58', '2022-07-18 01:55:58', 'EMP - 00020', '09752800400', '9/AhMaZa(N)016643', 'male', 'No.(5), Bo Sone Pat St, Bo Tun Zan Qt, Daw Pon TS', 3, NULL, NULL, 'public/passport/CPtZMVurA2zIPDKKr842JFrVPUlKg7SUhe4R6c4Q.jpg', '2022-03-28 12:00 AM', 0, '2022-07-18 08:55:58', '8.30.234.177', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'public/photo/hQ0CWPLnnHoFNBYS5RThqweNXKtM4OkgbVUl5SWE.jpg', 'public/photo/zG4yzkmft9Yd0lwFT80FT1wDv5Qq0RbfvNttV5Gz.jpg', '', NULL, 1, NULL, NULL, NULL),
 (21, 'Ko Soe Moe Aung', 'soemoe.skgroup@gmail.com', NULL, '$2y$10$FyWc2Xn8FzmUr9eROnqyqe9N.3eDX78agOHkk6wIgjwfImKoT01aS', 'C4aj7137ouGD3AwpJGcP7k7PavKbaknMrpuRr0zbtlaLeIPQh2w03oyjq5oD', '2022-04-19 07:44:07', '2022-07-18 00:25:49', 'EMP - 00021', '09765417569', '12/', 'male', 'No.(202), MaharNawarat Condo (A), 50th Street, Botahtaung Tsp.', 8, NULL, NULL, 'public/passport/8SXLPGuwlcWOGMW2ldebA9AvWimUxfMf479B3dHK.jpg', '2022-06-07 01:00 PM', 0, '2022-07-18 07:25:49', '103.42.217.181', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'public/photo/4gQlBwQ34Gi5fzIiQzoQm9Yhh6UlL21O2p5Owhn7.jpg', 'public/photo/71lV13sVhPTNWTLlbbqd6EXhdzWd2BVjr4OxaW6b.jpg', '', NULL, 1, NULL, NULL, NULL),
-(22, 'Daw Khin Zarni', 'khinzarni.skgroup@gmail.com', NULL, '$2y$10$2ra6OqKvEKq4rB3/eTiDouAk1eeo8YenKYAGDB35JhYlsSzkRTOLe', '4MTy86HbyDVb5bUEhq8rz4n11DUrZyX7mGSF79ZKKQRBL4k9n63oZf2r1Qnx', '2022-04-29 09:39:44', '2022-08-17 17:53:35', 'EMP - 00022', '09740875439', '14/HATHATA(N)021656', 'female', 'No.(202), MaharNawarat Condo (A), 50th Street, Botahtaung Tsp.', 9, NULL, NULL, 'public/passport/KsxCkoQ7IsohA6mX3eKWlnr8HHEX2MArcaOCaHYF.jpg', '2022-06-07 12:00 PM', 0, '2022-08-18 00:23:35', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'public/photo/PnZ9dvQBaq7SuoRnVJAnAfim5RPj1CXnFDZvagSH.pdf', 'public/photo/CN9TAXEP1yCgCwK9DdHEikrbF0hR4bn74iIR6upt.pdf', '', NULL, 1, NULL, NULL, NULL),
+(22, 'Daw Khin Zarni', 'khinzarni.skgroup@gmail.com', NULL, '$2y$10$2ra6OqKvEKq4rB3/eTiDouAk1eeo8YenKYAGDB35JhYlsSzkRTOLe', '4MTy86HbyDVb5bUEhq8rz4n11DUrZyX7mGSF79ZKKQRBL4k9n63oZf2r1Qnx', '2022-04-29 09:39:44', '2022-09-05 17:31:06', 'EMP - 00022', '09740875439', '14/HATHATA(N)021656', 'female', 'No.(202), MaharNawarat Condo (A), 50th Street, Botahtaung Tsp.', 9, NULL, NULL, 'public/passport/KsxCkoQ7IsohA6mX3eKWlnr8HHEX2MArcaOCaHYF.jpg', '2022-06-07 12:00 PM', 0, '2022-09-06 00:01:06', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'public/photo/PnZ9dvQBaq7SuoRnVJAnAfim5RPj1CXnFDZvagSH.pdf', 'public/photo/CN9TAXEP1yCgCwK9DdHEikrbF0hR4bn74iIR6upt.pdf', '', NULL, 1, NULL, NULL, NULL),
 (23, 'U Zin Wai Aung', 'zinwaiaung.skgroup@gmail.com', NULL, '$2y$10$lIRAeX5wlbVuT.V3vgtIb.baaZJMdQ00Yu.VDmDb/dwJ0L/Ais98e', NULL, '2022-04-29 12:27:33', '2022-06-16 03:31:08', 'EMP-00023', '09799404246', '12/KAKHAKA(N)090911', 'male', 'Thingyangun', 9, NULL, NULL, NULL, '2022-06-16 10:00 AM', 0, NULL, NULL, NULL, NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
 (24, 'Daw Htet Htet Zaw', 'htethtetzaw.skgroup@gmail.com', NULL, '$2y$10$uvo3UT1Uf1JA8SgHlt0iDOs8DAtRKwPckRhU/.pOiaS1n8ZhiWvwm', 'l7ew8k6pFYVIn45TXROxQFOxGdVT4t8yNKnoA9CStNLcg4808iUEBMxC1Uvz', '2022-04-29 12:37:19', '2022-06-25 07:35:49', 'EMP-00024', '09795345577', '12/BATAHTA(N)044264', 'male', 'No.262,Merchant Road, East Yangon General Hospital, Botahtaung Tsp', 4, NULL, NULL, 'public/passport/uq0PyzmVggoYIA660a9iIK1yxospt6pzfAGfD4jj.jpg', '2022-05-31 12:00 AM', 0, '2022-06-25 14:35:49', '103.135.217.180', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36 Edg/103.0.1264.37', 'public/photo/aDJvkSqgAXFtjbpMZY5CjzthX72XGgco0esm3RtG.jpg', 'public/photo/4Rw37rhWOXTD53oczdaTn3BOxkJybbCol65Ja4OP.jpg', '', NULL, 1, NULL, NULL, NULL),
 (25, 'Daw Zar Zar Khine', 'zarzarkhine.skgroup@gmail.com', NULL, '$2y$10$HfdR7fopHjyS2b5yn1gt6uk7TlVqjrsh1VEpZbEouJq7FXW3nx41G', NULL, '2022-04-29 12:42:04', '2022-08-17 09:48:34', 'EMP-00025', '09799048521', '5/KATHANA(N)122900', 'female', 'Shwe Ta Sote Stree, Thamine, MaYanGone Tsp', 9, NULL, NULL, 'public/passport/ucJI1yfCwS6fdEwKbiIfRBTWexzbU0rVSjNFGZce.jpg', '2022-07-18 09:09 AM', 0, '2022-08-17 16:18:34', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'public/photo/SZaB1xgXmwmIU6HzobbCTTgVfo1DZxvY8aSzRboG.jpg', 'public/photo/1XxFD6UTvPYerfQbx8CpuVN3t5HvW5Aqjr4sBNLk.jpg', '', NULL, 1, NULL, NULL, NULL),
@@ -4687,7 +4735,8 @@ INSERT INTO `variable_logistics_team_checks` (`id`, `variable_request_info_id`, 
 (303, 454, 1, 576, '1.5', '1.5', '1000', 26, '2022-08-01 17:27:19', '2022-08-01 17:27:19', NULL),
 (304, 454, 1, 577, '1.5', '1.5', '1000', 27, '2022-08-01 17:27:19', '2022-08-01 17:27:19', NULL),
 (305, 449, 1, 568, '100', '100', '1000', 167, '2022-08-01 17:29:39', '2022-08-01 17:29:39', NULL),
-(306, 448, 1, 567, '1000', '1000', '10', 25, '2022-08-08 02:40:02', '2022-08-08 02:40:02', NULL);
+(306, 448, 1, 567, '1000', '1000', '10', 25, '2022-08-08 02:40:02', '2022-08-08 02:40:02', NULL),
+(307, 463, 1, 596, '50', '50', '1000', 4, '2022-09-05 18:31:04', '2022-09-05 18:31:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -5206,7 +5255,8 @@ INSERT INTO `variable_payments` (`id`, `variable_request_info_id`, `user_id`, `t
 (241, 419, 21, '0', '0', '0', '0', '2022-07-18 01:06:11', '2022-07-18 01:06:11', 'Five Star'),
 (242, 454, 1, '0', '0', '0', '3000', '2022-08-01 17:27:19', '2022-08-01 17:27:19', ''),
 (243, 449, 1, '0', '0', '0', '0', '2022-08-01 17:29:39', '2022-08-01 17:29:39', ''),
-(244, 448, 1, '10', '10', '5', '10', '2022-08-08 02:40:02', '2022-08-08 02:40:02', 'Mg Mg');
+(244, 448, 1, '10', '10', '5', '10', '2022-08-08 02:40:02', '2022-08-08 02:40:02', 'Mg Mg'),
+(245, 463, 1, '10', '10', '50', '10', '2022-09-05 18:31:04', '2022-09-05 18:31:04', 'U Mg');
 
 -- --------------------------------------------------------
 
@@ -5708,7 +5758,8 @@ INSERT INTO `variable_qs_team_checks` (`id`, `user_id`, `variable_request_item_i
 (478, 11, 530, '32', '5', 429, 110, '2022-07-16 08:00:19', '2022-07-16 08:00:19', 'For Kitchen Counter Top'),
 (479, 11, 531, '185', '320', 429, 112, '2022-07-16 08:00:19', '2022-07-16 08:00:19', 'For Bath & WC Wall Tile ( 1\'-0\" x 1\'-0\" )'),
 (480, 11, 532, '285', '180', 430, 199, '2022-07-16 08:02:40', '2022-07-16 08:02:40', 'For Kitchen Wall Tile ( 1\' x 1\' )'),
-(481, 11, 533, '10', '10', 430, 200, '2022-07-16 08:02:40', '2022-07-16 08:02:40', NULL);
+(481, 11, 533, '10', '10', 430, 200, '2022-07-16 08:02:40', '2022-07-16 08:02:40', NULL),
+(482, 1, 596, '50', '50', 463, 4, '2022-09-05 18:29:48', '2022-09-05 18:29:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -6517,7 +6568,7 @@ INSERT INTO `variable_request_infos` (`id`, `code`, `date`, `customer_id`, `engi
 (460, 'VR-000454', '2022-07-17 11:44 PM', 5, 26, '2022-07-17 16:45:42', '2022-07-20 02:33:08', 'accept', '2022-07-20 09:03:08am', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-19 11:44 PM', 'G.Tank brick work,G.tank Foundation slab and Cover slab,stair topping and plastering', NULL, NULL, NULL, NULL, NULL),
 (461, 'VR-000455', '2022-07-18 07:56 AM', 17, 47, '2022-07-18 00:57:15', '2022-07-20 02:31:42', 'accept', '2022-07-20 09:01:42am', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-20 07:56 AM', 'RW', NULL, NULL, NULL, NULL, NULL),
 (462, 'VR-000456', '2022-07-18 09:12 AM', 17, 47, '2022-07-18 02:13:03', '2022-07-20 02:28:12', 'reject', '2022-07-20 08:58:12am', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-20 09:12 AM', 'RW & GT', NULL, NULL, NULL, NULL, NULL),
-(463, 'VR-000457', '2022-07-18 09:19 AM', 8, 36, '2022-07-18 02:20:04', '2022-07-20 02:27:38', 'accept', '2022-07-20 08:56:59am', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-20 09:19 AM', 'Plastering work (2F)', NULL, '2022-07-20 08:57:38am', '1', NULL, NULL),
+(463, 'VR-000457', '2022-07-18 09:19 AM', 8, 36, '2022-07-18 02:20:04', '2022-09-05 18:31:04', 'accept', '2022-07-20 08:56:59am', 'finished', '2022-09-06 00:59:48am', 'finished', '2022-09-06 01:01:04am', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-20 09:19 AM', 'Plastering work (2F)', NULL, '2022-07-20 08:57:38am', '1', NULL, NULL),
 (464, 'VR-000458', '2022-08-06 09:13 PM', 9, 22, '2022-08-06 14:43:40', '2022-08-06 14:43:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-06 09:13 PM', 'Test', NULL, NULL, NULL, NULL, NULL),
 (465, 'VR-000459', '2022-08-06 09:14 PM', 7, 22, '2022-08-06 14:44:46', '2022-08-06 14:44:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-06 09:14 PM', 'Testing', NULL, NULL, NULL, NULL, NULL),
 (466, 'VR-000460', '2022-08-06 09:16 PM', 7, 22, '2022-08-06 14:46:16', '2022-08-06 14:46:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-06 09:16 PM', 'abcd', NULL, NULL, NULL, NULL, NULL),
@@ -6527,7 +6578,9 @@ INSERT INTO `variable_request_infos` (`id`, `code`, `date`, `customer_id`, `engi
 (470, 'VR-000464', '2022-08-18 12:45 AM', 7, 22, '2022-08-17 18:16:01', '2022-08-17 18:16:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-18 12:45 AM', 'Foundation', NULL, NULL, NULL, 8, 1),
 (471, 'VR-000465', '2022-08-18 12:48 AM', 7, 22, '2022-08-17 18:18:17', '2022-08-17 18:18:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-18 12:48 AM', 'Foundation', NULL, NULL, NULL, 8, 1),
 (472, 'VR-000466', '2022-08-18 12:49 AM', 7, 22, '2022-08-17 18:19:22', '2022-08-17 18:19:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-18 12:49 AM', 'Foundation', NULL, NULL, NULL, 8, 1),
-(473, 'VR-000467', '2022-08-18 01:12 AM', 7, 22, '2022-08-17 18:42:26', '2022-08-17 18:42:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-18 01:12 AM', 'Foundation', NULL, NULL, NULL, 8, 1);
+(473, 'VR-000467', '2022-08-18 01:12 AM', 7, 22, '2022-08-17 18:42:26', '2022-08-17 18:42:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-18 01:12 AM', 'Foundation', NULL, NULL, NULL, 8, 1),
+(474, 'VR-000468', '2022-09-06 12:05 AM', 9, 22, '2022-09-05 17:36:07', '2022-09-05 17:36:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-06 12:05 AM', NULL, NULL, NULL, NULL, 10, 1),
+(475, 'VR-000469', '2022-09-06 12:08 AM', 9, 22, '2022-09-05 17:38:16', '2022-09-05 17:38:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-06 12:08 AM', 'Remark Test', NULL, NULL, NULL, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -7164,7 +7217,13 @@ INSERT INTO `variable_request_items` (`id`, `variable_asset_id`, `quantity`, `us
 (618, '26', '1', 22, 471, '2022-08-17 18:18:17', '2022-08-17 18:18:17', '', NULL, NULL),
 (619, '4', '2', 22, 472, '2022-08-17 18:19:22', '2022-08-17 18:19:22', '', 8, 1),
 (620, '107', '1', 22, 472, '2022-08-17 18:19:22', '2022-08-17 18:19:22', '', 8, 1),
-(621, '107', '10', 22, 473, '2022-08-17 18:42:26', '2022-08-17 18:42:26', '', 8, 1);
+(621, '107', '10', 22, 473, '2022-08-17 18:42:26', '2022-08-17 18:42:26', '', 8, 1),
+(622, '4', '1', 22, 474, '2022-09-05 17:36:07', '2022-09-05 17:36:07', '', 10, 1),
+(623, '1', '1', 22, 474, '2022-09-05 17:36:07', '2022-09-05 17:36:07', '', 10, 1),
+(624, '25', '1', 22, 474, '2022-09-05 17:36:07', '2022-09-05 17:36:07', '', 10, 1),
+(625, '4', '1', 22, 475, '2022-09-05 17:38:16', '2022-09-05 17:38:16', '', 10, 1),
+(626, '1', '1', 22, 475, '2022-09-05 17:38:16', '2022-09-05 17:38:16', '', 10, 1),
+(627, '25', '1', 22, 475, '2022-09-05 17:38:16', '2022-09-05 17:38:16', '', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -7322,6 +7381,12 @@ ALTER TABLE `floor_plans`
 -- Indexes for table `labours`
 --
 ALTER TABLE `labours`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `labour_costs`
+--
+ALTER TABLE `labour_costs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7626,13 +7691,13 @@ ALTER TABLE `archi_exterior_designs`
 -- AUTO_INCREMENT for table `bq_items`
 --
 ALTER TABLE `bq_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `bq_temporaries`
 --
 ALTER TABLE `bq_temporaries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `chartof_accounts`
@@ -7707,6 +7772,12 @@ ALTER TABLE `labours`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `labour_costs`
+--
+ALTER TABLE `labour_costs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `main_warehouses`
 --
 ALTER TABLE `main_warehouses`
@@ -7734,13 +7805,13 @@ ALTER TABLE `members_lists`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `permits`
@@ -7770,7 +7841,7 @@ ALTER TABLE `projects_users`
 -- AUTO_INCREMENT for table `project_bqs`
 --
 ALTER TABLE `project_bqs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `qs_team_check_passes`
@@ -7902,7 +7973,7 @@ ALTER TABLE `variable_assets_sizes`
 -- AUTO_INCREMENT for table `variable_assets_temporaries`
 --
 ALTER TABLE `variable_assets_temporaries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `variable_bq_temporaries`
@@ -7920,7 +7991,7 @@ ALTER TABLE `variable_finance_payment_slips`
 -- AUTO_INCREMENT for table `variable_logistics_team_checks`
 --
 ALTER TABLE `variable_logistics_team_checks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
 
 --
 -- AUTO_INCREMENT for table `variable_logistics_team_sends`
@@ -7932,13 +8003,13 @@ ALTER TABLE `variable_logistics_team_sends`
 -- AUTO_INCREMENT for table `variable_payments`
 --
 ALTER TABLE `variable_payments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT for table `variable_qs_team_checks`
 --
 ALTER TABLE `variable_qs_team_checks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=482;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
 
 --
 -- AUTO_INCREMENT for table `variable_received_by_engineers`
@@ -7950,13 +8021,13 @@ ALTER TABLE `variable_received_by_engineers`
 -- AUTO_INCREMENT for table `variable_request_infos`
 --
 ALTER TABLE `variable_request_infos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=474;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
 
 --
 -- AUTO_INCREMENT for table `variable_request_items`
 --
 ALTER TABLE `variable_request_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=622;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=628;
 
 --
 -- AUTO_INCREMENT for table `work_scopes`
