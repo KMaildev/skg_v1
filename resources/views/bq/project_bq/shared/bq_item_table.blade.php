@@ -89,15 +89,27 @@
                     @endphp
                 </td>
 
-                <td style="text-align: right; font-weight: bold;">
-                    @php
-                        $bqQty = $bq_item->qty ?? 0;
-                        $reqQty = $request_qty_total ?? 0;
-                        $balaceQty = $bqQty - $reqQty;
-                        echo number_format($balaceQty);
-                        $total_balace_qty[] = $balaceQty;
-                    @endphp
-                </td>
+                @php
+                    $bqQty = $bq_item->qty ?? 0;
+                    $reqQty = $request_qty_total ?? 0;
+                    $balaceQty = $bqQty - $reqQty;
+                    $total_balace_qty[] = $balaceQty;
+                @endphp
+
+                @if ($balaceQty >= 0)
+                    <td style="text-align: right; font-weight: bold; background-color: green; color: white;">
+                        @php
+                            echo number_format($balaceQty);
+                        @endphp
+                    </td>
+                @else
+                    <td style="text-align: right; font-weight: bold; background-color: red; color: white;">
+                        @php
+                            echo number_format($balaceQty);
+                        @endphp
+                    </td>
+                @endif
+
 
                 <td style="text-align: right; font-weight: bold;">
                     {{ number_format($bq_item->rate ?? 0, 2) }}
@@ -131,7 +143,8 @@
                     <form action="{{ route('project_bq.destroy', $bq_item->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <a type="button" class="del_confirm" id="confirm-text" data-toggle="tooltip">Remove</a>
+                        <a type="button" class="del_confirm text-danger" id="confirm-text"
+                            data-toggle="tooltip">Remove</a>
                     </form>
                 </td>
             </tr>
@@ -182,7 +195,7 @@
 @include('bq.project_bq.shared.bq_item_edit')
 
 @section('script')
-{!! JsValidator::formRequest('App\Http\Requests\UpdateBqItems', '#create-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\UpdateBqItems', '#create-form') !!}
     <script type="text/javascript">
         function getBQitems(bq_item_id) {
             document.getElementById("bq_item_id").value = bq_item_id;

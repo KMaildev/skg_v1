@@ -326,6 +326,12 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::post('update_bq_item', 'Bq\ProjectBqController@update_bq_item')->name('update_bq_item');
 
+    Route::get('bq_custom_create/{id}', [
+        'as' => 'bq_custom_create',
+        'uses' => 'Bq\ProjectBqController@bq_custom_create'
+    ]);
+
+
 
     Route::resource('bq_temporary', 'Bq\BqTemporaryController');
     Route::post('store_bq_temporary', 'Bq\BqTemporaryController@store');

@@ -19,6 +19,12 @@
                         Bill of Quantities (BQ)
                     </p>
 
+                    <a href="{{ route('bq_custom_create', $project->id) }}" class="btn btn-primary me-1 collapsed"
+                        target="_blank">
+                        <span class="tf-icons fa fa-plus"></span>
+                        Add
+                    </a>
+
                     <a class="btn btn-primary me-1 collapsed"
                         href="{{ route('project_bq_show', [$project->id, $project->project_id, $project->work_scope_id, 'true_overall']) }}">
                         <span class="tf-icons
@@ -45,6 +51,5 @@
         </div>
     </div>
 @endsection
-
 @section('script')
 @endsection

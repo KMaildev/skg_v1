@@ -43,7 +43,6 @@ class ProjectBqController extends Controller
             ->groupBy('category')
             ->get();
         $variable_assets = VariableAssets::orderBy('display_order', 'ASC')->get();
-
         $work_scopes = WorkScope::all();
         return view('bq.project_bq.create', compact('projects', 'categories', 'variable_assets', 'work_scopes'));
     }
@@ -118,12 +117,11 @@ class ProjectBqController extends Controller
 
         $overall_status = $overall_status;
 
-        // For Edit 
+        // For Edit  & Create
         $categories = VariableAssets::select('category')
             ->groupBy('category')
             ->get();
         $variable_assets = VariableAssets::orderBy('display_order', 'ASC')->get();
-
         return view('bq.project_bq.show', compact('project_bqs', 'project', 'bq_items', 'work_scope', 'overall_status', 'categories', 'variable_assets'));
     }
 
@@ -185,5 +183,19 @@ class ProjectBqController extends Controller
         $delete = BqItems::findOrFail($id);
         $delete->delete();
         return redirect()->back()->with('success', 'Your processing has been completed.');
+    }
+
+
+    public function bq_custom_create($id)
+    {
+        $projects = Projects::all();
+        // Variable Assets
+        $categories = VariableAssets::select('category')
+            ->groupBy('category')
+            ->get();
+        $variable_assets = VariableAssets::orderBy('display_order', 'ASC')->get();
+        $work_scopes = WorkScope::all();
+        $project_id = $id;
+        return view('bq.project_bq.custom.custom_create', compact('projects', 'categories', 'variable_assets', 'work_scopes', 'project_id'));
     }
 }
