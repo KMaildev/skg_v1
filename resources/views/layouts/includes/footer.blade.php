@@ -84,6 +84,26 @@
     });
 </script>
 
+<script>
+    $(document).on("click", ".permission_denied", function() {
+        // alert("You don't have permission to access denied.");
+        event.preventDefault();
+        Swal.fire({
+            text: "You don't have permission to access denied.",
+            showCancelButton: false,
+            customClass: {
+                confirmButton: 'btn btn-primary me-3',
+            },
+            buttonsStyling: false,
+            buttons: true,
+            dangerMode: true,
+        }).then((res) => {
+
+        });
+    });
+</script>
+
+
 {{-- Select Auto Color --}}
 <script type="text/javascript">
     $(function() {

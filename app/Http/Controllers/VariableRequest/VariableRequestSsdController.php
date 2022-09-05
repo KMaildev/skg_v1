@@ -77,9 +77,13 @@ class VariableRequestSsdController extends Controller
 
                 $html = '';
                 if (auth()->user()->can('variable_accept_reject')) {
-                    if ($each->accept_reject_status == 'accept') {
-                        $html .= '
-                        <a href="#" id="AssetRejectShowModel" data-id="' . $id . '">
+                    $permission_accept_reject = 'AssetRejectShowModel';
+                } else {
+                    $permission_accept_reject = 'permission_denied';
+                }
+                if ($each->accept_reject_status == 'accept') {
+                    $html .= '
+                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>' . $accept_reject_status . '</span>
@@ -94,9 +98,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else if ($each->accept_reject_status == 'reject') {
-                        $html .= '
-                        <a href="#" id="AssetRejectShowModel" data-id="' . $id . '">
+                } else if ($each->accept_reject_status == 'reject') {
+                    $html .= '
+                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>' . $accept_reject_status . '</span>
@@ -111,9 +115,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else {
-                        $html .= '
-                        <a href="#" id="AssetRejectShowModel" data-id="' . $id . '">
+                } else {
+                    $html .= '
+                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>Unknown</span>
@@ -122,22 +126,28 @@ class VariableRequestSsdController extends Controller
                                     <div class="progress-bar bg-danger" style="width: 100%" role="progressbar" aria-valuenow="100"
                                         aria-valuemin="100" aria-valuemax="100"></div>
                                 </div>
-                                <span style="font-size: 12px;">
-                                </span>
                             </div>
                         </a>
                         ';
-                    }
                 }
+
                 return $html;
             })
 
             ->editColumn('qs_team_check_status', function ($each) {
                 $qs_team_check_date = $each->qs_team_check_date;
                 $html = '';
+
                 if (auth()->user()->can('variable_qs_team_check_pass')) {
-                    if ($each->qs_team_check_status) {
-                        $html .= '
+                    $link = route('variable_qs_team_check_create', ['id' => $each->id]);
+                    $permission_accept = null;
+                } else {
+                    $link = '#';
+                    $permission_accept = 'permission_denied';
+                }
+
+                if ($each->qs_team_check_status) {
+                    $html .= '
                         <a href="#">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
@@ -153,9 +163,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else {
-                        $html .= '
-                        <a href="' . route('variable_qs_team_check_create', ['id' => $each->id]) . '" target="_blank">
+                } else {
+                    $html .= '
+                        <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>No</span>
@@ -167,21 +177,25 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    }
                 }
                 return $html;
             })
 
             ->editColumn('logistics_team_check', function ($each) {
                 $logistics_team_check_date = $each->logistics_team_check_date;
-                $accept_reject_status = $each->accept_reject_status;
-                $id = $each->id;
-
                 $html = '';
+
                 if (auth()->user()->can('variable_logistics_team_check')) {
-                    if ($each->logistics_team_check) {
-                        $html .= '
-                        <a href="' . route('variable_logistics_check_create', ['id' => $each->id]) . '">
+                    $link = route('variable_logistics_check_create', ['id' => $each->id]);
+                    $permission_accept = null;
+                } else {
+                    $link = '#';
+                    $permission_accept = 'permission_denied';
+                }
+
+                if ($each->logistics_team_check) {
+                    $html .= '
+                        <a class="' . $permission_accept . '" href="' . $link . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>Finished</span>
@@ -196,9 +210,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else {
-                        $html .= '
-                        <a href="' . route('variable_logistics_check_create', ['id' => $each->id]) . '" target="_blank">
+                } else {
+                    $html .= '
+                        <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>No</span>
@@ -210,7 +224,6 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    }
                 }
                 return $html;
             })
@@ -222,11 +235,16 @@ class VariableRequestSsdController extends Controller
                 $id = $each->id;
 
                 $html = '';
-                
+
                 if (auth()->user()->can('management_accept_reject')) {
-                    if ($each->management_accept_reject_status == 'accept') {
-                        $html .= '
-                        <a href="#" id="ManagementAssetRejectShowModel" data-id="' . $id . '">
+                    $manage_permission_accept_reject = 'ManagementAssetRejectShowModel';
+                } else {
+                    $manage_permission_accept_reject = 'permission_denied';
+                }
+
+                if ($each->management_accept_reject_status == 'accept') {
+                    $html .= '
+                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>' . $management_accept_reject_status . '</span>
@@ -241,9 +259,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else if ($each->accept_reject_status == 'reject') {
-                        $html .= '
-                        <a href="#" id="ManagementAssetRejectShowModel" data-id="' . $id . '">
+                } else if ($each->accept_reject_status == 'reject') {
+                    $html .= '
+                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>' . $management_accept_reject_status . '</span>
@@ -258,9 +276,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else {
-                        $html .= '
-                        <a href="#" id="ManagementAssetRejectShowModel" data-id="' . $id . '">
+                } else {
+                    $html .= '
+                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>Unknown</span>
@@ -274,7 +292,6 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    }
                 }
                 return $html;
             })
@@ -285,9 +302,17 @@ class VariableRequestSsdController extends Controller
                 $id = $each->id;
 
                 $html = '';
+
                 if (auth()->user()->can('variable_logistics_team_send')) {
-                    if ($each->logistics_team_send_status) {
-                        $html .= '
+                    $link = route('variable_logistics_send_form', ['id' => $each->id]);
+                    $permission_accept = null;
+                } else {
+                    $link = '#';
+                    $permission_accept = 'permission_denied';
+                }
+
+                if ($each->logistics_team_send_status) {
+                    $html .= '
                         <a href="#">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
@@ -303,9 +328,9 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    } else {
-                        $html .= '
-                        <a href="' . route('variable_logistics_send_form', ['id' => $each->id]) . '" target="_blank">
+                } else {
+                    $html .= '
+                        <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>No</span>
@@ -317,7 +342,6 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                    }
                 }
                 return $html;
             })
@@ -374,9 +398,19 @@ class VariableRequestSsdController extends Controller
             ->editColumn('actual_voucher_upload', function ($each) {
                 $actual_voucher_upload_date = $each->actual_voucher_upload_date ?? '';
                 $html = '';
+
                 if (auth()->user()->can('variable_actual_voucher')) {
-                    if ($each->actual_voucher_upload) {
-                        $html .= '
+                    $voucher_upload_link = route('variable_actual_voucher_upload', ['id' => $each->id]);
+                    $voucher_upload_view_link = route('variable_actual_voucher.show', $each->id);
+                    $permission_accept = null;
+                } else {
+                    $voucher_upload_link = '#';
+                    $voucher_upload_view_link = '#';
+                    $permission_accept = 'permission_denied';
+                }
+
+                if ($each->actual_voucher_upload) {
+                    $html .= '
                         <div class="d-flex mb-2">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
@@ -391,14 +425,14 @@ class VariableRequestSsdController extends Controller
                                 </div>
                                 <div class="d-flex justify-content-between mb-1">
                                     <span style="font-size: 12px;">
-                                        <a href="' . route('variable_actual_voucher_upload', ['id' => $each->id]) . '"
+                                        <a class="' . $permission_accept . '" href="' . $voucher_upload_link . '"
                                             style="text-align: left" target="_blank">
                                             Upload Voucher
                                         </a>
                                     </span>
     
                                     <span style="font-size: 12px;">
-                                        <a href="' . route('variable_actual_voucher.show', $each->id) . '"
+                                        <a class="' . $permission_accept . '" href="' . $voucher_upload_view_link . '"
                                             style="text-align: right" target="_blank">
                                             View Voucher
                                         </a>
@@ -407,8 +441,8 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </div>
                         ';
-                    } else {
-                        $html .= '
+                } else {
+                    $html .= '
                         <div class="d-flex flex-column w-100">
                             <div class="d-flex justify-content-between mb-1">
                                 <span>No</span>
@@ -419,15 +453,14 @@ class VariableRequestSsdController extends Controller
                             </div>
                             <div class="d-flex justify-content-start mb-1">
                                 <span style="font-size: 12px; text-align: left">
-                                    <a href="' . route('variable_actual_voucher_upload', ['id' => $each->id]) . '" target="_blank">
+                                    <a class="' . $permission_accept . '" href="' . $voucher_upload_link . '" target="_blank">
                                         Upload Voucher
                                     </a>
                                 </span>
                             </div>
                         </div>
                         ';
-                    }
-                    }
+                }
                 return $html;
             })
 
