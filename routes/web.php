@@ -330,8 +330,12 @@ Route::middleware('auth')->group(function () {
         'as' => 'bq_custom_create',
         'uses' => 'Bq\ProjectBqController@bq_custom_create'
     ]);
+    
 
 
+    // Bq Labout Cost 
+    Route::resource('bq_labour_cost', 'Bq\LabourCostController');
+    Route::post('labour_costs_import', 'Bq\LabourCostController@labour_costs_import')->name('labour_costs_import');
 
     Route::resource('bq_temporary', 'Bq\BqTemporaryController');
     Route::post('store_bq_temporary', 'Bq\BqTemporaryController@store');

@@ -176,6 +176,19 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="">
+                                        <label class="form-label" for="flatpickr-human-friendly"
+                                            style="font-weight: bold">Remark</label>
+                                        <input type="text" class="form-control"  name="remark" />
+                                        @error('remark')
+                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row py-5">

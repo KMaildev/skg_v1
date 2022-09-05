@@ -81,7 +81,7 @@ class EngineerVariableAssetsController extends Controller
         // Work Scope Id 
         $work_scope_id = $request->work_scope_id;
         $work_scope = WorkScope::findOrFail($work_scope_id);
-        $variable_asset->work_scope = $work_scope->title;
+        $variable_asset->work_scope = $request->remark;
         $variable_asset->work_scope_id = $request->work_scope_id;
 
         $variable_asset->save();

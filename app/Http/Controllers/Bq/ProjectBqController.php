@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectBq;
 use App\Http\Requests\UpdateBqItems;
 use App\Models\BqItems;
 use App\Models\Customers;
+use App\Models\LabourCost;
 use App\Models\ProjectBq;
 use App\Models\Projects;
 use App\Models\VariableAssets;
@@ -122,7 +123,10 @@ class ProjectBqController extends Controller
             ->groupBy('category')
             ->get();
         $variable_assets = VariableAssets::orderBy('display_order', 'ASC')->get();
-        return view('bq.project_bq.show', compact('project_bqs', 'project', 'bq_items', 'work_scope', 'overall_status', 'categories', 'variable_assets'));
+
+        // Labour Cost
+        $labour_costs = LabourCost::get()->where('project_id', $project_id);
+        return view('bq.project_bq.show', compact('project_bqs', 'project', 'bq_items', 'work_scope', 'overall_status', 'categories', 'variable_assets', 'labour_costs'));
     }
 
     /**

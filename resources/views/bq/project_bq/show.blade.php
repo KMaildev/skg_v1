@@ -47,6 +47,9 @@
                 @elseif ($overall_status == 'false_overall')
                     @include('bq.project_bq.shared.bq_item_table')
                 @endif
+
+                <hr>
+                @include('bq.project_bq.labour_cost.index')
             </div>
         </div>
     </div>
