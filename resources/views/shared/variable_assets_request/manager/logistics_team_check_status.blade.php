@@ -13,6 +13,7 @@
             </span>
         </div>
     </a>
+    
     <div id="accordionPayment" class="accordion accordion-header-primary">
         <div class="accordion-item">
             <a data-bs-toggle="collapse" data-bs-target="#accordionPayment_{{ $request_info->id }}"

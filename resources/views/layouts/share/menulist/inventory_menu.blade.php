@@ -78,7 +78,7 @@
 
                     <li class="menu-item">
                         <a href="{{ route('variable_request_ssd.index') }}" class="menu-link">
-                            <div data-i2n="Without menu">Variable Assets Request SSD</div>
+                            <div data-i2n="Without menu">Variable Assets Request Testing</div>
                         </a>
                     </li>
 

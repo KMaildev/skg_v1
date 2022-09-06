@@ -330,7 +330,7 @@ Route::middleware('auth')->group(function () {
         'as' => 'bq_custom_create',
         'uses' => 'Bq\ProjectBqController@bq_custom_create'
     ]);
-    
+
 
 
     // Bq Labout Cost 
@@ -358,5 +358,10 @@ Route::middleware('auth')->group(function () {
     Route::get('get_variable_request_ssd', [
         'as' => 'get_variable_request_ssd',
         'uses' => 'VariableRequest\VariableRequestSsdController@getVariableRequest'
+    ]);
+
+    Route::get('get_logistics_check_items/{id}', [
+        'as' => 'get_logistics_check_items',
+        'uses' => 'VariableRequest\VariableRequestSsdController@get_logistics_check_items'
     ]);
 });

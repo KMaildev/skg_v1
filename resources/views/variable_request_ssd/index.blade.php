@@ -81,6 +81,7 @@
 
 @include('variable_request_ssd.shared.accept_reject')
 @include('variable_request_ssd.shared.management_accept_reject')
+@include('variable_request_ssd.shared.logistics_team_check_model')
 
 @endsection
 @section('script')
@@ -249,6 +250,22 @@
             $('#ManagementAssetRejectModelShowHide').modal('show');
             document.getElementById("management_request_info_id").value = id;
         });
+
+        // Logistics Team check Model Show
+        $('body').on('click', '#showLogisiticTeamItem', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#LogisticsTeamCheckModel').modal('show');
+            $.ajax({
+                url: "get_logistics_check_items/" + id,
+                method: 'GET',
+                success: function(result) {
+                    console.log(result);
+                    $('#showItemsList').html(result.html);
+                }
+            });
+        });
+
 
         // Submit Management Show Accept Reject 
         $('.management_accept_reject_ajax_save').submit(function(e) {

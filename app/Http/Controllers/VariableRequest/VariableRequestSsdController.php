@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\VariableRequest;
 
 use App\Http\Controllers\Controller;
+use App\Models\VariableLogisticsTeamCheck;
+use App\Models\VariablePayment;
 use App\Models\VariableRequestInfo;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -183,6 +185,7 @@ class VariableRequestSsdController extends Controller
 
             ->editColumn('logistics_team_check', function ($each) {
                 $logistics_team_check_date = $each->logistics_team_check_date;
+                $supplier_name = $each->variable_payments_table->supplier_name ?? '';
                 $html = '';
 
                 if (auth()->user()->can('variable_logistics_team_check')) {
@@ -195,20 +198,13 @@ class VariableRequestSsdController extends Controller
 
                 if ($each->logistics_team_check) {
                     $html .= '
-                        <a class="' . $permission_accept . '" href="' . $link . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>Finished</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-success" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px; text-align: left">
-                                    ' . $logistics_team_check_date . '
-                                </span>
+                        <div id="accordionPayment" class="accordion accordion-header-primary">
+                            <div class="accordion-item">
+                                <a data-bs-toggle="collapse" style="color: blue" id="showLogisiticTeamItem" data-id="' . $each->id . '">
+                                    Finished: ' . $logistics_team_check_date . '
+                                </a>
                             </div>
-                        </a>
+                        </div>
                         ';
                 } else {
                     $html .= '
@@ -560,6 +556,126 @@ class VariableRequestSsdController extends Controller
     {
         //
     }
+
+
+    public function get_logistics_check_items($id)
+    {
+        $logistics_check_items = VariableLogisticsTeamCheck::get()->where('variable_request_info_id', $id);
+        $variable_payment = VariablePayment::where('variable_request_info_id', $id)->firstOrFail();
+
+
+        $html = '';
+        $html .= '<table style="width: 100%" class="sub_table">';
+        $html .= '<tr>';
+        $html .= '<td style="background-color: #296166; color: white; text-align: center;"># </td>';
+        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Qty </td>';
+        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Price </td>';
+        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Total Amt </td>';
+        $html .= '</tr>';
+        $i = 1;
+        $totalAmt = [];
+        $qs_pass_qty_total = [];
+        $total_price = [];
+        foreach ($logistics_check_items as $key => $value) {
+            $totalAmt[] = $value->qs_passed_qty * $value->price;
+            $amt = $value->qs_passed_qty * $value->price;
+            $qs_pass_qty_total[] = $value->qs_passed_qty;
+            $total_price[] = $value->price;
+
+            $html .= '<tr>';
+            $html .= '<td style="text-align: center;">' . $i++ . '</td>';
+            $html .= '<td style="text-align: right;">' . number_format($value->qs_passed_qty) . '</td>';
+            $html .= '<td style="text-align: right;">' . number_format($value->price, 2) . '</td>';
+            $html .= '<td style="text-align: right;">' . number_format($amt, 2) . '</td>';
+            $html .= '</tr>';
+        }
+        $AmttotalAmt = array_sum($totalAmt);
+        $TotalQs_pass_qty_total = array_sum($qs_pass_qty_total);
+        $price_total = array_sum($total_price);
+
+        $html .= '<tr style="font-weight: bold;">';
+        $html .= '<td style="text-align: right; font-weight: bold">Total</td>';
+        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= number_format($TotalQs_pass_qty_total, 2);
+        $html .= '</td>';
+
+        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= number_format($price_total, 2);
+        $html .= '</td>';
+
+        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= number_format($AmttotalAmt, 2);
+        $html .= '</td>';
+
+        $html .= '</tr>';
+
+
+        $html .= '
+            <tr style="background-color: #e2dede; color: black;">
+                <td colspan="3" style="text-align: left; font-weight: bold">
+                    Transportation
+                </td>
+                <td style="text-align: right;">
+                    ' . number_format($variable_payment->transportation, 2) . '
+                </td>
+            </tr>';
+
+        $html .= '
+            <tr style="background-color: #e2dede; color: black;">
+                <td colspan="3" style="text-align: left; font-weight: bold">
+                    Labor
+                </td>
+                <td style="text-align: right;">
+                    ' . number_format($variable_payment->labor, 2) . '
+                </td>
+            </tr>';
+
+        $banking_percent = $variable_payment->banking_percent;
+        $banking_amount = ($AmttotalAmt / 100) * $banking_percent;
+        $html .= '
+            <tr style="background-color: #e2dede; color: black;">
+                <td colspan="2" style="text-align: left; font-weight: bold">
+                    Banking %
+                </td>
+                <td style="text-align: right;">
+                    ' . $variable_payment->banking_percent . '%
+                </td>
+                <td style="text-align: right;">
+                    ' . number_format($banking_amount, 2) . '%
+                </td>
+            </tr>';
+
+        $html .= '
+            <tr style="background-color: #e2dede; color: black;">
+                <td colspan="3" style="text-align: left; font-weight: bold">
+                Extra
+                </td>
+                <td style="text-align: right;">
+                    ' . number_format($variable_payment->extra, 2) . '
+                </td>
+            </tr>';
+
+
+        $transportation = $variable_payment->transportation;
+        $labor = $variable_payment->labor;
+        $extra = $variable_payment->extra;
+        $allTotal = $AmttotalAmt + $transportation + $labor + $banking_amount + $extra;
+        $html .= '
+            <tr style="background-color: #e2dede; color: black;">
+                <td colspan="3" style="text-align: left; font-weight: bold">
+                Total
+                </td>
+                <td style="text-align: right;">
+                    ' . number_format($allTotal, 2) . '
+                </td>
+            </tr>';
+
+
+        $html .= '</table>';
+        return response()->json(['html' => $html]);
+    }
+
+
 
 
     public function item_list_table_no_using()
