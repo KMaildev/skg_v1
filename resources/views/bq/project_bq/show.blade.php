@@ -19,7 +19,7 @@
                         Bill of Quantities (BQ)
                     </p>
 
-                    <a href="{{ route('bq_custom_create', $project->id) }}" class="btn btn-primary me-1 collapsed"
+                    <a href="{{ route('bq_custom_create', $project->project_id) }}" class="btn btn-primary me-1 collapsed"
                         target="_blank">
                         <span class="tf-icons fa fa-plus"></span>
                         Add

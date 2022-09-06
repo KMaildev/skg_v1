@@ -20,7 +20,7 @@
             </div>
         </form>
         <a class="text-danger">
-            Project Id = {{ $project->id }}
+            Project Id = {{ $project->project_id }}
         </a>
         /
         <a class="text-success" href="{{ asset('public/simple_labour_cost.xlsx') }}" download="">
