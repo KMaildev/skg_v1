@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Models\FixedAssets;
+use App\Models\RequestInfo;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +16,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('inventory.index');
+        $total_fixed_assets = FixedAssets::count();
+        $total_fixed_assets_request_infos = RequestInfo::where('received_by_engineer_status', NULL)
+            ->where('request_status', NULL)
+            ->get()
+            ->count();
+
+        $total_fixed_assets_reject = RequestInfo::where('accept_reject_status', 'reject')
+            ->get()
+            ->count();
+
+        $total_fixed_assets_completed = RequestInfo::where('received_by_engineer_status', 'received')
+            ->get()
+            ->count();
+        return view('inventory.index', compact('total_fixed_assets', 'total_fixed_assets_request_infos', 'total_fixed_assets_reject', 'total_fixed_assets_completed'));
     }
 
     /**

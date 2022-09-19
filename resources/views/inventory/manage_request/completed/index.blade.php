@@ -62,7 +62,7 @@
                             @foreach ($eng_request_infos as $key => $request_info)
                                 <tr>
                                     <td class="sticky-col first-col">
-                                        {{ $key + 1 }}
+                                        {{ $loop->iteration }}
                                     </td>
 
                                     <td style="text-align: center" class="sticky-col second-col">

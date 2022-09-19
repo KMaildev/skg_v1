@@ -16,7 +16,10 @@ class ManageRequestController extends Controller
      */
     public function index()
     {
-        $eng_request_infos = RequestInfo::with('eng_request_items_table')->orderBy('id', 'DESC')->get()->where('request_status', NULL);
+        $eng_request_infos = RequestInfo::with('eng_request_items_table')
+            ->orderBy('id', 'DESC')->get()
+            ->where('received_by_engineer_status', NULL)
+            ->where('request_status', NULL);
         return view('inventory.manage_request.index', compact('eng_request_infos'));
     }
 
@@ -28,7 +31,7 @@ class ManageRequestController extends Controller
      */
     public function fixed_assets_completed_list()
     {
-        $eng_request_infos = RequestInfo::with('eng_request_items_table')->orderBy('id', 'DESC')->get()->where('request_status', 'completed');
+        $eng_request_infos = RequestInfo::with('eng_request_items_table')->orderBy('id', 'DESC')->get()->where('received_by_engineer_status', 'received');
         return view('inventory.manage_request.completed.index', compact('eng_request_infos'));
     }
 

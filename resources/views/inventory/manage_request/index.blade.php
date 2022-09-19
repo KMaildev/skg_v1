@@ -66,118 +66,115 @@
                                 $i = 1;
                             @endphp
                             @foreach ($eng_request_infos as $key => $request_info)
-                                @if ($request_info->accept_reject_status == 'accept' || $request_info->accept_reject_status == null)
-                                    <tr>
-                                        <td class="sticky-col first-col">
-                                            {{ $i++ }}
-                                        </td>
+                                <tr>
+                                    <td class="sticky-col first-col">
+                                        {{ $i++ }}
+                                    </td>
 
-                                        <td style="text-align: center" class="sticky-col second-col">
-                                            {{ $request_info->user_table->name ?? '' }}
-                                        </td>
+                                    <td style="text-align: center" class="sticky-col second-col">
+                                        {{ $request_info->user_table->name ?? '' }}
+                                    </td>
 
-                                        <td style="text-align: center" class="sticky-col three-col">
-                                            {{ $request_info->request_code }}
-                                        </td>
+                                    <td style="text-align: center" class="sticky-col three-col">
+                                        {{ $request_info->request_code }}
+                                    </td>
 
-                                        <td style="text-align: center">
-                                            {{ $request_info->request_date }}
-                                        </td>
+                                    <td style="text-align: center">
+                                        {{ $request_info->request_date }}
+                                    </td>
 
-                                        {{-- Request Items --}}
-                                        <td>
-                                            <table style="width: 100%" class="sub_table">
+                                    {{-- Request Items --}}
+                                    <td>
+                                        <table style="width: 100%" class="sub_table">
+                                            <tr>
+                                                <td style="background-color: #296166; color: white; width: 80%">
+                                                    Items
+                                                </td>
+                                                <td style="background-color: #296166; color: white; width: 20%">
+                                                    Qty
+                                                </td>
+                                            </tr>
+                                            @foreach ($request_info->eng_request_items_table as $value)
                                                 <tr>
-                                                    <td style="background-color: #296166; color: white; width: 80%">
-                                                        Items
+                                                    <td style="text-align: left;">
+                                                        {{ $value->fixed_assets_table->item_name ?? '' }}
                                                     </td>
-                                                    <td style="background-color: #296166; color: white; width: 20%">
-                                                        Qty
+                                                    <td style="text-align: center;">
+                                                        {{ $value->quantity ?? 0 }}
                                                     </td>
                                                 </tr>
-                                                @foreach ($request_info->eng_request_items_table as $value)
-                                                    <tr>
-                                                        <td style="text-align: left;">
-                                                            {{ $value->fixed_assets_table->item_name ?? '' }}
-                                                        </td>
-                                                        <td style="text-align: center;">
-                                                            {{ $value->quantity ?? 0 }}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </table>
-                                        </td>
+                                            @endforeach
+                                        </table>
+                                    </td>
 
-                                        {{-- Accept / Reject --}}
-                                        <td style="text-align: center">
-                                            @include('shared.managerequest.accept_reject_status', [
-                                                'request_info' => $request_info,
-                                            ])
-                                        </td>
+                                    {{-- Accept / Reject --}}
+                                    <td style="text-align: center">
+                                        @include('shared.managerequest.accept_reject_status', [
+                                            'request_info' => $request_info,
+                                        ])
+                                    </td>
 
-                                        {{-- QS Team Check & Pass --}}
-                                        <td style="text-align: center">
-                                            @include('shared.managerequest.qs_team_check_pass_status', [
-                                                'request_info' => $request_info,
-                                            ])
-                                        </td>
+                                    {{-- QS Team Check & Pass --}}
+                                    <td style="text-align: center">
+                                        @include('shared.managerequest.qs_team_check_pass_status', [
+                                            'request_info' => $request_info,
+                                        ])
+                                    </td>
 
-                                        {{-- Logistics Team Check & Sent --}}
-                                        <td style="text-align: center">
-                                            @include('shared.managerequest.logistics_team_check_sent_status',
-                                                [
-                                                    'request_info' => $request_info,
-                                                ])
-                                        </td>
+                                    {{-- Logistics Team Check & Sent --}}
+                                    <td style="text-align: center">
+                                        @include('shared.managerequest.logistics_team_check_sent_status', [
+                                            'request_info' => $request_info,
+                                        ])
+                                    </td>
 
-                                        <td style="text-align: center">
-                                            @if ($request_info->transfer_from_status == 'warehouse')
-                                                {{ $request_info->main_warehouse_table->warehouse_code ?? 'Warehouse' }}
-                                            @elseif ($request_info->transfer_from_status == 'other_site')
-                                                {{ $request_info->request_infos_table->customer_table->project_code ?? '' }}
-                                                @
-                                                {{ $request_info->request_infos_table->customer_table->name ?? '' }}
-                                            @endif
-                                        </td>
-
-                                        <td style="text-align: center">
-                                            {{ $request_info->customer_table->project_code ?? '' }}
+                                    <td style="text-align: center">
+                                        @if ($request_info->transfer_from_status == 'warehouse')
+                                            {{ $request_info->main_warehouse_table->warehouse_code ?? 'Warehouse' }}
+                                        @elseif ($request_info->transfer_from_status == 'other_site')
+                                            {{ $request_info->request_infos_table->customer_table->project_code ?? '' }}
                                             @
-                                            {{ $request_info->customer_table->name ?? '' }}
-                                        </td>
+                                            {{ $request_info->request_infos_table->customer_table->name ?? '' }}
+                                        @endif
+                                    </td>
 
-                                        <td style="text-align: center">
-                                            @include('shared.managerequest.received_by_engineer_status', [
-                                                'request_info' => $request_info,
-                                            ])
-                                        </td>
+                                    <td style="text-align: center">
+                                        {{ $request_info->customer_table->project_code ?? '' }}
+                                        @
+                                        {{ $request_info->customer_table->name ?? '' }}
+                                    </td>
 
-                                        <td style="text-align: center;">
-                                            <div class="btn-group">
-                                                <button class="btn btn-info btn-xs dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Action
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('managerequest.show', $request_info->id) }}">
-                                                            Detail
-                                                        </a>
-                                                    </li>
+                                    <td style="text-align: center">
+                                        @include('shared.managerequest.received_by_engineer_status', [
+                                            'request_info' => $request_info,
+                                        ])
+                                    </td>
 
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('fixed_assets_status_completed', $request_info->id) }}">
-                                                            Completed
-                                                        </a>
-                                                    </li>
+                                    <td style="text-align: center;">
+                                        <div class="btn-group">
+                                            <button class="btn btn-info btn-xs dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('managerequest.show', $request_info->id) }}">
+                                                        Detail
+                                                    </a>
+                                                </li>
 
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endif
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('fixed_assets_status_completed', $request_info->id) }}">
+                                                        Completed
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

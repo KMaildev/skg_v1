@@ -31,8 +31,9 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-        $fixed_assets_request_count_total = RequestInfo::where('request_status', NULL)
-            ->where('accept_reject_status', 'accept')
+        $fixed_assets_request_count_total =  RequestInfo::where('received_by_engineer_status', NULL)
+            ->where('request_status', NULL)
+            ->get()
             ->count();
         view()->share('fixed_assets_request_count_total', $fixed_assets_request_count_total);
     }
