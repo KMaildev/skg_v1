@@ -78,19 +78,23 @@
                                                 Action
                                             </button>
                                             <ul class="dropdown-menu">
+
                                                 <li>
                                                     <a class="dropdown-item"
                                                         href="{{ route('employee.edit', $value->id) }}">Edit</a>
                                                 </li>
+
                                                 <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('leave.edit', $value->id) }}">
+                                                    <a class="dropdown-item" href="{{ route('leave.edit', $value->id) }}">
                                                         Leave
                                                     </a>
                                                 </li>
+
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('employee.show', $value->id) }}">View Profile</a>
+                                                        href="{{ route('employee.show', $value->id) }}">
+                                                        View Profile
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Department;
+use App\Models\Leave;
 use App\Models\MembersLists;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -82,6 +83,13 @@ class LeaveController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $leave = new Leave();
+        $leave->leave_unleave_date = $request->leave_date;
+        $leave->remark = $request->leave_remark;
+        $leave->leave_by = auth()->user()->id;
+        $leave->user_id = $id ?? 0;
+        $leave->save();
+
         $employee = User::findOrFail($id);
         $employee->is_banned = 0;
         $employee->leave_date = $request->leave_date;
@@ -100,5 +108,42 @@ class LeaveController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function un_leave($id)
+    {
+        $employee = User::findOrFail($id);
+        $old_roles = $employee->roles->pluck('id')->toArray();
+        $departments = Department::orderBy('title')->get();
+        $roles = Role::all();
+
+        $members_lists = MembersLists::where('user_id', $id)->get();
+        return view('leave.un_leave', compact('employee', 'old_roles', 'departments', 'roles', 'members_lists'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function UnleaveUpdate(Request $request)
+    {
+        $id = $request->user_id;
+        $leave = new Leave();
+        $leave->leave_unleave_date = $request->leave_date;
+        $leave->remark = $request->leave_remark;
+        $leave->leave_by = auth()->user()->id;
+        $leave->user_id = $id ?? 0;
+        $leave->save();
+
+        $employee = User::findOrFail($id);
+        $employee->is_banned = 1;
+        $employee->leave_date = $request->leave_date;
+        $employee->leave_remark = $request->leave_remark;
+        $employee->leave_by = auth()->user()->id;
+        $employee->update();
+        return redirect()->back()->with('success', 'Your processing has been completed.');
     }
 }

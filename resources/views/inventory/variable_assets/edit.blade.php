@@ -74,7 +74,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-4 mb-2">
+                                    <div class="col-md-4 mb-2" hidden>
                                         <label class="form-label" for="formtabs-last-name"
                                             style="font-weight: bold">Qty</label>
                                         <input type="text" class="form-control @error('qty') is-invalid @enderror"

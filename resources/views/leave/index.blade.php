@@ -69,12 +69,21 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('employee.edit', $value->id) }}">Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('un_leave', $value->id) }}">
+                                                        Unleave
+                                                    </a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('employee.show', $value->id) }}">View Profile</a>
+                                                        href="{{ route('employee.edit', $value->id) }}">
+                                                        Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('employee.show', $value->id) }}">
+                                                        View Profile
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>

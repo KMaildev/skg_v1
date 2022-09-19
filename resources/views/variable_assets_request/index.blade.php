@@ -118,9 +118,6 @@
                         Actual Voucher
                     </th>
                     <th>
-                        Finance
-                    </th>
-                    <th>
                         Actions
                     </th>
                 </thead>
@@ -256,15 +253,6 @@
                                 {{-- Actual Voucher --}}
                                 <td style="text-align: center; font-size: 13px;" class="mytd">
                                     @include('shared.variable_assets_request.manager.variable_actual_voucher',
-                                        [
-                                            'request_info' => $request_info,
-                                        ])
-                                </td>
-
-
-                                {{-- Finance --}}
-                                <td style="text-align: center; font-size: 13px;" class="mytd">
-                                    @include('shared.variable_assets_request.manager.variable_finance_payment_slip',
                                         [
                                             'request_info' => $request_info,
                                         ])

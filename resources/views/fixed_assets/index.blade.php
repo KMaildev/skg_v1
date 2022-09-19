@@ -29,32 +29,70 @@
                                 <th style="color: white; text-align: center; width: 2%;">Unit</th>
                                 <th style="color: white; text-align: center; width: 2%;">Qty</th>
                                 <th style="color: white; text-align: center; width: 10%;">Remark</th>
-                                <th style="color: white; text-align: center; width: 10%;">Voucher</th>
+                                <th style="color: white; text-align: center; width: 20%;">Request</th>
+                                <th style="color: white; text-align: center; width: 20%;">Approval</th>
+                                <th style="color: white; text-align: center; width: 15%;">Voucher</th>
+                                <th style="color: white; text-align: center; width: 10%;">Received</th>
                                 <th style="color: white; text-align: center; width: 10%;">Unusable</th>
                                 <th style="color: white; text-align: center; width: 10%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
+                            @php
+                                $all_total_fixed_asset_qty = [];
+                            @endphp
                             @foreach ($fixed_assets as $key => $fixed_asset)
                                 <tr>
                                     <td style="text-align: center;">
                                         {{ $key + 1 }}
                                     </td>
+
                                     <td style="text-align: center;">
                                         {{ $fixed_asset->item_name ?? '-' }}
                                     </td>
+
                                     <td style="text-align: center;">
                                         {{ $fixed_asset->unit ?? '-' }}
                                     </td>
+
                                     <td style="text-align: center;">
-                                        {{ number_format($fixed_asset->qty) }}
+                                        @php
+                                            $received_qty = $fixed_asset->fixed_assets_buy_requests_table->sum('received_qty');
+                                            $fixed_asset_qty = $fixed_asset->qty;
+                                            $total_fixed_asset_qty = $received_qty + $fixed_asset_qty;
+                                            echo number_format($total_fixed_asset_qty, 2);
+                                            $all_total_fixed_asset_qty[] = $total_fixed_asset_qty;
+                                        @endphp
                                     </td>
+
                                     <td style="text-align: center;">
                                         {{ $fixed_asset->desciption }}
                                     </td>
 
+                                    {{-- Request --}}
+                                    <td>
+                                        @include('fixed_assets.shared.request_form', [
+                                            'fixed_asset' => $fixed_asset,
+                                        ])
+                                    </td>
+
+                                    {{-- Approval --}}
+                                    <td>
+                                        @include('fixed_assets.shared.approval_status', [
+                                            'fixed_asset' => $fixed_asset,
+                                        ])
+                                    </td>
+
+                                    {{-- Voucher --}}
                                     <td style="text-align: center; font-size: 13px;">
                                         @include('fixed_assets.status.voucher_status', [
+                                            'fixed_asset' => $fixed_asset,
+                                        ])
+                                    </td>
+
+                                    {{-- Received --}}
+                                    <td>
+                                        @include('fixed_assets.shared.received_status', [
                                             'fixed_asset' => $fixed_asset,
                                         ])
                                     </td>
@@ -74,12 +112,16 @@
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('fixedassets.edit', $fixed_asset->id) }}">Edit</a>
+                                                        href="{{ route('fixedassets.edit', $fixed_asset->id) }}">
+                                                        Edit
+                                                    </a>
                                                 </li>
 
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('fixedassets.show', $fixed_asset->id) }}">Details</a>
+                                                        href="{{ route('fixedassets.show', $fixed_asset->id) }}">
+                                                        Details
+                                                    </a>
                                                 </li>
 
                                                 <li>
@@ -88,7 +130,9 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item del_confirm"
-                                                            id="confirm-text" data-toggle="tooltip">Delete</button>
+                                                            id="confirm-text" data-toggle="tooltip">
+                                                            Delete
+                                                        </button>
                                                     </form>
                                                 </li>
                                             </ul>
@@ -100,7 +144,10 @@
                         <tr>
                             <th colspan="3">Total</th>
                             <th style="text-align: center; font-weight: bold">
-                                {{ $fixed_assets->sum('qty') }}
+                                @php
+                                    $all_total_fixed_asset_qty = array_sum($all_total_fixed_asset_qty);
+                                    echo number_format($all_total_fixed_asset_qty, 2);
+                                @endphp
                             </th>
                         </tr>
                     </table>

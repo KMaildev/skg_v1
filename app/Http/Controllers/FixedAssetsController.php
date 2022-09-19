@@ -19,7 +19,7 @@ class FixedAssetsController extends Controller
      */
     public function index()
     {
-        $fixed_assets = FixedAssets::paginate(100);
+        $fixed_assets = FixedAssets::paginate(1000);
         return view('fixed_assets.index', compact('fixed_assets'));
     }
 

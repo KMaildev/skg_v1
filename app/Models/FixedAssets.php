@@ -22,9 +22,13 @@ class FixedAssets extends Model
         return $this->hasMany(ReturnQsTeamCheckPass::class, 'fixed_asset_id', 'id');
     }
 
-
     public function return_items_table()
     {
         return $this->hasMany(ReturnItem::class, 'fixed_asset_id', 'id');
+    }
+
+    public function fixed_assets_buy_requests_table()
+    {
+        return $this->hasMany(FixedAssetsBuyRequest::class, 'fixed_asset_id', 'id');
     }
 }

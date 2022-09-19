@@ -35,9 +35,6 @@
                                     Unit
                                 </th>
                                 <th style="background-color: #2e696e !important; color: white; text-align: center;">
-                                    Qty
-                                </th>
-                                <th style="background-color: #2e696e !important; color: white; text-align: center;">
                                     Category
                                 </th>
                                 <th style="background-color: #2e696e !important; color: white; text-align: center;">
@@ -75,10 +72,6 @@
                                             </td>
                                             <td style="text-align: center;">
                                                 {{ $variable_asset->unit ?? '-' }}
-                                            </td>
-
-                                            <td style="text-align: center;">
-                                                {{ number_format($variable_asset->qty) }}
                                             </td>
 
                                             <td style="text-align: center;">

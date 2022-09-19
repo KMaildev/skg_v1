@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 05, 2022 at 08:34 PM
+-- Generation Time: Sep 19, 2022 at 06:34 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -1010,6 +1010,31 @@ INSERT INTO `fixed_assets` (`id`, `item_name`, `unit`, `qty`, `desciption`, `mai
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fixed_assets_buy_requests`
+--
+
+CREATE TABLE `fixed_assets_buy_requests` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `request_qty` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remark` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `request_date` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `fixed_asset_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `approval_qty` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approval_remark` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approval_user_id` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approval_date` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `received_qty` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `received_remark` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `received_user_id` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `received_date` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `fixed_assets_purchases`
 --
 
@@ -1199,13 +1224,21 @@ CREATE TABLE `labour_costs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `labour_costs`
+-- Table structure for table `leaves`
 --
 
-INSERT INTO `labour_costs` (`id`, `project_id`, `particular`, `unit`, `quantity`, `rate`, `per`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 'No 1', 'Nos', '1000', '1000', 'Nos', 1, '2022-09-05 05:23:28', '2022-09-05 05:23:28'),
-(2, 2, 'No 1', 'Nos', '1000', '1000', 'Nos', 1, '2022-09-05 05:23:28', '2022-09-05 05:23:28');
+CREATE TABLE `leaves` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `leave_unleave_date` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remark` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `leave_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1741,7 +1774,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (138, '2022_09_01_084618_add_remark_to_bq_temporaries_table', 31),
 (139, '2022_09_01_084715_add_remark_to_bq_items_table', 31),
 (140, '2022_09_01_084748_add_remark_to_project_bqs_table', 31),
-(141, '2022_09_05_225632_create_labour_costs_table', 32);
+(141, '2022_09_05_225632_create_labour_costs_table', 32),
+(142, '2022_09_19_073216_create_leaves_table', 33),
+(143, '2022_09_19_091354_create_fixed_assets_buy_requests_table', 34),
+(144, '2022_09_19_102634_add_approval_fields_to_fixed_assets_buy_requests_table', 35),
+(145, '2022_09_19_104854_add_received_fields_to_fixed_assets_buy_requests_table', 36);
 
 -- --------------------------------------------------------
 
@@ -1930,7 +1967,8 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (31, 'variable_logistics_team_check', 'web', '2022-09-05 17:41:56', '2022-09-05 17:41:56'),
 (32, 'management_accept_reject', 'web', '2022-09-05 17:42:00', '2022-09-05 17:42:00'),
 (33, 'variable_logistics_team_send', 'web', '2022-09-05 17:42:05', '2022-09-05 17:42:05'),
-(34, 'variable_actual_voucher', 'web', '2022-09-05 17:42:11', '2022-09-05 17:42:11');
+(34, 'variable_actual_voucher', 'web', '2022-09-05 17:42:11', '2022-09-05 17:42:11'),
+(35, 'accept_bq_module', 'web', '2022-09-06 05:39:07', '2022-09-06 05:39:07');
 
 -- --------------------------------------------------------
 
@@ -2441,10 +2479,10 @@ CREATE TABLE `request_infos` (
 --
 
 INSERT INTO `request_infos` (`id`, `request_code`, `request_date`, `work_scope`, `user_id`, `project_id`, `customer_id`, `created_at`, `updated_at`, `accept_reject_status`, `accept_reject_date`, `qs_team_check_status`, `logistics_team_check_sent_status`, `transfer_from_status`, `main_warehouse_id`, `other_site_id`, `received_by_engineer_status`, `received_date`, `qs_team_check_date`, `logistics_team_check_sent_date`, `projects_users_id`, `request_status`, `request_status_date`, `request_status_user`) VALUES
-(23, 'FR-000023', '2022-06-24 01:00 PM', 'Site Use', 22, 0, 9, '2022-06-24 06:52:12', '2022-06-24 09:19:11', 'accept', '2022-06-24 15:25:50pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:17:37pm', '2022-06-24 16:18:41pm', 1, NULL, NULL, NULL),
-(24, 'FR-000024', '2022-06-24 01:00 PM', 'Site Use', 22, 0, 7, '2022-06-24 06:53:28', '2022-06-24 09:19:15', 'accept', '2022-06-24 15:25:55pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:05:08pm', '2022-06-24 16:08:07pm', 14, NULL, NULL, NULL),
-(25, 'FR-000025', '2022-06-24 01:00 PM', 'Site Use', 44, 0, 16, '2022-06-24 06:56:44', '2022-06-24 09:08:43', 'accept', '2022-06-24 15:25:43pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:01:38pm', '2022-06-24 16:07:53pm', 18, NULL, NULL, NULL),
-(26, 'FR-000026', '2022-06-24 01:00 PM', 'Site Use', 37, 0, 21, '2022-06-24 06:59:00', '2022-06-24 09:10:01', 'accept', '2022-06-24 15:24:24pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:00:38pm', '2022-06-24 16:07:34pm', 13, NULL, NULL, NULL),
+(23, 'FR-000023', '2022-06-24 01:00 PM', 'Site Use', 22, 0, 9, '2022-06-24 06:52:12', '2022-09-06 05:59:53', 'accept', '2022-06-24 15:25:50pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:17:37pm', '2022-06-24 16:18:41pm', 1, 'completed', '2022-09-06 12:29:53pm', '1'),
+(24, 'FR-000024', '2022-06-24 01:00 PM', 'Site Use', 22, 0, 7, '2022-06-24 06:53:28', '2022-09-06 06:00:01', 'accept', '2022-06-24 15:25:55pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:05:08pm', '2022-06-24 16:08:07pm', 14, 'completed', '2022-09-06 12:30:01pm', '1'),
+(25, 'FR-000025', '2022-06-24 01:00 PM', 'Site Use', 44, 0, 16, '2022-06-24 06:56:44', '2022-09-06 06:00:11', 'accept', '2022-06-24 15:25:43pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:01:38pm', '2022-06-24 16:07:53pm', 18, 'completed', '2022-09-06 12:30:11pm', '1'),
+(26, 'FR-000026', '2022-06-24 01:00 PM', 'Site Use', 37, 0, 21, '2022-06-24 06:59:00', '2022-09-06 06:00:19', 'accept', '2022-06-24 15:24:24pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 04:00 PM', '2022-06-24 16:00:38pm', '2022-06-24 16:07:34pm', 13, 'completed', '2022-09-06 12:30:19pm', '1'),
 (27, 'FR-000027', '2022-06-24 02:00 PM', 'Site Use', 36, 0, 8, '2022-06-24 07:20:26', '2022-06-24 08:58:11', 'accept', '2022-06-24 15:25:33pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 03:00 PM', '2022-06-24 15:55:56pm', '2022-06-24 15:56:28pm', 19, NULL, NULL, NULL),
 (28, 'FR-000028', '2022-06-24 02:00 PM', 'Site Use', 32, 0, 12, '2022-06-24 07:22:44', '2022-06-24 08:58:47', 'accept', '2022-06-24 15:25:25pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 03:00 PM', '2022-06-24 15:54:58pm', '2022-06-24 15:56:11pm', 11, NULL, NULL, NULL),
 (29, 'FR-000029', '2022-06-24 02:00 PM', 'Site Use', 31, 0, 11, '2022-06-24 07:25:31', '2022-06-24 08:55:45', 'accept', '2022-06-24 15:25:20pm', 'finished', 'finished', 'warehouse', 1, 0, 'received', '2022-06-24 03:00 PM', '2022-06-24 15:53:58pm', '2022-06-24 15:54:20pm', 9, NULL, NULL, NULL),
@@ -2957,8 +2995,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `employee_id`, `phone`, `nrc_number`, `gender`, `address`, `department_id`, `contact_person`, `emergency_contact`, `passport_photo`, `join_date`, `employment_type`, `last_login_at`, `last_login_ip`, `agent`, `nrc_front`, `nrc_back`, `members_list_file`, `other_file`, `is_banned`, `leave_date`, `leave_remark`, `leave_by`) VALUES
-(1, 'Admin', 'admin@skg.com', NULL, '$2y$10$iY.PTOOlASzaLY549BHGH.aQorS3bbzjX7P9wcQ2QbJH/sGWI0aXa', NULL, '2022-02-14 04:00:05', '2022-09-05 14:55:55', 'EMP-00001', '09455165415', '-', 'male', 'YGN', 1, NULL, NULL, 'public/passport/yfI6n3suGBsHHNAoFiNDKV2fVIm4EqkN2Kdmdswg.jpg', '2022-06-01 12:00 AM', 0, '2022-09-05 21:25:55', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
-(2, 'U AUNG MYO HTUT', 'aungmyohtut.skgroup@gmail.com', NULL, '$2y$10$jYBSEwxV5Fv0WkfDbpwz7.8J4L5nL.qNq4AJ7LXStOWxerGMssZ.S', 'CLb9kS8OAWpQUTVj1smvl85KY7LFRhhCfzQbpo6lyG2JoG00EhBy3f6pHufo', '2022-02-14 04:00:32', '2022-07-18 03:57:55', 'EMP - 00002', '09772746336', '12/OuKaTa(N)178191', 'male', 'အမှတ် (၂၄၆)၊ ၆ လမ်း၊ ၁၁ရပ်ကွက်.‌တောင်ဉက္ကလာပမြို့နယ်၊ ရန်ကုန်မြို့', 1, NULL, NULL, 'public/passport/Ow2ZsVWJ8GcLThEMnvJsrJUY2JJYFBxLVGctygx2.jpg', '2020-12-21 12:00 AM', 0, '2022-06-01 11:51:59', '103.217.156.204', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0', 'public/photo/PJHizF8U2stJ9aTVEKMOUdNBkyCHjoOG5iVxzbbT.jpg', 'public/photo/GiyMPenfBnPMJRjUlM2VT8LNTRfvRwZVsCPpJUO4.jpg', '', NULL, 0, '2022-07-18 10:27 AM', 'Ok', '1'),
+(1, 'Admin', 'admin@skg.com', NULL, '$2y$10$iY.PTOOlASzaLY549BHGH.aQorS3bbzjX7P9wcQ2QbJH/sGWI0aXa', NULL, '2022-02-14 04:00:05', '2022-09-19 00:57:24', 'EMP-00001', '09455165415', '-', 'male', 'YGN', 1, NULL, NULL, 'public/passport/yfI6n3suGBsHHNAoFiNDKV2fVIm4EqkN2Kdmdswg.jpg', '2022-06-01 12:00 AM', 0, '2022-09-19 07:27:24', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', NULL, NULL, '', NULL, 1, NULL, NULL, NULL),
+(2, 'U AUNG MYO HTUT', 'aungmyohtut.skgroup@gmail.com', NULL, '$2y$10$jYBSEwxV5Fv0WkfDbpwz7.8J4L5nL.qNq4AJ7LXStOWxerGMssZ.S', 'CLb9kS8OAWpQUTVj1smvl85KY7LFRhhCfzQbpo6lyG2JoG00EhBy3f6pHufo', '2022-02-14 04:00:32', '2022-09-19 01:17:49', 'EMP - 00002', '09772746336', '12/OuKaTa(N)178191', 'male', 'အမှတ် (၂၄၆)၊ ၆ လမ်း၊ ၁၁ရပ်ကွက်.‌တောင်ဉက္ကလာပမြို့နယ်၊ ရန်ကုန်မြို့', 1, NULL, NULL, 'public/passport/Ow2ZsVWJ8GcLThEMnvJsrJUY2JJYFBxLVGctygx2.jpg', '2020-12-21 12:00 AM', 0, '2022-06-01 11:51:59', '103.217.156.204', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0', 'public/photo/PJHizF8U2stJ9aTVEKMOUdNBkyCHjoOG5iVxzbbT.jpg', 'public/photo/GiyMPenfBnPMJRjUlM2VT8LNTRfvRwZVsCPpJUO4.jpg', '', NULL, 1, '2022-09-19 07:47 AM', 'Un Leave', '1'),
 (3, 'Daw Pearl Yadanar Soe', 'pearl.skgroup@gmail.com', NULL, '$2y$10$5ZtZj/NPdW8QTxYw8jHuT.Yt6GEd.2PSy0h.iBmGbOha9piqpfYge', 'w0qC5zZnJI4ZlSTqv1CBlLGe0LtbNpIwnVGtMcN4aS0ZoA1dBl9ky6xG8uQL', '2022-03-07 17:39:27', '2022-06-30 08:14:05', 'EMP-00003', '09751446005', '12/KaThaNa (N)050585', 'female', 'YGN', 4, NULL, NULL, 'public/passport/fQkbrpdxdMDgfzNLa5UTActUa1IKRXuHpnb3PUdA.jpg', '2022-06-03 12:00 AM', 0, '2022-06-30 15:14:05', '8.30.234.3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0', 'public/photo/7NoIpz2lecBCK0c7ieif98QD1Iyskt4K4kEYVLvA.jpg', 'public/photo/BYGiccJ0mDtxSD8E5dJWaVZyq5crrS8USdoqFWJE.jpg', '', NULL, 1, NULL, NULL, NULL),
 (4, 'Archi Myo Thet', 'myothet.skgroup@gmail.com', NULL, '$2y$10$o.55w0i12oOqRzvuJ/PZv.8ioInfp4b5LmqwFrglsMDAWmwBtl7iG', 'YwEkUw3QZI6scWBld8C7nRiNYfSV8ziKXj78C0EAlhnarfq8uqasHn8QbVyN', '2022-03-07 18:22:19', '2022-07-17 12:57:08', 'EMP-00004', '09751446090', '12/Thakata(N)180068', 'male', 'YGN', 6, NULL, NULL, 'public/passport/MPq9DwBPXDQmHdeiIJnjJ90P9x5PB8TLpNDhraIX.jpg', '2022-06-01 12:00 AM', 0, '2022-07-17 19:57:08', '45.125.4.194', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0', 'public/photo/OVHb7FxrbthLoYex1a5BdVM28pfbvKdZS9LMF1KF.jpg', 'public/photo/1BvWI4vfsZA2MaPvZxHiDUQgp84y0e3Ooep3DJ6B.jpg', '', NULL, 1, NULL, NULL, NULL),
 (5, 'Ma Hpoo Ngone Kyaw', 'hpoongone.skgroup@gmail.com', NULL, '$2y$10$wbCsGmqe7rSeDa.GmCsYQeqgknZdelTsPQIQ/ytaKbBgV8tD5baEO', 'JPqxF8s1SwYOSgYy0a6ThzHgQQrWjHSlcA0YkI5qFLM6PhcZf21WEoDFPJG7', '2022-03-11 09:14:52', '2022-06-07 07:34:54', 'EMP - 00005', '09751446006', '12/TaMaNa(N)119539', 'female', 'No 127/5, PaDaMyar Street, Thinkangyun Tsp.', 4, NULL, NULL, 'public/passport/qxi2Imx0vbnnT3u8AkcZZOnIS9hP2LfXNbukyDUn.jpg', '2022-05-31 12:00 AM', 0, NULL, NULL, NULL, 'public/photo/oW8ABZD4n4NuirdWQ7Oh7cDUMtuUQgv24jL9dFXL.jpg', 'public/photo/XYSDDDuoIvL6QSBapF8cEr8V7LpNKKXqWw9bJM2X.jpg', '', NULL, 1, NULL, NULL, NULL),
@@ -7360,6 +7398,12 @@ ALTER TABLE `fixed_assets`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `fixed_assets_buy_requests`
+--
+ALTER TABLE `fixed_assets_buy_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `fixed_assets_purchases`
 --
 ALTER TABLE `fixed_assets_purchases`
@@ -7387,6 +7431,12 @@ ALTER TABLE `labours`
 -- Indexes for table `labour_costs`
 --
 ALTER TABLE `labour_costs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leaves`
+--
+ALTER TABLE `leaves`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7748,6 +7798,12 @@ ALTER TABLE `fixed_assets`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `fixed_assets_buy_requests`
+--
+ALTER TABLE `fixed_assets_buy_requests`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `fixed_assets_purchases`
 --
 ALTER TABLE `fixed_assets_purchases`
@@ -7775,7 +7831,13 @@ ALTER TABLE `labours`
 -- AUTO_INCREMENT for table `labour_costs`
 --
 ALTER TABLE `labour_costs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `leaves`
+--
+ALTER TABLE `leaves`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `main_warehouses`
@@ -7805,13 +7867,13 @@ ALTER TABLE `members_lists`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `permits`

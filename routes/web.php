@@ -207,6 +207,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('employee', 'EmployeeController');
     Route::resource('leave', 'hr\LeaveController');
+    Route::get('un_leave/{id}', 'hr\LeaveController@un_leave')->name('un_leave');
+    Route::post('un_leave_update', 'hr\LeaveController@UnleaveUpdate')->name('un_leave_update');
+
     Route::resource('profile', 'ProfileController');
     Route::resource('changepassword', 'ChangePasswordController');
 
@@ -302,6 +305,9 @@ Route::middleware('auth')->group(function () {
     ]);
 
 
+
+
+
     Route::post('add_variable_assets_temporarie', 'General\VariableAssetsTemporaryController@store');
     Route::get('get_variable_assets_temporarie', array('as' => 'get_variable_assets_temporarie', 'uses' => 'General\VariableAssetsTemporaryController@index'));
     Route::get('remove_variable_assets_temporarie/{id}', array('as' => 'remove_variable_assets_temporarie', 'uses' => 'General\VariableAssetsTemporaryController@remove_variable_assets_temporarie'));
@@ -364,4 +370,16 @@ Route::middleware('auth')->group(function () {
         'as' => 'get_logistics_check_items',
         'uses' => 'VariableRequest\VariableRequestSsdController@get_logistics_check_items'
     ]);
+
+
+    Route::resource('fixed_assets_buy_request', 'Fixedassets\FixedAssetsBuyRequestController');
+    Route::resource('fixed_assets_approval', 'Fixedassets\FixedAssetsApprovalController');
+    Route::get('fixed_assets_approval_create/{id}', 'Fixedassets\FixedAssetsApprovalController@approvalCreate')->name('fixed_assets_approval_create');
+    Route::post('update_fixed_assets_approval_qty', 'Fixedassets\FixedAssetsApprovalController@UpdateFixedAssetsApprovalQty')->name('update_fixed_assets_approval_qty');
+    Route::post('update_fixed_assets_approval_remark', 'Fixedassets\FixedAssetsApprovalController@UpdateFixedAssetsApprovalRemark')->name('update_fixed_assets_approval_remark');
+
+    Route::resource('fixed_assets_received', 'Fixedassets\FiexdAssetsReceivedController');
+    Route::get('fixed_assets_received_create/{id}', 'Fixedassets\FiexdAssetsReceivedController@receivedCreate')->name('fixed_assets_received_create');
+    Route::post('update_fixed_assets_received_qty', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedQty')->name('update_fixed_assets_received_qty');
+    Route::post('update_fixed_assets_received_remark', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedRemark')->name('update_fixed_assets_received_remark');
 });

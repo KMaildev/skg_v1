@@ -56,7 +56,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2" hidden>
                                     <label class="form-label" for="formtabs-last-name" style="font-weight: bold">Qty</label>
                                     <input type="text" class="form-control @error('qty') is-invalid @enderror"
                                         name="qty" value="{{ $fixed_assets->qty }}" />
