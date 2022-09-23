@@ -48,7 +48,7 @@ class EngRequestController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $request_info_count = RequestInfo::all();
+        $request_info_count = RequestInfo::count();
         $code_count = count($request_info_count);
         $increment = 'FR-' . sprintf('%06d', $code_count + 1);
 

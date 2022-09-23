@@ -7,6 +7,7 @@ use App\Models\Projects;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -14,6 +15,29 @@ class User extends Authenticatable
     use Notifiable, HasRoles;
 
     protected $guarded = [];
+
+    use LogsActivity;
+    protected static $logName = 'users_log';
+    protected static $logAttributes = [
+        'name',
+        'email',
+        'phone',
+        'created_at',
+        'updated_at',
+        'employee_id',
+        'phone',
+        'nrc_number',
+        'gender',
+        'address',
+        'department_id',
+        'contact_person',
+        'emergency_contact',
+        'join_date',
+        'employment_type',
+        'last_login_at',
+        'last_login_ip',
+        'agent',
+    ];
 
     /**
      * The attributes that are mass assignable.

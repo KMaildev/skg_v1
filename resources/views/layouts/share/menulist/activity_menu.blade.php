@@ -6,18 +6,21 @@
             <li class="menu-item">
                 <a href="{{ route('activity.index') }}" class="menu-link">
                     <div data-i1n="Layouts">
-                        Login
+                        Login Activity
                     </div>
                 </a>
             </li>
 
-            <li class="menu-item">
-                <a href="{{ route('activity.show', 'customers_log') }}" class="menu-link">
-                    <div data-i1n="Layouts">
-                        {{ Str::upper(str_replace('_', ' ', 'customers_log')) }}
-                    </div>
-                </a>
-            </li>
+            @foreach ($activitieslogs as $activitieslog)
+                <li class="menu-item">
+                    <a href="{{ route('activity.show', $activitieslog->log_name) }}" class="menu-link">
+                        <div data-i1n="Layouts">
+                            {{ Str::upper(str_replace('_', ' ', $activitieslog->log_name)) }}
+                        </div>
+                    </a>
+                </li>
+            @endforeach
+
         </ul>
     </div>
 </aside>

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\RequestInfo;
 use App\Models\VariableRequestInfo;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Activitylog\Models\Activity;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
             ->where('request_status', NULL)
             ->get()
             ->count();
+
+        $activitieslogs = Activity::select('log_name')
+            ->groupBy('log_name')
+            ->get();
+        view()->share('activitieslogs', $activitieslogs);
+
         view()->share('fixed_assets_request_count_total', $fixed_assets_request_count_total);
     }
 }
