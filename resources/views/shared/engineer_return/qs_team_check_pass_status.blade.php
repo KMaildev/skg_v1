@@ -1,4 +1,4 @@
-@if ($engineer_return_infos->qs_team_check_pass_status)
+@if ($engineer_return_infos->qs_team_check_pass_status ?? '')
     <a href="{{ route('inventory_qs_team_check_create', ['id' => $engineer_return_infos->id]) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">

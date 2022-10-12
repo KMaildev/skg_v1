@@ -27,9 +27,10 @@ class VariableRequestSsdController extends Controller
     {
         $data = VariableRequestInfo::with('variable_request_items_table')
             ->orderBy('id', 'DESC')
-            ->get()
-            ->where('request_status', NULL)
-            ->where('actual_voucher_upload', NULL);
+            ->where('accept_reject_status', 'accept')
+            ->orWhere('accept_reject_status', NULL)
+            // ->where('actual_voucher_upload', NULL);
+            ->get();
         return Datatables::of($data)
 
             ->editColumn('engineer_name', function ($each) {
@@ -255,7 +256,7 @@ class VariableRequestSsdController extends Controller
                             </div>
                         </a>
                         ';
-                } else if ($each->accept_reject_status == 'reject') {
+                } else if ($each->management_accept_reject_status == 'reject') {
                     $html .= '
                         <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
                             <div class="d-flex flex-column w-100">

@@ -95,8 +95,9 @@ class EmployeeController extends Controller
                 $insert[$key]['created_at'] =  date('Y-m-d H:i:s');
                 $insert[$key]['updated_at'] =  date('Y-m-d H:i:s');
             }
+            MembersLists::insert($insert);
         }
-        MembersLists::insert($insert);
+        
         return redirect()->back()->with('success', 'Employee is successfully created.');
     }
 

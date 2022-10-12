@@ -41,7 +41,11 @@ class EngineerReturnController extends Controller
         $request_items = EngRequestItem::where('user_id', $user_id)
             ->where('customer_id', $customer_id)
             ->get();
-        return view('engineer.return.create', compact('fixed_assets', 'projects_users', 'request_items', 'customer_id'));
+
+        $return_items = ReturnItem::where('user_id', $user_id)
+            ->where('customer_id', $customer_id)
+            ->get();
+        return view('engineer.return.create', compact('fixed_assets', 'projects_users', 'request_items', 'customer_id', 'return_items'));
     }
 
     /**
@@ -66,6 +70,7 @@ class EngineerReturnController extends Controller
         $eng_return->save();
         $eng_return_id = $eng_return->id;
 
+
         $data = $request->except('_token');
         // Qty Config
         $qty = $data['quantity'] ?? [];
@@ -83,6 +88,7 @@ class EngineerReturnController extends Controller
             for ($i = 0; $i < $fixed_asset_id; $i++) {
                 $save = new ReturnItem();
                 $save->fixed_asset_id = $data['fixed_asset_id'][$i];
+                $save->customer_id = $request->return_from;
                 $save->quantity = $array_qty[$i] ?? 0;
                 $save->user_id = $user_id;
                 $save->engineer_return_info_id = $eng_return_id;

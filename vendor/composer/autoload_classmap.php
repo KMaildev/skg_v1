@@ -211,6 +211,7 @@ return array(
     'App\\Http\\Requests\\UpdateFixedAssets' => $baseDir . '/app/Http/Requests/UpdateFixedAssets.php',
     'App\\Http\\Requests\\UpdateFixedAssetsApproval' => $baseDir . '/app/Http/Requests/UpdateFixedAssetsApproval.php',
     'App\\Http\\Requests\\UpdateFixedAssetsPurchase' => $baseDir . '/app/Http/Requests/UpdateFixedAssetsPurchase.php',
+    'App\\Http\\Requests\\UpdateFixedAssetsReceived' => $baseDir . '/app/Http/Requests/UpdateFixedAssetsReceived.php',
     'App\\Http\\Requests\\UpdateLabour' => $baseDir . '/app/Http/Requests/UpdateLabour.php',
     'App\\Http\\Requests\\UpdateMainWarehouse' => $baseDir . '/app/Http/Requests/UpdateMainWarehouse.php',
     'App\\Http\\Requests\\UpdateMaterial' => $baseDir . '/app/Http/Requests/UpdateMaterial.php',

@@ -7,6 +7,7 @@
                 <div class="card-body">
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Warehouse Plan</h5>
+                        <h1 style="color: red;">in progress</h1>
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
                                 <form action="#" method="GET" autocomplete="off">
@@ -28,7 +29,10 @@
                                         <th style="color: white; text-align: center; width: 1%">#</th>
                                         <th style="color: white; text-align: center; width: 14%">Items Name</th>
                                         <th style="color: white; text-align: center; width: 14%">Main Warehouse</th>
-                                        <th style="color: white; text-align: center; width: 14%">Site On Hand [Total]</th>
+                                        <th style="color: white; text-align: center; width: 14%">
+                                            Request Total
+                                            <!--Site On Hand [Total]-->
+                                        </th>
                                         <th style="color: white; text-align: center; width: 14%">Return [Total]</th>
                                         <th style="color: white; text-align: center; width: 14%">Remaining Balance</th>
                                         <th style="color: white; text-align: center; width: 14%">Action</th>
@@ -60,10 +64,14 @@
                                                 {{-- {{ $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty') }} --}}
                                                 @php
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
+                                                    echo "Request : " . $site_on_hand;
+                                                    $site_on_hand_total[] = $site_on_hand;
                                                     $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
                                                     $site_on_hand = $site_on_hand - $return;
-                                                    echo $site_on_hand;
-                                                    $site_on_hand_total[] = $site_on_hand;
+                                                    
+                                                    
+                                        
+                                                    
                                                 @endphp
                                             </td>
 
@@ -82,7 +90,7 @@
                                                     $main_warehouse = $fixed_asset->qty;
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
                                                     $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    $remaining_balance_calc = $main_warehouse - $site_on_hand + $return;
+                                                    $remaining_balance_calc = $site_on_hand - $return;
                                                     echo $remaining_balance_calc;
                                                     $remaining_balance_total[] = $remaining_balance_calc;
                                                 @endphp

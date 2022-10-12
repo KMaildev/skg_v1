@@ -1,7 +1,7 @@
 @extends('layouts.menus.engineer')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-10 col-sm-12">
+        <div class="col-md-12 col-lg-12 col-sm-12">
 
             <div class="col-xxl">
                 <div class="card mb-4">
@@ -50,8 +50,7 @@
                                             @endforeach
                                         </select>
 
-                                        <input type="hidden" name="return_from" value="{{ $customer_id ?? '' }}"
-                                            required>
+                                        <input type="hidden" name="return_from" value="{{ $customer_id ?? '' }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -78,6 +77,9 @@
                                             Passed Qty
                                         </th>
                                         <th style="color: white; text-align: center; width: 14%">
+                                            Already (Return)
+                                        </th>
+                                        <th style="color: white; text-align: center; width: 14%">
                                             Return Qty
                                         </th>
                                     </tr>
@@ -95,6 +97,7 @@
                                             @if ($request_item->another_qs_team_check_passes_table->qs_passed_qty ?? '')
                                                 @php
                                                     $y = $i++;
+                                                    $fixed_asset_id = $request_item->fixed_asset_id;
                                                 @endphp
                                                 <tr>
                                                     <td>
@@ -128,9 +131,31 @@
                                                     </td>
 
                                                     <td>
+                                                        {{-- Already (Return) --}}
+                                                        @php
+                                                            $AlreadyTotal = [];
+                                                        @endphp
+                                                        @foreach ($return_items as $already_return_item)
+                                                            @php
+                                                                if ($fixed_asset_id == $already_return_item->fixed_asset_id) {
+                                                                    $AlreadyTotal[] = $already_return_item->quantity ?? 0;
+                                                                }
+                                                            @endphp
+                                                        @endforeach
+                                                        @php
+                                                            $TotalAlreadyTotal = array_sum($AlreadyTotal);
+                                                            echo $TotalAlreadyTotal;
+                                                        @endphp
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                            $pass_qty = $request_item->another_qs_team_check_passes_table->qs_passed_qty ?? 0;
+                                                            $already_return_qty = $TotalAlreadyTotal;
+                                                            $return_qty_tot = $pass_qty - $already_return_qty;
+                                                        @endphp
                                                         <input type="text" class="form-control" name="quantity[]"
-                                                            required value="0" id="qty_{{ $y }}"
-                                                            disabled />
+                                                            required id="qty_{{ $y }}" disabled />
                                                         @error('quantity')
                                                             <div class="invalid-feedback"> {{ $message }} </div>
                                                         @enderror
