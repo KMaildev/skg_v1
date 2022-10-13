@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Engineer;
+namespace App\Http\Controllers\Testing;
 
 use App\Http\Controllers\Controller;
-use App\Models\EngRequestItem as ModelsEngRequestItem;
+use App\Models\VariableRequestInfo;
 use Illuminate\Http\Request;
 
-class EngRequestItem extends Controller
+class TestingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class EngRequestItem extends Controller
      */
     public function index()
     {
-        //
+        $data = VariableRequestInfo::with('variable_request_items_table')
+            ->where('accept_reject_status', 'accept')
+            ->orWhere('accept_reject_status', NULL)
+            ->get();
+        return view('testing.index', compact('data'));
     }
 
     /**
@@ -47,7 +51,7 @@ class EngRequestItem extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**

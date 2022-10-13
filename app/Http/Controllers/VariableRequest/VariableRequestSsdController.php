@@ -25,11 +25,9 @@ class VariableRequestSsdController extends Controller
 
     public function getVariableRequest(Request $request)
     {
-        $data = VariableRequestInfo::with('variable_request_items_table')
-            ->orderBy('id', 'DESC')
+        $data = VariableRequestInfo::orderBy('id', 'DESC')
             ->where('accept_reject_status', 'accept')
             ->orWhere('accept_reject_status', NULL)
-            // ->where('actual_voucher_upload', NULL);
             ->get();
         return Datatables::of($data)
 
@@ -43,33 +41,22 @@ class VariableRequestSsdController extends Controller
                 return $customer_name . '@' . $project_code;
             })
 
+            ->editColumn('work_scope', function ($each) {
+                $html = '';
+                $html .= '<span class="fixeds">
+                        "' . $each->work_scope . '"
+                    </span>';
+                return $html;
+            })
+
             ->editColumn('request_item', function ($each) {
                 $html = '';
-                $html .= '<table style="width: 100%" class="sub_table">';
-                $html .= '<tr>';
-                $html .= '<td style="background-color: #296166; color: white;"> Items</td>';
-                $html .= '<td style="background-color: #296166; color: white;"> Unit </td>';
-                $html .= '<td style="background-color: #296166; color: white;"> Qty </td>';
-                $html .= '</tr>';
-
-                foreach ($each->variable_request_items_table as $value) {
-                    $itemName = $value->variable_assets_table->item_name ?? '';
-                    $unit = $value->variable_assets_table->unit ?? '';
-                    $quantity = $value->quantity ?? 0;
-
-                    $html .= '<tr>';
-                    $html .= '<td style="text-align: left;">';
-                    $html .= $itemName;
-                    $html .= '</td>';
-                    $html .= '<td style="text-align: left;">';
-                    $html .= $unit;
-                    $html .= '</td>';
-                    $html .= '<td style="text-align: left;">';
-                    $html .= $quantity;
-                    $html .= '</td>';
-                    $html .= '</tr>';
-                }
-                $html .= '</table>';
+                $html .= '<span class="badge bg-primary" 
+                        data-bs-toggle="collapse"
+                        id="showRequestItems"
+                        data-id="' . $each->id . '">
+                        Request Items
+                    </span>';
                 return $html;
             })
 
@@ -488,7 +475,7 @@ class VariableRequestSsdController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['request_item', 'accept_reject_status', 'qs_team_check_status', 'logistics_team_check', 'management_accept_reject_status', 'logistics_team_send_status', 'transferred_from', 'transferred_to', 'received_by_engineer', 'actual_voucher_upload', 'action'])
+            ->rawColumns(['request_item', 'accept_reject_status', 'qs_team_check_status', 'logistics_team_check', 'management_accept_reject_status', 'logistics_team_send_status', 'transferred_from', 'transferred_to', 'received_by_engineer', 'actual_voucher_upload', 'work_scope', 'action'])
             ->make(true);
     }
 
@@ -563,7 +550,6 @@ class VariableRequestSsdController extends Controller
     {
         $logistics_check_items = VariableLogisticsTeamCheck::get()->where('variable_request_info_id', $id);
         $variable_payment = VariablePayment::where('variable_request_info_id', $id)->firstOrFail();
-
 
         $html = '';
         $html .= '<table style="width: 100%" class="sub_table">';

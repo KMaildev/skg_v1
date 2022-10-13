@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Engineer;
+namespace App\Http\Controllers\VariableRequest;
 
 use App\Http\Controllers\Controller;
-use App\Models\EngRequestItem as ModelsEngRequestItem;
+use App\Models\EngRequestItem;
+use App\Models\VariableRequestItem;
 use Illuminate\Http\Request;
 
-class EngRequestItem extends Controller
+class RequestItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -47,7 +48,34 @@ class EngRequestItem extends Controller
      */
     public function show($id)
     {
-        
+        $variable_request_items_table = VariableRequestItem::get()->where('variable_request_info_id', $id);
+        $html = '';
+        $html .= '<table style="width: 100%" class="sub_table">';
+        $html .= '<tr>';
+        $html .= '<td style="background-color: #296166; color: white;"> Items</td>';
+        $html .= '<td style="background-color: #296166; color: white;"> Unit </td>';
+        $html .= '<td style="background-color: #296166; color: white;"> Qty </td>';
+        $html .= '</tr>';
+
+        foreach ($variable_request_items_table as $value) {
+            $itemName = $value->variable_assets_table->item_name ?? '';
+            $unit = $value->variable_assets_table->unit ?? '';
+            $quantity = $value->quantity ?? 0;
+
+            $html .= '<tr>';
+            $html .= '<td style="text-align: center;">';
+            $html .= $itemName;
+            $html .= '</td>';
+            $html .= '<td style="text-align: right;">';
+            $html .= $unit;
+            $html .= '</td>';
+            $html .= '<td style="text-align: right;">';
+            $html .= $quantity;
+            $html .= '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+        return response()->json(['html' => $html]);
     }
 
     /**

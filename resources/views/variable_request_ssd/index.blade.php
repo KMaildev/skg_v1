@@ -10,78 +10,91 @@
         margin: 0 auto;
     }
 </style>
-<div class="container-fulid">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-lg-12" style="background-color: white;">
-            <div class="outer-wrapper">
-                <div class="table-wrapper py-5">
-                    <table id="datatable" class="display nowrap yajra-datatable">
-                        <thead>
-                            <th style="background-color: #296166 !important; color: white !important;">
-                                #
-                            </th>
-                            <th style="background-color: #296166 !important; color: white !important;">
-                                Engineer Request
-                            </th>
-                            <th style="background-color: #296166 !important; color: white !important;">
-                                Project
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Request code
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Work Scope
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Request Date
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Need Date
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Request Items
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Accept / Reject
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                QS Team Check & Pass
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Logistics Team Check
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Management
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Logistics Team Send
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Transferred from
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Transferred to
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Received by Engineer
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Actual Voucher
-                            </th>
-                            <th style="background-color: #296166; color: white;">
-                                Actions
-                            </th>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+<div class="outer-wrapper" style="width: 100%; background-color: white;">
+    <div class="py-5">
+        <table id="datatable" class="display nowrap yajra-datatable">
+            <thead>
+                <th style="background-color: #296166 !important; color: white !important;">
+                    #
+                </th>
+
+                <th style="background-color: #296166 !important; color: white !important;">
+                    Engineer Request
+                </th>
+
+                <th style="background-color: #296166 !important; color: white !important;">
+                    Project
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request code
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Work Scope
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request Date
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Need Date
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request Items
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Accept / Reject
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    QS Team Check & Pass
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Logistics Team Check
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Management
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Logistics Team Send
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Transferred from
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Transferred to
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Received by Engineer
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Actual Voucher
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Actions
+                </th>
+            </thead>
+        </table>
     </div>
 </div>
 
 @include('variable_request_ssd.shared.accept_reject')
 @include('variable_request_ssd.shared.management_accept_reject')
 @include('variable_request_ssd.shared.logistics_team_check_model')
+@include('variable_request_ssd.shared.show_request_items_model')
 
 @endsection
 @section('script')
@@ -241,7 +254,6 @@
 
         });
 
-
         // Management Show Accept Reject 
         var id;
         $('body').on('click', '#ManagementAssetRejectShowModel', function(e) {
@@ -265,7 +277,6 @@
                 }
             });
         });
-
 
         // Submit Management Show Accept Reject 
         $('.management_accept_reject_ajax_save').submit(function(e) {
@@ -299,6 +310,22 @@
                 },
                 error: function(data) {
                     // location.reload();
+                }
+            });
+        });
+
+
+        // Show Request Items
+        $('body').on('click', '#showRequestItems', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#showRequestItemsModel').modal('show');
+            $.ajax({
+                url: "get_request_item_show/" + id,
+                method: 'GET',
+                success: function(result) {
+                    console.log(result);
+                    $('#showVariableRequestItemsList').html(result.html);
                 }
             });
         });

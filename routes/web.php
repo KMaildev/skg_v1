@@ -372,6 +372,12 @@ Route::middleware('auth')->group(function () {
     ]);
 
 
+    Route::get('get_request_item_show/{id}', [
+        'as' => 'get_request_item_show',
+        'uses' => 'VariableRequest\RequestItemController@show'
+    ]);
+
+
     Route::resource('fixed_assets_buy_request', 'Fixedassets\FixedAssetsBuyRequestController');
     Route::resource('fixed_assets_approval', 'Fixedassets\FixedAssetsApprovalController');
     Route::get('fixed_assets_approval_create/{id}', 'Fixedassets\FixedAssetsApprovalController@approvalCreate')->name('fixed_assets_approval_create');
@@ -382,4 +388,8 @@ Route::middleware('auth')->group(function () {
     Route::get('fixed_assets_received_create/{id}', 'Fixedassets\FiexdAssetsReceivedController@receivedCreate')->name('fixed_assets_received_create');
     Route::post('update_fixed_assets_received_qty', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedQty')->name('update_fixed_assets_received_qty');
     Route::post('update_fixed_assets_received_remark', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedRemark')->name('update_fixed_assets_received_remark');
+
+
+
+    Route::resource('testing', 'Testing\TestingController');
 });
