@@ -95,11 +95,11 @@
                                         </td>
 
                                         <td style="text-align: center;">
-                                            {{ $return_item_list->fixed_assets_table->item_name }}
+                                            {{ $return_item_list->fixed_assets_table->item_name ?? '' }}
                                         </td>
 
                                         <td style="text-align: center;">
-                                            {{ $return_item_list->quantity }}
+                                            {{ $return_item_list->quantity ?? 0 }}
                                         </td>
 
                                         <td style="text-align: center;">

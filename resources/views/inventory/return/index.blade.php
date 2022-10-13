@@ -8,7 +8,21 @@
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Engineer Return</h5>
                         <div class="card-title-elements ms-auto">
-                            @include('layouts.includes.export')
+                            <form action="{{ route('inventory_engineer_return.index') }}" method="get">
+                                <input type="text" placeholder="Search" name="keyword" class="form-control">
+                            </form>
+
+                            <form action="{{ route('inventory_engineer_return.index') }}" autocomplete="off" method="GET">
+                                <select class="select2 form-select" data-allow-clear="false" name="user_id"
+                                    id="submit_form">
+                                    <option value="">--Please Select--</option>
+                                    @foreach ($users as $engineer)
+                                        <option value="{{ $engineer->id }}">
+                                            {{ $engineer->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -29,6 +43,9 @@
                                         Return Date
                                     </th>
                                     <th style="color: white; text-align: center; width: 14%">
+                                        Return Item
+                                    </th>
+                                    <th style="color: white; text-align: center; width: 14%">
                                         Return From
                                     </th>
                                     <th style="color: white; text-align: center; width: 14%">
@@ -45,7 +62,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tablesearch">
                                 @foreach ($returns as $key => $return)
                                     <tr>
                                         <td style="text-align: center">
@@ -65,6 +82,12 @@
                                         </td>
 
                                         <td style="text-align: center">
+                                            @include('inventory.return.return_items', [
+                                                'return_info' => $return,
+                                            ])
+                                        </td>
+
+                                        <td style="text-align: center">
                                             {{ $return->customer_table->project_code ?? '' }}
                                             @
                                             {{ $return->customer_table->name ?? '' }}
@@ -77,17 +100,13 @@
                                         </td>
 
                                         <td style="text-align: center">
-                                            @include(
-                                                'shared.engineer_return.logistics_team_check_sent_status',
-                                                ['engineer_return_infos' => $return]
-                                            )
+                                            @include('shared.engineer_return.logistics_team_check_sent_status',
+                                                ['engineer_return_infos' => $return])
                                         </td>
 
                                         <td style="text-align: center">
-                                            @include(
-                                                'shared.engineer_return.received_by_store_manager_status',
-                                                ['engineer_return_infos' => $return]
-                                            )
+                                            @include('shared.engineer_return.received_by_store_manager_status',
+                                                ['engineer_return_infos' => $return])
                                         </td>
 
                                         <td style="text-align: center;">

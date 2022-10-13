@@ -20,7 +20,7 @@ class EngineerReturnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = auth()->user()->id;
         $returns = EngineerReturnInfo::where('return_user_id', $user_id)->get();

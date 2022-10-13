@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inventory;
 use App\Http\Controllers\Controller;
 use App\Models\FixedAssets;
 use App\Models\RequestInfo;
+use App\User;
 use Illuminate\Http\Request;
 
 class ManageRequestController extends Controller
@@ -14,13 +15,24 @@ class ManageRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = User::all();
         $eng_request_infos = RequestInfo::with('eng_request_items_table')
             ->orderBy('id', 'DESC')->get()
             ->where('received_by_engineer_status', NULL)
             ->where('request_status', NULL);
-        return view('inventory.manage_request.index', compact('eng_request_infos'));
+
+
+        if ($request->user_id) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table')
+                ->where('received_by_engineer_status', NULL)
+                ->where('request_status', NULL)
+                ->where('user_id', 'Like', '%' . $request->user_id . '%')
+                ->orderBy('id', 'DESC')->get();
+        }
+
+        return view('inventory.manage_request.index', compact('eng_request_infos', 'users'));
     }
 
 

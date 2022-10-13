@@ -11,12 +11,20 @@
                         </h5>
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
-                                <form action="#" method="GET" autocomplete="off">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
-                                        name="search" />
+
+                                <form action="{{ route('managerequest.index') }}" autocomplete="off"
+                                    method="GET">
+                                    <select class="select2 form-select" data-allow-clear="false" name="user_id"
+                                        id="submit_form">
+                                        <option value="">--Please Select--</option>
+                                        @foreach ($users as $engineer)
+                                            <option value="{{ $engineer->id }}">
+                                                {{ $engineer->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </form>
                             </div>
-                            @include('layouts.includes.export')
                         </div>
                     </div>
                 </div>

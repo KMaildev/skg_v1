@@ -34,6 +34,11 @@
                                     <th style="color: white; text-align: center; width: 14%">
                                         Return Date
                                     </th>
+
+                                    <th style="color: white; text-align: center; width: 14%">
+                                        Return Item
+                                    </th>
+
                                     <th style="color: white; text-align: center; width: 14%">
                                         Return From
                                     </th>
@@ -67,28 +72,28 @@
                                         </td>
 
                                         <td style="text-align: center">
+                                            @include('inventory.return.return_items', [
+                                                'return_info' => $return,
+                                            ])
+                                        </td>
+
+                                        <td style="text-align: center">
                                             {{ $return->customer_table->project_code ?? '' }}
                                         </td>
 
                                         <td style="text-align: center">
-                                            @include(
-                                                'shared.engineer_return.engineer.qs_team_check_pass_status',
-                                                ['engineer_return_infos' => $return]
-                                            )
+                                            @include('shared.engineer_return.engineer.qs_team_check_pass_status',
+                                                ['engineer_return_infos' => $return])
                                         </td>
 
                                         <td style="text-align: center">
-                                            @include(
-                                                'shared.engineer_return.engineer.logistics_team_check_sent_status',
-                                                ['engineer_return_infos' => $return]
-                                            )
+                                            @include('shared.engineer_return.engineer.logistics_team_check_sent_status',
+                                                ['engineer_return_infos' => $return])
                                         </td>
 
                                         <td style="text-align: center">
-                                            @include(
-                                                'shared.engineer_return.engineer.received_by_store_manager_status',
-                                                ['engineer_return_infos' => $return]
-                                            )
+                                            @include('shared.engineer_return.engineer.received_by_store_manager_status',
+                                                ['engineer_return_infos' => $return])
                                         </td>
 
                                         <td style="text-align: center;">
