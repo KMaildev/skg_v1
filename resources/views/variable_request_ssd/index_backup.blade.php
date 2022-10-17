@@ -1,18 +1,164 @@
 @extends('layouts.menus.inventory')
 @section('content')
 @section('cssscript')
+    {{-- <link rel="stylesheet" href="{{ asset('css/variable_assets_table.css') }}" /> --}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 @endsection
 <style>
-    .dataTables_filter {
-        display: none;
+    div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-header-group;
     }
 </style>
-<h1 style="color: red">in progress</h1>
+
 <div class="outer-wrapper" style="width: 100%; background-color: white;">
-    <div class="py-5 tableFixHead">
-        <table id="datatable" class="display nowrap yajra-datatable zebra">
-            @include('variable_request_ssd.table_shared.thead')
-            @include('variable_request_ssd.table_shared.tfoot')
+    <div class="py-5">
+        <table id="datatable" class="display nowrap yajra-datatable">
+            <thead>
+                <th style="background-color: #296166 !important; color: white !important;">
+                    #
+                </th>
+
+                <th style="background-color: #296166 !important; color: white !important;">
+                    Engineer Request
+                </th>
+
+                <th style="background-color: #296166 !important; color: white !important;">
+                    Project
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request code
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Work Scope
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request Date
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Need Date
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Request Items
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Accept / Reject
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    QS Team Check & Pass
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Logistics Team Check
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Management
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Logistics Team Send
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Transferred from
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Transferred to
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Received by Engineer
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Actual Voucher
+                </th>
+
+                <th style="background-color: #296166; color: white;">
+                    Actions
+                </th>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <th>
+                        <input type="text" data-colum="0" hidden>
+                    </th>
+                    <th>
+                        <input type="text" data-colum="1" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="2" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="3" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="4" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="5" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="6" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="7" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="8" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="9" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="10" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="11" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="12" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="13" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="14" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="15" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="16" style="width: 100%;">
+                    </th>
+                    <th>
+                        <input type="text" data-colum="17">
+                    </th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -21,18 +167,21 @@
 @include('variable_request_ssd.shared.management_accept_reject')
 @include('variable_request_ssd.shared.logistics_team_check_model')
 @include('variable_request_ssd.shared.show_request_items_model')
+
 @endsection
 @section('script')
 <script>
     $(function() {
         var table = $('#datatable').DataTable({
-            orderCellsTop: true,
             processing: true,
             serverSide: true,
             ordering: false,
             fixedHeader: true,
             scrollY: 500,
             scrollX: true,
+            data: {
+                includeInactive: false
+            },
             language: {
                 "processing": "<img src='/public/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
             },
@@ -126,37 +275,29 @@
                     data: 'action',
                     name: 'action',
                 }
-            ],
-
-            // initComplete: function() {
-            //     this.api().columns().every(function() {
-            //         var column = this;
-            //         var input = document.createElement("input");
-            //         $(input).appendTo($(column.footer()).empty())
-            //             .on('change', function() {
-            //                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
-            //                 column.search(val ? val : '', true, false).draw();
-            //             });
-            //     });
-            // }
+            ]
         });
 
 
         $(document).ready(function() {
-            $('#datatable thead th').each(function() {
+            $('#datatable tfoot th').each(function() {
                 var title = $('#datatable thead th').eq($(this).index()).text();
             });
             var table = $('#datatable').DataTable();
-
             table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).footer()).on('change', function() {
+                $('input', table.column(colIdx).footer()).on('keyup change', function() {
                     table
                         .column(colIdx)
                         .search(this.value)
                         .draw();
                 });
             });
+
+            $('#datatable tfoot tr').appendTo('#datatable thead');
         });
+
+
+
 
         // Show Accept Reject 
         var id;

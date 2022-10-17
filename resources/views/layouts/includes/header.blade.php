@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style " dir="ltr"
-    data-theme="theme-default" data-assets-path="../../assets/" data-template="horizontal-menu-template">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style " dir="ltr" data-theme="theme-default"
+    data-assets-path="../../assets/" data-template="horizontal-menu-template">
 
 <head>
     <meta charset="utf-8">
@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icons.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}"
-        class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
@@ -46,9 +45,10 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 
-
     {{-- My Css --}}
     <link rel="stylesheet" href="{{ asset('install/datetime/jquery.datetimepicker.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
     @yield('cssscript')
 

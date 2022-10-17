@@ -23,19 +23,45 @@ class VariableRequestSsdController extends Controller
     }
 
 
+
     public function getVariableRequest(Request $request)
     {
-        $data = VariableRequestInfo::orderBy('id', 'DESC')
-            ->where('accept_reject_status', 'accept')
-            ->orWhere('accept_reject_status', NULL)
-            ->get();
+        // $data = VariableRequestInfo::orderBy('id', 'DESC')
+        //     ->where('accept_reject_status', 'accept')
+        //     ->orWhere('accept_reject_status', NULL)
+        //     ->get();
+
+        // $data = VariableRequestInfo::with('user_table', 'customer_table')
+        //     ->orderBy('id', 'DESC')
+        //     ->where('accept_reject_status', 'accept')
+        //     ->orWhere('accept_reject_status', NULL);
+
+
+        $data = VariableRequestInfo::with('user_table', 'customer_table')
+            ->orderBy('id', 'DESC')
+            ->where('accept_reject_status', 'accept');
+
         return Datatables::of($data)
+
+            ->addIndexColumn()
+
+            ->filterColumn('engineer_name', function ($query, $keyword) {
+                $query->whereHas('user_table', function ($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
 
             ->editColumn('engineer_name', function ($each) {
                 return $each->user_table ? $each->user_table->name : '-';
             })
 
-            ->editColumn('customer', function ($each) {
+            ->filterColumn('customer_name', function ($query, $keyword) {
+                $query->whereHas('customer_table', function ($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('customer_name', function ($each) {
                 $customer_name = $each->customer_table ? $each->customer_table->name : '';
                 $project_code = $each->customer_table ? $each->customer_table->project_code : '';
                 return $customer_name . '@' . $project_code;
@@ -43,9 +69,7 @@ class VariableRequestSsdController extends Controller
 
             ->editColumn('work_scope', function ($each) {
                 $html = '';
-                $html .= '<span class="fixeds">
-                        "' . $each->work_scope . '"
-                    </span>';
+                $html .= $each->work_scope;
                 return $html;
             })
 
@@ -279,7 +303,7 @@ class VariableRequestSsdController extends Controller
                 }
                 return $html;
             })
-
+ 
             ->editColumn('logistics_team_send_status', function ($each) {
 
                 $logistics_team_send_date = $each->logistics_team_send_date;

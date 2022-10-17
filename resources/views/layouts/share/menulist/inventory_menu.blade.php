@@ -78,11 +78,11 @@
 
                     <li class="menu-item">
                         <a href="{{ route('variable_request_ssd.index') }}" class="menu-link">
-                            <div data-i2n="Without menu">Variable Assets Request Testing</div>
+                            <div data-i2n="Without menu">Variable Assets Request</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item" hidden>
                         <a href="{{ route('variable_assets_request.index') }}" class="menu-link">
                             <div data-i2n="Without menu">Variable Assets Request</div>
                         </a>
