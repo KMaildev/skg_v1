@@ -103,7 +103,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="mytbody">
                             @php
                                 $i = 1;
                             @endphp

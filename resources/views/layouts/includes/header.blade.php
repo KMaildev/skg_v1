@@ -39,8 +39,10 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/pickr/pickr-themes.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('css/table.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/table.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/table_v1.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}" /> --}}
+
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
@@ -91,6 +93,12 @@
         background-color: red;
         color: white;
     }
+
+
+
+
+    /* table  */
+
 </style>
 
 <body>

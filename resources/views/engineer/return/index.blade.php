@@ -56,7 +56,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="mytbody">
                                 @foreach ($returns as $key => $return)
                                     <tr>
                                         <td style="text-align: center">

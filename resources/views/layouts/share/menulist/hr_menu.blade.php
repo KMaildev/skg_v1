@@ -3,7 +3,7 @@
     <div class="container-xxl d-flex h-100">
         <ul class="menu-inner">
 
-            <li class="menu-item">
+            <li class="menu-item" hidden>
                 <a href="{{ route('hrdashboard.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i1n="Layouts">Dashboard</div>

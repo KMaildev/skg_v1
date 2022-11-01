@@ -12,8 +12,7 @@
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
 
-                                <form action="{{ route('managerequest.index') }}" autocomplete="off"
-                                    method="GET">
+                                <form action="{{ route('managerequest.index') }}" autocomplete="off" method="GET">
                                     <select class="select2 form-select" data-allow-clear="false" name="user_id"
                                         id="submit_form">
                                         <option value="">--Please Select--</option>
@@ -69,7 +68,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="mytbody">
                             @php
                                 $i = 1;
                             @endphp

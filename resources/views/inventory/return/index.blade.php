@@ -62,7 +62,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody id="tablesearch">
+                            <tbody id="tablesearch" class="mytbody">
                                 @foreach ($returns as $key => $return)
                                     <tr>
                                         <td style="text-align: center">

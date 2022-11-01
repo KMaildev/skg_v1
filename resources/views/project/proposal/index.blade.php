@@ -255,6 +255,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $projects->links() }}
                 </div>
 
                 <div class="pseduo-track"></div>

@@ -64,7 +64,7 @@
                                         <label class="form-label" for="flatpickr-human-friendly"
                                             style="font-weight: bold">Request Date</label>
                                         <input type="text" class="form-control date_picker" name="request_date"
-                                            value="{{ date('Y-m-d') }}" />
+                                            value="{{ date('Y-m-d') }}"/>
                                         @error('request_date')
                                             <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror

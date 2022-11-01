@@ -38,7 +38,7 @@
                                         <th style="color: white; text-align: center; width: 14%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="mytbody">
                                     @php
                                         $site_on_hand_total = [];
                                         $return_total = [];

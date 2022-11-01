@@ -24,7 +24,7 @@ class EngineerVariableAssetsController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')->where('engineer_id', $user_id)->get();
+        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')->where('engineer_id', $user_id)->paginate(50);
         return view('engineer.variable_assets.index', compact('eng_request_infos'));
     }
 

@@ -3,7 +3,7 @@
     <div class="container-xxl d-flex h-100">
         <ul class="menu-inner">
 
-            <li class="menu-item">
+            <li class="menu-item" hidden>
                 <a href="{{ route('bq_dashboard.index') }}" class="menu-link">
                     <div data-i1n="bq_dashboard">Dashboard</div>
                 </a>

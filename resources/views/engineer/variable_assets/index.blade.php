@@ -5,8 +5,7 @@
         <div class="card-title header-elements">
             <h5 class="m-0 me-2">Variable Assets Request</h5>
             <div class="card-title-elements ms-auto">
-                <a href="{{ route('engineer_variable_assets.create') }}"
-                    class="dt-button create-new btn btn-primary btn-sm">
+                <a href="{{ route('engineer_variable_assets.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                     <span>
                         <i class="bx bx-plus me-sm-2"></i>
                         <span class="d-none d-sm-inline-block">
@@ -127,9 +126,9 @@
                             <td>
                                 <table style="width: 100%">
                                     <tr>
-                                        <th> Items </th>
-                                        <th> Unit </th>
-                                        <th> Qty </th>
+                                        <th style="background-color: gray; color: white;"> Items </th>
+                                        <th style="background-color: gray; color: white;"> Unit </th>
+                                        <th style="background-color: gray; color: white;"> Qty </th>
                                     </tr>
                                     @foreach ($request_info->variable_request_items_table as $value)
                                         <tr>
@@ -139,7 +138,7 @@
                                             <td style="text-align: center;">
                                                 {{ $value->variable_assets_table->unit ?? '' }}
                                             </td>
-                                            <td style="text-align: center;">
+                                            <td style="text-align: center; background-color: #F2F2F2;:">
                                                 {{ $value->quantity ?? 0 }}
                                             </td>
                                         </tr>
@@ -219,11 +218,11 @@
                                     </ul>
                                 </div>
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            {{ $eng_request_infos->links() }}
         </div>
     </div>
 @endsection

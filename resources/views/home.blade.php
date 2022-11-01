@@ -23,7 +23,7 @@
 
                 @can('accept_project_module')
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
-                        <a href="{{ route('projectdashboard.index') }}">
+                        <a href="{{ route('customers.index') }}">
                             <div class="card">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
@@ -40,7 +40,7 @@
 
                 @can('accept_bq_module')
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
-                        <a href="{{ route('bq_dashboard.index') }}">
+                        <a href="{{ route('project_bq.index') }}">
                             <div class="card">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
@@ -76,7 +76,7 @@
 
                 @can('accept_engineer_module')
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
-                        <a href="{{ route('engineerdashboard.index') }}">
+                        <a href="{{ route('sites.index') }}">
                             <div class="card">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
@@ -146,7 +146,7 @@
 
                 @can('accept_hr_module')
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
-                        <a href="{{ route('hrdashboard.index') }}">
+                        <a href="{{ route('employee.index') }}">
                             <div class="card">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">

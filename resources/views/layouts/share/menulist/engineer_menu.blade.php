@@ -4,7 +4,7 @@
     <div class="container-xxl d-flex h-100">
         <ul class="menu-inner">
 
-            <li class="menu-item">
+            <li class="menu-item" hidden>
                 <a href="{{ route('engineerdashboard.index') }}" class="menu-link">
                     <div data-i1n="Layouts">Dashboard</div>
                 </a>

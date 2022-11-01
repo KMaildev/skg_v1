@@ -8,7 +8,7 @@
             Engineer Request
         </th>
 
-        <th style="background-color: #296166 !important; color: white !important;">
+        <th style="background-color: #296166; color: white;">
             Project
         </th>
 

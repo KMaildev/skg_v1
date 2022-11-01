@@ -6,11 +6,14 @@
     .dataTables_filter {
         display: none;
     }
+
+    tfoot {
+        display: table-header-group !important;
+    }
 </style>
-<h1 style="color: red">in progress</h1>
 <div class="outer-wrapper" style="width: 100%; background-color: white;">
     <div class="py-5 tableFixHead">
-        <table id="datatable" class="display nowrap yajra-datatable zebra">
+        <table id="datatable" class="display nowrap yajra-datatable">
             @include('variable_request_ssd.table_shared.thead')
             @include('variable_request_ssd.table_shared.tfoot')
         </table>
@@ -43,17 +46,17 @@
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
-                    class: 'sticky-col first-col mytd',
+                    // class: 'sticky-col first-col mytd',
                 },
                 {
                     data: 'engineer_name',
                     name: 'engineer_name',
-                    class: 'sticky-col second-col mytd',
+                    // class: 'sticky-col second-col mytd',
                 },
                 {
                     data: 'customer_name',
                     name: 'customer_name',
-                    class: 'sticky-col three-col mytd',
+                    // class: 'sticky-col',
                 },
                 {
                     data: 'code',
@@ -279,7 +282,6 @@
                 }
             });
         });
-
     });
 </script>
 @endsection

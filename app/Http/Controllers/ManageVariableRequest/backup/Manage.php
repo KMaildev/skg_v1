@@ -38,11 +38,8 @@ class VariableRequestSsdController extends Controller
 
 
         $data = VariableRequestInfo::with('user_table', 'customer_table')
-            ->orderBy('id', 'DESC');
-            // ->whereIn('accept_reject_status', ['accept', NULL]);
-            // ->where('accept_reject_status', 'accept')
-            // ->orWhere('accept_reject_status', NULL);
-     
+            ->orderBy('id', 'DESC')
+            ->where('accept_reject_status', 'accept');
 
         return Datatables::of($data)
 
@@ -598,7 +595,7 @@ class VariableRequestSsdController extends Controller
 
             $html .= '<tr>';
             $html .= '<td style="text-align: center;">' . $i++ . '</td>';
-            $html .= '<td style="text-align: right;">' . $value->qs_passed_qty . '</td>';
+            $html .= '<td style="text-align: right;">' . number_format($value->qs_passed_qty) . '</td>';
             $html .= '<td style="text-align: right;">' . number_format($value->price, 2) . '</td>';
             $html .= '<td style="text-align: right;">' . number_format($amt, 2) . '</td>';
             $html .= '</tr>';

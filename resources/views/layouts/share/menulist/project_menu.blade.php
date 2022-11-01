@@ -3,7 +3,7 @@
     <div class="container-xxl d-flex h-100">
         <ul class="menu-inner">
 
-            <li class="menu-item">
+            <li class="menu-item" hidden>
                 <a href="{{ route('projectdashboard.index') }}" class="menu-link">
                     <div data-i1n="Layouts">Dashboard</div>
                 </a>
@@ -27,12 +27,12 @@
                             <div data-i2n="Without menu">Proposal</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" hidden>
                         <a href="{{ route('labour.index') }}" class="menu-link">
                             <div data-i2n="Without menu">Operation </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" hidden>
                         <a href="{{ route('labour.index') }}" class="menu-link">
                             <div data-i2n="Without menu">Completed </div>
                         </a>
