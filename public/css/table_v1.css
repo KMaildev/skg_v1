@@ -1,13 +1,12 @@
-table {
+/* table {
     border-collapse: collapse;
-    text-align: center;
     display: block;
-}
+} */
 
-.table-border-bottom-0,
+/* .table-border-bottom-0,
 .mytbody {
     display: block;
-}
+} */
 
 .table-border-bottom-0,
 .mytbody {
@@ -17,21 +16,10 @@ table {
 }
 
 
-
-/* First Col Fix  */
-table tr td:nth-child(1) {
-    position: sticky;
-    width: 1%;
-    left: 0;
-    z-index: 10;
-    background: #f2f2f2;
-}
-
 /* table tr th:nth-child(2), */
 table tr td:nth-child(2) {
     position: sticky;
-    width: 100px;
     left: 0;
     z-index: 10;
-    background: #f2f2f2;
+    background: white;
 }

@@ -50,11 +50,11 @@ class RequestItemController extends Controller
     {
         $variable_request_items_table = VariableRequestItem::get()->where('variable_request_info_id', $id);
         $html = '';
-        $html .= '<table style="width: 100%" class="sub_table">';
+        $html .= '<table style="width: 100%">';
         $html .= '<tr>';
-        $html .= '<td style="background-color: #296166; color: white;"> Items</td>';
-        $html .= '<td style="background-color: #296166; color: white;"> Unit </td>';
-        $html .= '<td style="background-color: #296166; color: white;"> Qty </td>';
+        $html .= '<td style="background-color: #296166; color: white; width: 60%"> Items</td>';
+        $html .= '<td style="background-color: #296166; color: white; width: 20%"> Unit </td>';
+        $html .= '<td style="background-color: #296166; color: white; width: 20%"> Qty </td>';
         $html .= '</tr>';
 
         foreach ($variable_request_items_table as $value) {
@@ -63,13 +63,13 @@ class RequestItemController extends Controller
             $quantity = $value->quantity ?? 0;
 
             $html .= '<tr>';
-            $html .= '<td style="text-align: center;">';
+            $html .= '<td style="text-align: left; width: 60%">';
             $html .= $itemName;
             $html .= '</td>';
-            $html .= '<td style="text-align: right;">';
+            $html .= '<td style="width: 30%">';
             $html .= $unit;
             $html .= '</td>';
-            $html .= '<td style="text-align: right;">';
+            $html .= '<td style="width: 30%">';
             $html .= $quantity;
             $html .= '</td>';
             $html .= '</tr>';

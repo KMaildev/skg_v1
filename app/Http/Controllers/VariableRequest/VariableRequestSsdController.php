@@ -39,10 +39,10 @@ class VariableRequestSsdController extends Controller
 
         $data = VariableRequestInfo::with('user_table', 'customer_table')
             ->orderBy('id', 'DESC');
-            // ->whereIn('accept_reject_status', ['accept', NULL]);
-            // ->where('accept_reject_status', 'accept')
-            // ->orWhere('accept_reject_status', NULL);
-     
+        // ->whereIn('accept_reject_status', ['accept', NULL]);
+        // ->where('accept_reject_status', 'accept')
+        // ->orWhere('accept_reject_status', NULL);
+
 
         return Datatables::of($data)
 
@@ -306,7 +306,7 @@ class VariableRequestSsdController extends Controller
                 }
                 return $html;
             })
- 
+
             ->editColumn('logistics_team_send_status', function ($each) {
 
                 $logistics_team_send_date = $each->logistics_team_send_date;
@@ -581,10 +581,10 @@ class VariableRequestSsdController extends Controller
         $html = '';
         $html .= '<table style="width: 100%" class="sub_table">';
         $html .= '<tr>';
-        $html .= '<td style="background-color: #296166; color: white; text-align: center;"># </td>';
-        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Qty </td>';
-        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Price </td>';
-        $html .= '<td style="background-color: #296166; color: white; text-align: center;">Total Amt </td>';
+        $html .= '<td style="background-color: #296166; color: white;"># </td>';
+        $html .= '<td style="background-color: #296166; color: white;">Qty </td>';
+        $html .= '<td style="background-color: #296166; color: white;">Price </td>';
+        $html .= '<td style="background-color: #296166; color: white;">Total Amt </td>';
         $html .= '</tr>';
         $i = 1;
         $totalAmt = [];
@@ -597,10 +597,10 @@ class VariableRequestSsdController extends Controller
             $total_price[] = $value->price;
 
             $html .= '<tr>';
-            $html .= '<td style="text-align: center;">' . $i++ . '</td>';
-            $html .= '<td style="text-align: right;">' . $value->qs_passed_qty . '</td>';
-            $html .= '<td style="text-align: right;">' . number_format($value->price, 2) . '</td>';
-            $html .= '<td style="text-align: right;">' . number_format($amt, 2) . '</td>';
+            $html .= '<td>' . $i++ . '</td>';
+            $html .= '<td>' . $value->qs_passed_qty . '</td>';
+            $html .= '<td>' . number_format($value->price, 2) . '</td>';
+            $html .= '<td>' . number_format($amt, 2) . '</td>';
             $html .= '</tr>';
         }
         $AmttotalAmt = array_sum($totalAmt);
@@ -608,38 +608,40 @@ class VariableRequestSsdController extends Controller
         $price_total = array_sum($total_price);
 
         $html .= '<tr style="font-weight: bold;">';
-        $html .= '<td style="text-align: right; font-weight: bold">Total</td>';
-        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= '<td style="font-weight: bold">Total</td>';
+        $html .= '<td style="font-weight: bold">';
         $html .= number_format($TotalQs_pass_qty_total, 2);
         $html .= '</td>';
 
-        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= '<td style="font-weight: bold">';
         $html .= number_format($price_total, 2);
         $html .= '</td>';
 
-        $html .= '<td style="text-align: right; font-weight: bold">';
+        $html .= '<td style="font-weight: bold">';
         $html .= number_format($AmttotalAmt, 2);
         $html .= '</td>';
 
         $html .= '</tr>';
 
 
+
+
         $html .= '
-            <tr style="background-color: #e2dede; color: black;">
+            <tr style="background-color: #f7f4f4">
                 <td colspan="3" style="text-align: left; font-weight: bold">
                     Transportation
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . number_format($variable_payment->transportation, 2) . '
                 </td>
             </tr>';
 
         $html .= '
-            <tr style="background-color: #e2dede; color: black;">
+            <tr style="background-color: #f7f4f4">
                 <td colspan="3" style="text-align: left; font-weight: bold">
                     Labor
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . number_format($variable_payment->labor, 2) . '
                 </td>
             </tr>';
@@ -647,24 +649,24 @@ class VariableRequestSsdController extends Controller
         $banking_percent = $variable_payment->banking_percent;
         $banking_amount = ($AmttotalAmt / 100) * $banking_percent;
         $html .= '
-            <tr style="background-color: #e2dede; color: black;">
-                <td colspan="2" style="text-align: left; font-weight: bold">
+            <tr style="background-color: #f7f4f4">
+                <td colspan="2">
                     Banking %
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . $variable_payment->banking_percent . '%
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . number_format($banking_amount, 2) . '%
                 </td>
             </tr>';
 
         $html .= '
-            <tr style="background-color: #e2dede; color: black;">
-                <td colspan="3" style="text-align: left; font-weight: bold">
+            <tr style="background-color: #f7f4f4">
+                <td colspan="3">
                 Extra
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . number_format($variable_payment->extra, 2) . '
                 </td>
             </tr>';
@@ -675,11 +677,11 @@ class VariableRequestSsdController extends Controller
         $extra = $variable_payment->extra;
         $allTotal = $AmttotalAmt + $transportation + $labor + $banking_amount + $extra;
         $html .= '
-            <tr style="background-color: #e2dede; color: black;">
-                <td colspan="3" style="text-align: left; font-weight: bold">
+            <tr style="background-color: #f7f4f4">
+                <td colspan="3">
                 Total
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: right; background-color: #f7f4f4">
                     ' . number_format($allTotal, 2) . '
                 </td>
             </tr>';

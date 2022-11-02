@@ -100,7 +100,7 @@
                                 @endcan
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0 row_position" id="tablecontents">
+                        <tbody class="mytbody table-border-bottom-0 row_position" id="tablecontents">
 
                             @foreach ($projects as $key => $project)
                                 <tr class="row1" data-id="{{ $project->id }}">
@@ -301,12 +301,8 @@
                     success: function(response) {
                         if (response.status == "success") {
                             console.log(response);
-                            alert(response);
-                            alert("w");
                         } else {
                             console.log(response);
-                            alert(response);
-                            alert("E");
                         }
                     }
                 });
