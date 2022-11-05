@@ -141,6 +141,8 @@ return array(
     'App\\Http\\Controllers\\RoleController' => $baseDir . '/app/Http/Controllers/RoleController.php',
     'App\\Http\\Controllers\\StructureDesignController' => $baseDir . '/app/Http/Controllers/StructureDesignController.php',
     'App\\Http\\Controllers\\StructureDesignFeesController' => $baseDir . '/app/Http/Controllers/StructureDesignFeesController.php',
+    'App\\Http\\Controllers\\Testing\\TestingController' => $baseDir . '/app/Http/Controllers/Testing/TestingController.php',
+    'App\\Http\\Controllers\\VariableRequest\\RequestItemController' => $baseDir . '/app/Http/Controllers/VariableRequest/RequestItemController.php',
     'App\\Http\\Controllers\\VariableRequest\\VariableRequestSsdController' => $baseDir . '/app/Http/Controllers/VariableRequest/VariableRequestSsdController.php',
     'App\\Http\\Controllers\\Warehouse\\ManageWareHousePlanController' => $baseDir . '/app/Http/Controllers/Warehouse/ManageWareHousePlanController.php',
     'App\\Http\\Controllers\\hr\\EngineerController' => $baseDir . '/app/Http/Controllers/hr/EngineerController.php',

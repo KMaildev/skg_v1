@@ -704,6 +704,8 @@ class ComposerStaticInita824448a002a3fe67d28a9c81a6aa012
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\StructureDesignController' => __DIR__ . '/../..' . '/app/Http/Controllers/StructureDesignController.php',
         'App\\Http\\Controllers\\StructureDesignFeesController' => __DIR__ . '/../..' . '/app/Http/Controllers/StructureDesignFeesController.php',
+        'App\\Http\\Controllers\\Testing\\TestingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Testing/TestingController.php',
+        'App\\Http\\Controllers\\VariableRequest\\RequestItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/VariableRequest/RequestItemController.php',
         'App\\Http\\Controllers\\VariableRequest\\VariableRequestSsdController' => __DIR__ . '/../..' . '/app/Http/Controllers/VariableRequest/VariableRequestSsdController.php',
         'App\\Http\\Controllers\\Warehouse\\ManageWareHousePlanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Warehouse/ManageWareHousePlanController.php',
         'App\\Http\\Controllers\\hr\\EngineerController' => __DIR__ . '/../..' . '/app/Http/Controllers/hr/EngineerController.php',

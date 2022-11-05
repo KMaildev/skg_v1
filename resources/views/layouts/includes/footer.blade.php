@@ -240,4 +240,61 @@
     });
 </script>
 
+<script>
+    // updateAcceptRejectRemark
+    $(document).on("keyup", ".updateAcceptRejectRemark", function() {
+        var id = $(this).data('id');
+        var value = $(this).val();
+
+        var url = '{{ url('variable_accept_reject_remark') }}';
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: id,
+                value: value,
+            },
+            success: function(data) {
+                toastr.success("Success");
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+    });
+
+    // updateAcceptRejectStatus 
+    function updateAcceptRejectStatus(data) {
+        var variable_request_info_id = data.id;
+        var value = data.value;
+        var id = variable_request_info_id.split("_")[1];
+
+        var url = '{{ url('variable_accept_reject_status') }}';
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: id,
+                value: value,
+            },
+            success: function(data) {
+                toastr.success("Your processing has been completed.");
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+    }
+</script>
+
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManageVariableRequest\VariableAcceptRejectStatusController;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,9 @@ Route::middleware('auth')->group(function () {
         'as' => 'save_variable_accept_reject',
         'uses' => 'ManageVariableRequest\VariableAcceptRejectStatusController@save_variable_accept_reject'
     ]);
+    Route::get('variable_accept_reject_remark', [VariableAcceptRejectStatusController::class, 'updateAcceptRejectRemark'])->name('variable_accept_reject_remark');
+    Route::get('variable_accept_reject_status', [VariableAcceptRejectStatusController::class, 'updateAcceptRejectStatus'])->name('variable_accept_reject_status');
+
 
     Route::resource('variable_qs_team_check', 'ManageVariableRequest\VariableQsTeamCheckController');
     Route::get('variable_qs_team_check_create/{id}', [

@@ -88,68 +88,77 @@ class VariableRequestSsdController extends Controller
             })
 
             ->editColumn('accept_reject_status', function ($each) {
-                $accept_reject_status = ucfirst($each->accept_reject_status);
+                $remark = $each->accept_reject_remark ?? '';
+                $accept_reject_status = $each->accept_reject_status;
                 $accept_reject_date = $each->accept_reject_date;
                 $id = $each->id;
-
                 $html = '';
-                if (auth()->user()->can('variable_accept_reject')) {
-                    $permission_accept_reject = 'AssetRejectShowModel';
-                } else {
-                    $permission_accept_reject = 'permission_denied';
-                }
+
+
                 if ($each->accept_reject_status == 'accept') {
                     $html .= '
-                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>' . $accept_reject_status . '</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-success" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px;">
-                                ' . $accept_reject_date . '
-                                </span>
-                            </div>
-                        </a>
-                        ';
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept" checked>
+                        <label class="form-check-label" for="accept_' . $id . '">
+                            Accept
+                        </label>
+                    </div>
+                    
+                    
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject">
+                        <label class="form-check-label" for="reject_' . $id . '">
+                            Reject
+                        </label>
+                    </div>';
                 } else if ($each->accept_reject_status == 'reject') {
+
                     $html .= '
-                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>' . $accept_reject_status . '</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-danger" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px;">
-                                ' . $accept_reject_date . '
-                                </span>
-                            </div>
-                        </a>
-                        ';
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
+                        <label class="form-check-label" for="accept_' . $id . '">
+                            Accept
+                        </label>
+                    </div>
+                    
+                    
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject" checked>
+                        <label class="form-check-label" for="reject_' . $id . '">
+                            Reject
+                        </label>
+                    </div>';
                 } else {
+
                     $html .= '
-                        <a class="' . $permission_accept_reject . '" href="#" id="' . $permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>Unknown</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-danger" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </a>
-                        ';
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
+                        <label class="form-check-label" for="accept_' . $id . '">
+                            Accept
+                        </label>
+                    </div>
+                    
+                    
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject">
+                        <label class="form-check-label" for="reject_' . $id . '">
+                            Reject
+                        </label>
+                    </div>';
                 }
 
+
+                $html .= '
+                    <br>
+                    <input type="text" placeholder="Remark" value="' . $remark . '" class="updateAcceptRejectRemark" data-id="' . $id . '"/>
+                    <br>
+                    <span style="font-size: 12px;">
+                        ' . $accept_reject_date . '
+                    </span>
+                ';
                 return $html;
             })
+
 
             ->editColumn('qs_team_check_status', function ($each) {
                 $qs_team_check_date = $each->qs_team_check_date;
