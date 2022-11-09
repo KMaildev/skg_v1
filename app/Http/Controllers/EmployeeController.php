@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
 use App\Http\Requests\StoreEmployee;
 use App\Http\Requests\UpdateEmployee;
 use App\Models\Department;
@@ -9,6 +10,7 @@ use App\Models\MembersLists;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 
 class EmployeeController extends Controller
@@ -20,7 +22,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::all();
+        $employees = User::query();
+        if (request('q')) {
+            $employees->where('name', 'Like', '%' . request('q') . '%');
+            $employees->orWhere('employee_id', 'Like', '%' . request('q') . '%');
+        }
+        $employees = $employees->orderBy('id', 'ASC')->get();
+
         return view('employee.index', compact('employees'));
     }
 
@@ -97,7 +105,7 @@ class EmployeeController extends Controller
             }
             MembersLists::insert($insert);
         }
-        
+
         return redirect()->back()->with('success', 'Employee is successfully created.');
     }
 
@@ -194,5 +202,11 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function exportUser()
+    {
+        $users = User::all();
+        return Excel::download(new UserExport($users), 'users_' . date("Y-m-d H:i:s") . '.xlsx');
     }
 }

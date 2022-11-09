@@ -55,10 +55,31 @@ class VariableAssetsRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function variable_completed_list()
+    public function variable_completed_list(Request $request)
     {
-        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')->orderBy('id', 'DESC')->get()->where('request_status', 'completed');
-        return view('variable_assets_request.completed.index', compact('eng_request_infos'));
+        $users = User::all();
+        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+            ->orderBy('id', 'DESC')
+            ->where('request_status', 'completed')
+            ->paginate(50);
+
+        if ($request->user_id) {
+            $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+                ->where('engineer_id', $request->user_id)
+                ->where('request_status', 'completed')
+                ->orderBy('id', 'DESC')
+                ->paginate(1000);
+        }
+
+        if ($request->q) {
+            $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+                ->where('request_status', 'completed')
+                ->where('code', 'LIKE', "%{$request->q}%")
+                ->orWhere('work_scope', 'LIKE', "%{$request->q}%")
+                ->paginate(1000);
+        }
+
+        return view('variable_assets_request.completed.index', compact('eng_request_infos', 'users'));
     }
 
 
@@ -67,10 +88,32 @@ class VariableAssetsRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function variable_reject_list()
+    public function variable_reject_list(Request $request)
     {
-        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')->orderBy('id', 'DESC')->get()->where('accept_reject_status', 'reject');
-        return view('variable_assets_request.reject.index', compact('eng_request_infos'));
+        $users = User::all();
+        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+            ->orderBy('id', 'DESC')
+            ->where('accept_reject_status', 'reject')
+            ->paginate(50);
+
+
+        if ($request->user_id) {
+            $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+                ->where('engineer_id', $request->user_id)
+                ->where('accept_reject_status', 'reject')
+                ->orderBy('id', 'DESC')
+                ->paginate(1000);
+        }
+
+        if ($request->q) {
+            $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+                ->where('accept_reject_status', 'reject')
+                ->where('code', 'LIKE', "%{$request->q}%")
+                ->orWhere('work_scope', 'LIKE', "%{$request->q}%")
+                ->paginate(1000);
+        }
+
+        return view('variable_assets_request.reject.index', compact('eng_request_infos', 'users'));
     }
 
     /**

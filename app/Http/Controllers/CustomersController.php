@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CustomersExport;
 use App\Http\Requests\StoreCustomer;
 use App\Http\Requests\UpdateCustomer;
 use App\Models\Customers;
 use App\Models\Projects;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomersController extends Controller
 {
@@ -129,5 +131,12 @@ class CustomersController extends Controller
 
         return redirect()->route('customers.index')
             ->with('success', 'Deleted successfully.');
+    }
+
+
+    public function exportCustomer()
+    {
+        $customers = Customers::all();
+        return Excel::download(new CustomersExport($customers), 'customers_' . date("Y-m-d H:i:s") . '.xlsx');
     }
 }

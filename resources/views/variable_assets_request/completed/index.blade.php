@@ -11,19 +11,23 @@
                         </h5>
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
-                                <form action="#" method="GET" autocomplete="off">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
-                                        name="search" />
+                                <form action="{{ route('variable_completed_list') }}" method="get">
+                                    <input type="text" placeholder="Search: Request code" name="q"
+                                        value="{{ old('q') }}">
+                                </form>
+
+                                <form action="{{ route('variable_completed_list') }}" method="get">
+                                    @include('components.user_datalist')
+                                    <input type="submit" value="Find">
                                 </form>
                             </div>
-                            @include('layouts.includes.export')
                         </div>
                     </div>
                 </div>
 
                 <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper wrapper" role="region"
                     aria-labelledby="HeadersCol" tabindex="0">
-                    <table class="table table-bordered main-table" id="export_excel">
+                    <table class="table table-bordered main-table" id="export_excel" style="margin-bottom: 10px !important">
                         <thead class="tbbg">
                             <tr>
                                 <th
@@ -273,9 +277,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $eng_request_infos->links() ?? '' }}
                 </div>
-
-                <div class="pseduo-track"></div>
             </div>
         </div>
     </div>

@@ -7,16 +7,6 @@
                 <div class="card-body">
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Warehouse Plan</h5>
-                        <h1 style="color: red;">in progress</h1>
-                        <div class="card-title-elements ms-auto">
-                            <div class="card-header-elements ms-auto">
-                                <form action="#" method="GET" autocomplete="off">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
-                                        name="search" />
-                                </form>
-                            </div>
-                            @include('layouts.includes.export')
-                        </div>
                     </div>
                 </div>
 
@@ -26,16 +16,16 @@
                             <table class="table">
                                 <thead class="tbbg">
                                     <tr>
-                                        <th style="color: white; text-align: center; width: 1%">#</th>
-                                        <th style="color: white; text-align: center; width: 14%">Items Name</th>
-                                        <th style="color: white; text-align: center; width: 14%">Main Warehouse</th>
-                                        <th style="color: white; text-align: center; width: 14%">
-                                            Request Total
-                                            <!--Site On Hand [Total]-->
+                                        <th style="color: white; width: 1%">#</th>
+                                        <th style="color: white; width: 14%">Items Name</th>
+                                        <th style="color: white; width: 14%">Main Warehouse</th>
+                                        <th style="color: white; width: 14%">
+                                            {{-- Request Total --}}
+                                            Site On Hand [Total]
                                         </th>
-                                        <th style="color: white; text-align: center; width: 14%">Return [Total]</th>
-                                        <th style="color: white; text-align: center; width: 14%">Remaining Balance</th>
-                                        <th style="color: white; text-align: center; width: 14%">Action</th>
+                                        <th style="color: white; width: 14%">Return [Total]</th>
+                                        <th style="color: white; width: 14%">Remaining Balance</th>
+                                        <th style="color: white; width: 14%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mytbody">
@@ -55,28 +45,26 @@
                                             </td>
 
                                             {{-- Main Warehouse --}}
-                                            <td style="text-align: right; font-weight: bold;">
+                                            <td style="font-weight: bold;">
                                                 {{ $fixed_asset->qty }}
                                             </td>
 
                                             {{-- Site On Hand --}}
-                                            <td style="text-align: right; font-weight: bold;">
+                                            <td style="font-weight: bold;">
                                                 {{-- {{ $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty') }} --}}
                                                 @php
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    echo "Request : " . $site_on_hand;
+                                                    echo $site_on_hand;
                                                     $site_on_hand_total[] = $site_on_hand;
-                                                    $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    $site_on_hand = $site_on_hand - $return;
                                                     
-                                                    
-                                        
+                                                    // $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
+                                                    // $site_on_hand = $site_on_hand - $return;
                                                     
                                                 @endphp
                                             </td>
 
                                             {{-- Return [Total] --}}
-                                            <td style="text-align: right; font-weight: bold;">
+                                            <td style="font-weight: bold;">
                                                 @php
                                                     $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
                                                     echo number_format($return);
@@ -85,7 +73,7 @@
                                             </td>
 
                                             {{-- Remaining Balance --}}
-                                            <td style="text-align: right; font-weight: bold;">
+                                            <td style="font-weight: bold;">
                                                 @php
                                                     $main_warehouse = $fixed_asset->qty;
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');

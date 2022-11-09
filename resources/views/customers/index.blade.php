@@ -15,7 +15,9 @@
                                 </form>
                             </div>
 
-                            @include('layouts.includes.export')
+                            <a href="{{ route('customer_export') }}" class="dt-button create-new btn btn-success btn-sm">
+                                Excel
+                            </a>
 
                             <a href="{{ route('customers.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                                 <span>

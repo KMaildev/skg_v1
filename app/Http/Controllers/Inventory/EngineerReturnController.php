@@ -19,14 +19,16 @@ class EngineerReturnController extends Controller
         $users = User::all();
         $returns = EngineerReturnInfo::query();
 
-        $keyword = $request->keyword;
-        if ($request->keyword) {
-            $returns->where('return_code', 'Like', '%' . $keyword . '%');
-            $returns->orWhere('return_date', 'Like', '%' . $keyword . '%');
+
+        $keyword = $request->q;
+        if ($request->q) {
+            $returns->where('return_code', 'LIKE', "%{$request->q}%");
         }
+
         if ($request->user_id) {
             $returns->where('return_user_id', 'Like', '%' . $request->user_id . '%');
         }
+
         $returns = $returns->orderBy('id', 'ASC')->get();
 
         return view('inventory.return.index', compact('returns', 'users'));

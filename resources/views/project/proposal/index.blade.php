@@ -8,8 +8,6 @@
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Proposal</h5>
                         <div class="card-title-elements ms-auto">
-                            @include('layouts.includes.export')
-
                             <a href="{{ route('project.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                                 <span>
                                     <i class="bx bx-plus me-sm-2"></i>

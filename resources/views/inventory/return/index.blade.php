@@ -9,20 +9,15 @@
                         <h5 class="m-0 me-2">Engineer Return</h5>
                         <div class="card-title-elements ms-auto">
                             <form action="{{ route('inventory_engineer_return.index') }}" method="get">
-                                <input type="text" placeholder="Search" name="keyword" class="form-control">
+                                <input type="text" placeholder="Search: Return code" name="q"
+                                    value="{{ old('q') }}">
                             </form>
 
-                            <form action="{{ route('inventory_engineer_return.index') }}" autocomplete="off" method="GET">
-                                <select class="select2 form-select" data-allow-clear="false" name="user_id"
-                                    id="submit_form">
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($users as $engineer)
-                                        <option value="{{ $engineer->id }}">
-                                            {{ $engineer->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <form action="{{ route('inventory_engineer_return.index') }}" method="get">
+                                @include('components.user_datalist')
+                                <input type="submit" value="Find">
                             </form>
+
                         </div>
                     </div>
                 </div>

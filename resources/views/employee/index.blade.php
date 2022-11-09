@@ -9,10 +9,15 @@
                         <h5 class="m-0 me-2">Employees</h5>
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
-                                <input type="text" class="form-control form-control-sm" placeholder="Search" />
+                                <form action="{{ route('employee.index') }}" method="get">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
+                                        name="q" />
+                                </form>
                             </div>
-
-                            @include('layouts.includes.export')
+                            
+                            <a href="{{ route('user_export') }}" class="dt-button create-new btn btn-success btn-sm">
+                                Excel
+                            </a>
 
                             <a href="{{ route('employee.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                                 <span>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FixedAssetsController;
 use App\Http\Controllers\Inventory\VariableAssetsController;
 use App\Http\Controllers\ManageVariableRequest\VariableAcceptRejectStatusController;
@@ -407,4 +409,6 @@ Route::middleware('auth')->group(function () {
     // Export 
     Route::get('fixedassets_export', [FixedAssetsController::class, 'exportFixedAssets'])->name('fixedassets_export');
     Route::get('variable_assets_export', [VariableAssetsController::class, 'exportVariableAssets'])->name('variable_assets_export');
+    Route::get('customer_export', [CustomersController::class, 'exportCustomer'])->name('customer_export');
+    Route::get('user_export', [EmployeeController::class, 'exportUser'])->name('user_export');
 });
