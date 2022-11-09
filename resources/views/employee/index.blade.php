@@ -29,19 +29,20 @@
                     </div>
                 </div>
 
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered table-sm">
+                <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                    aria-labelledby="HeadersCol" tabindex="0">
+                    <table class="table table-bordered main-table">
                         <thead class="tbbg">
                             <tr>
-                                <th style="color: white; text-align: center; width: 1%;">#</th>
-                                <th style="color: white; text-align: center;">Employee ID</th>
-                                <th style="color: white; text-align: center;">Name</th>
-                                <th style="color: white; text-align: center;">Email</th>
-                                <th style="color: white; text-align: center;">Phone</th>
-                                <th style="color: white; text-align: center;">Passport</th>
-                                <th style="color: white; text-align: center;">Department</th>
-                                <th style="color: white; text-align: center;">Role (or) Designation</th>
-                                <th style="color: white; text-align: center;">Actions</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 1%;">#</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Employee ID</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Name</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Email</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Phone</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Passport</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Department</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Role (or) Designation</th>
+                                <th style="background-color: #296166; color: white; text-align: center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">

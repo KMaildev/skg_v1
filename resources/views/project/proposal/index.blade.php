@@ -20,7 +20,7 @@
 
                 <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
                     aria-labelledby="HeadersCol" tabindex="0">
-                    <table class="table table-bordered main-table" id="export_excel">
+                    <table class="table table-bordered main-table" id="export_excel" style="margin-bottom: 10px">
                         <thead class="tbbg">
                             <tr>
                                 <th
@@ -99,7 +99,6 @@
                             </tr>
                         </thead>
                         <tbody class="mytbody table-border-bottom-0 row_position" id="tablecontents">
-
                             @foreach ($projects as $key => $project)
                                 <tr class="row1" data-id="{{ $project->id }}">
 

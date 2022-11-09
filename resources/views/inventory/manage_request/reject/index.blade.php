@@ -25,8 +25,9 @@
                     </div>
                 </div>
 
-                <div class="table-responsive text-nowrap table-scroll outer-wrapper wrapper">
-                    <table class="table table-bordered">
+                <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                    aria-labelledby="HeadersCol" tabindex="0">
+                    <table class="table table-bordered main-table">
                         <thead class="tbbg">
                             <tr>
                                 <th style="color: white; background-color: #296166; text-align: center; width: 1%">#</th>
@@ -69,11 +70,12 @@
                                         {{ $key + 1 }}
                                     </td>
 
-                                    <td style="text-align: center" class="sticky-col second-col">
+                                    <th style="text-align: center; font-size: 13px; font-weight: bold; background-color: white;"
+                                        scope="row">
                                         {{ $request_info->user_table->name ?? '' }}
-                                    </td>
+                                    </th>
 
-                                    <td style="text-align: center" class="sticky-col three-col">
+                                    <td style="text-align: center">
                                         {{ $request_info->request_code }}
                                     </td>
 

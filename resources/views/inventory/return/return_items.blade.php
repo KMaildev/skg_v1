@@ -1,10 +1,10 @@
 <table class="table table-bordered sub_table" style="margin-bottom: 0px;">
     <thead class="tbbg">
         <tr>
-            <th style="color: white; text-align: center; width: 1%;">#</th>
-            <th style="color: white; text-align: center; width: 20%;">Return Items</th>
-            <th style="color: white; text-align: center; width: 20%;">Return Qty</th>
-            <th style="color: white; text-align: center; width: 20%;">Passed (Qty)</th>
+            <td style="color: white; text-align: center; width: 1%;">#</td>
+            <td style="color: white; text-align: center; width: 20%;">Return Items</td>
+            <td style="color: white; text-align: center; width: 20%;">Return Qty</td>
+            <td style="color: white; text-align: center; width: 20%;">Passed (Qty)</td>
         </tr>
     </thead>
     <tbody>
@@ -13,35 +13,35 @@
         @endphp
         @foreach ($return_info->return_items_table as $key => $return_item_list)
             <tr>
-                <th style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $key + 1 }}
-                </th>
+                </td>
 
-                <th style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $return_item_list->fixed_assets_table->item_name ?? '' }}
-                </th>
+                </td>
 
-                <th style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $return_item_list->quantity ?? 0 }}
-                </th>
+                </td>
 
-                <th style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $return_item_list->return_qs_team_check_passes_table->qs_passed_qty ?? 0 }}
                     @php
                         $PassedQty += $return_item_list->return_qs_team_check_passes_table->qs_passed_qty ?? 0;
                     @endphp
-                </th>
+                </td>
             </tr>
         @endforeach
     </tbody>
     <tr>
-        <th colspan="2">Total</th>
-        <th style="text-align: center; font-weight: bold">
+        <td colspan="2">Total</td>
+        <td style="text-align: center; font-weight: bold">
             {{ $return_info->return_items_table->sum('quantity') }}
-        </th>
+        </td>
 
-        <th style="text-align: center; font-weight: bold">
+        <td style="text-align: center; font-weight: bold">
             {{ $PassedQty }}
-        </th>
+        </td>
     </tr>
 </table>

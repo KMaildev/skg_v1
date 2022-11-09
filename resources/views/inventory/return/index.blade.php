@@ -23,36 +23,37 @@
                 </div>
 
                 <div class="col-md">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table table-bordered">
+                    <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                        aria-labelledby="HeadersCol" tabindex="0">
+                        <table class="table table-bordered main-table">
                             <thead class="tbbg">
                                 <tr>
-                                    <th style="color: white; text-align: center; width: 1%">#</th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 1%">#</th>
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Return Code
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Return Engineer
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Return Date
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Return Item
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Return From
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         QS Team Check & Pass
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Logistics Team Check & Sent
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Received by Store Manager
                                     </th>
-                                    <th style="color: white; text-align: center; width: 14%">
+                                    <th style="background-color: #296166; color: white; text-align: center; width: 14%">
                                         Action
                                     </th>
                                 </tr>
@@ -64,9 +65,10 @@
                                             {{ $key + 1 }}
                                         </td>
 
-                                        <td style="text-align: center">
+                                        <th style="text-align: center; font-size: 13px; font-weight: bold; background-color: white;"
+                                            scope="row">
                                             {{ $return->return_code }}
-                                        </td>
+                                        </th>
 
                                         <td style="text-align: center">
                                             {{ $return->user_table->name ?? '' }}

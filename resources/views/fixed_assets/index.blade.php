@@ -28,24 +28,37 @@
                     </div>
                 </div>
 
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered table-sm" id="export_excel">
+                <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                    aria-labelledby="HeadersCol" tabindex="0">
+                    <table class="table table-bordered main-table" id="export_excel" style="margin-bottom: 10px">
+
                         <thead class="tbbg">
                             <tr>
-                                <th style="color: white; text-align: center; width: 1%;">#</th>
-                                <th style="color: white; text-align: center; width: 10%;">Item Name</th>
-                                <th style="color: white; text-align: center; width: 2%;">Unit</th>
-                                <th style="color: white; text-align: center; width: 2%;">Qty</th>
-                                <th style="color: white; text-align: center; width: 10%;">Remark</th>
-                                <th style="color: white; text-align: center; width: 20%;">Request</th>
-                                <th style="color: white; text-align: center; width: 20%;">Approval</th>
-                                <th style="color: white; text-align: center; width: 15%;">Voucher</th>
-                                <th style="color: white; text-align: center; width: 10%;">Received</th>
-                                <th style="color: white; text-align: center; width: 10%;">Unusable</th>
-                                <th style="color: white; text-align: center; width: 10%;">Actions</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 1%;">#</th>
+                                <th
+                                    style="background-color: #296166 !important; color: white; text-align: center; width: 10%;">
+                                    Item
+                                    Name</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 2%;">Unit
+                                </th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 2%;">Qty</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 10%;">Remark
+                                </th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 20%;">Request
+                                </th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 20%;">
+                                    Approval</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 15%;">Voucher
+                                </th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 10%;">
+                                    Received</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 10%;">
+                                    Unusable</th>
+                                <th style="background-color: #296166; color: white; text-align: center; width: 10%;">Actions
+                                </th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="mytbody table-border-bottom-0 row_position" id="tablecontents">
                             @php
                                 $all_total_fixed_asset_qty = [];
                             @endphp
@@ -55,7 +68,8 @@
                                         {{ $key + 1 }}
                                     </td>
 
-                                    <td style="text-align: center;">
+                                    <td style="text-align: center; font-size: 13px; font-weight: bold; background-color: #f2f2f2;"
+                                        scope="row">
                                         {{ $fixed_asset->item_name ?? '-' }}
                                     </td>
 

@@ -12,20 +12,21 @@
 
                 <div class="col-md">
                     <div class="accordion mt-3 accordion-header-primary" id="accordionStyle1">
-                        <div class="accordion-item card">
-                            <table class="table">
+                        <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                            aria-labelledby="HeadersCol" tabindex="0">
+                            <table class="table table-bordered main-table">
                                 <thead class="tbbg">
                                     <tr>
-                                        <th style="color: white; width: 1%">#</th>
-                                        <th style="color: white; width: 14%">Items Name</th>
-                                        <th style="color: white; width: 14%">Main Warehouse</th>
-                                        <th style="color: white; width: 14%">
+                                        <th style="background-color: #296166; color: white; width: 1%">#</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">Items Name</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">Main Warehouse</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">
                                             {{-- Request Total --}}
                                             Site On Hand [Total]
                                         </th>
-                                        <th style="color: white; width: 14%">Return [Total]</th>
-                                        <th style="color: white; width: 14%">Remaining Balance</th>
-                                        <th style="color: white; width: 14%">Action</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">Return [Total]</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">Remaining Balance</th>
+                                        <th style="background-color: #296166; color: white; width: 14%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mytbody">

@@ -1,20 +1,5 @@
 @extends('layouts.menus.inventory')
 @section('content')
-    <style>
-        table {
-            border: 1px solid #000
-        }
-
-        table td {
-            border: 1px solid #000;
-            padding: 5px;
-        }
-
-        .collapse-row.collapsed+tr {
-            display: none;
-        }
-
-    </style>
     <div class="row justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12">
             <div class="card">
@@ -22,7 +7,7 @@
                 <div class="card-body">
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Warehouse Plan</h5>
-                        
+
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
                                 <form action="#" method="GET" autocomplete="off">
@@ -37,17 +22,24 @@
 
                 <div class="col-md">
                     <div class="accordion mt-3 accordion-header-primary" id="accordionStyle1">
-                        <div class="accordion-item card">
-                            <table class="table">
+                        <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                            aria-labelledby="HeadersCol" tabindex="0">
+                            <table class="table table-bordered main-table">
                                 <thead class="tbbg">
                                     <tr>
-                                        <th style="color: white; text-align: center; width: 1%">#</th>
-                                        <th style="color: white; text-align: center; width: 14%">Items Name</th>
-                                        <th style="color: white; text-align: center; width: 14%">Main Warehouse</th>
-                                        <th style="color: white; text-align: center; width: 14%">Site On Hand</th>
-                                        <th style="color: white; text-align: center; width: 14%">Remaining Balance</th>
-                                        <th style="color: white; text-align: center; width: 14%">Action</th>
-                                        <th style="color: white; background-color: white; width: 0%;">
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 1%">#
+                                        </th>
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 14%">
+                                            Items Name</th>
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 14%">
+                                            Main Warehouse</th>
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 14%">
+                                            Site On Hand</th>
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 14%">
+                                            Remaining Balance</th>
+                                        <th style="background-color: #296166; color: white; text-align: center; width: 14%">
+                                            Action</th>
+                                        <th style="background-color: #296166; color: white;  width: 0%;">
                                         </th>
                                     </tr>
                                 </thead>
@@ -114,7 +106,8 @@
                                                         @endphp
                                                         @foreach ($fixed_assets_with_eng_request_item->eng_request_items_table as $key => $item)
                                                             <tr class="clickable js-tabularinfo-toggle"
-                                                                data-toggle="collapse" id="" data-target=".subrow1">
+                                                                data-toggle="collapse" id=""
+                                                                data-target=".subrow1">
                                                                 <th width="1%">{{ $key + 1 }}</th>
 
                                                                 <th style="text-align: center">

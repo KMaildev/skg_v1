@@ -27,7 +27,7 @@ class VariableRequestSsdController extends Controller
     public function getVariableRequest(Request $request)
     {
         $data = VariableRequestInfo::with('user_table', 'customer_table')
-            ->where('accept_reject_status', 'accept')
+            // ->where('accept_reject_status', 'accept')
             ->orderBy('id', 'DESC');
         // ->whereIn('accept_reject_status', ['accept', NULL]);
         // ->where('accept_reject_status', 'accept')

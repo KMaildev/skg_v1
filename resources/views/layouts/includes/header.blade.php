@@ -39,10 +39,9 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/pickr/pickr-themes.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" />
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/table.css') }}" /> --}}
-    <link rel="stylesheet" href="{{ asset('css/table_v1.css') }}" />
-    {{-- <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}" /> --}}
-
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/table_v1.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
@@ -52,11 +51,31 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
+
+
     @yield('cssscript')
 
 </head>
 
 <style>
+    /* table tr th:nth-child(2), */
+
+    .mytd {
+        position: sticky !important;
+        left: 0 !important;
+        z-index: 10 !important;
+        background: white !important;
+    }
+
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+
     .tbbg {
         background-color: #236166;
     }

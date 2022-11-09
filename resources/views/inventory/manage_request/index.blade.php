@@ -21,50 +21,52 @@
                                     @include('components.user_datalist')
                                     <input type="submit" value="Find">
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- text-nowrap table-scroll outer-wrapper wrapper --}}
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-
+                <div class="table-responsive text-nowrap rowheaders table-scroll outer-wrapper" role="region"
+                    aria-labelledby="HeadersCol" tabindex="0">
+                    <table class="table table-bordered main-table">
                         <thead class="tbbg">
                             <tr>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 1%">#</th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
+                                    #
+                                </th>
+                                <th style="color: white; background-color: #296166;">
                                     Engineer Request
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Request code
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Request Date
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Request Items
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
-                                    Accept / Reject
+                                <th style="color: white; background-color: #296166;">
+                                    Accept Reject
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     QS Team Check & Pass
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Logistics Team Check & Sent
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Transferred from
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Transferred to
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
-                                    Received by Engineer
+                                <th style="color: white; background-color: #296166;">
+                                    Received Engineer
                                 </th>
-                                <th style="color: white; background-color: #296166; text-align: center; width: 14%">
+                                <th style="color: white; background-color: #296166;">
                                     Action
                                 </th>
                             </tr>
@@ -80,9 +82,10 @@
                                         {{ $i++ }}
                                     </td>
 
-                                    <td>
+                                    <th style="text-align: center; font-size: 13px; font-weight: bold; background-color: white;"
+                                        scope="row">
                                         {{ $request_info->user_table->name ?? '' }}
-                                    </td>
+                                    </th>
 
                                     <td>
                                         {{ $request_info->request_code }}
@@ -96,12 +99,12 @@
                                     <td>
                                         <table style="width: 100%">
                                             <tr>
-                                                <th style="background-color: #296166; color: white; width: 80%">
+                                                <td style="background-color: #296166; color: white; width: 80%">
                                                     Items
-                                                </th>
-                                                <th style="background-color: #296166; color: white; width: 20%">
+                                                </td>
+                                                <td style="background-color: #296166; color: white; width: 20%">
                                                     Qty
-                                                </th>
+                                                </td>
                                             </tr>
                                             @foreach ($request_info->eng_request_items_table as $value)
                                                 <tr>
@@ -117,27 +120,27 @@
                                     </td>
 
                                     {{-- Accept / Reject --}}
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         @include('shared.managerequest.accept_reject_status', [
                                             'request_info' => $request_info,
                                         ])
                                     </td>
 
                                     {{-- QS Team Check & Pass --}}
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         @include('shared.managerequest.qs_team_check_pass_status', [
                                             'request_info' => $request_info,
                                         ])
                                     </td>
 
                                     {{-- Logistics Team Check & Sent --}}
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         @include('shared.managerequest.logistics_team_check_sent_status', [
                                             'request_info' => $request_info,
                                         ])
                                     </td>
 
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         @if ($request_info->transfer_from_status == 'warehouse')
                                             {{ $request_info->main_warehouse_table->warehouse_code ?? 'Warehouse' }}
                                         @elseif ($request_info->transfer_from_status == 'other_site')
@@ -147,13 +150,13 @@
                                         @endif
                                     </td>
 
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         {{ $request_info->customer_table->project_code ?? '' }}
-                                        @
+                                        @ <br>
                                         {{ $request_info->customer_table->name ?? '' }}
                                     </td>
 
-                                    <td style="text-align: center">
+                                    <td style="text-align: center;">
                                         @include('shared.managerequest.received_by_engineer_status', [
                                             'request_info' => $request_info,
                                         ])
@@ -188,8 +191,8 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
+
         </div>
     </div>
 @endsection

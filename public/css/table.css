@@ -15,6 +15,7 @@ th[scope=row] {
 }
 
 th[scope=row] {
+    /* vertical-align: top; */
     color: inherit;
     background-color: inherit;
     background: linear-gradient(90deg, transparent 0%, transparent calc(100% - .05em), #d6d6d6 calc(100% - .05em), #d6d6d6 100%);
@@ -23,6 +24,7 @@ th[scope=row] {
 th:not([scope=row]):first-child {
     left: 0;
     z-index: 3;
+    /* background: linear-gradient(90deg, #666 0%, #666 calc(100% - .05em), #ccc calc(100% - .05em), #ccc 100%); */
 }
 
 /* proposal style table */
@@ -35,7 +37,7 @@ th:not([scope=row]):first-child {
     position: sticky;
     top: 0;
     z-index: 0;
-    background-color: white !important;
+    /* background-color: #f2f2f2 !important; */
     color: black !important;
 }
 
@@ -49,12 +51,14 @@ th:not([scope=row]):first-child {
 }
 
 .three-col {
-    left: 12%;
+    left: 10%;
 }
 
 
 
-.second_table,
+
+/* Sub table */
+.sub_table,
 th,
 td {
     border: 1px solid black;

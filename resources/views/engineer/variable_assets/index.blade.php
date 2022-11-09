@@ -126,9 +126,9 @@
                             <td>
                                 <table style="width: 100%">
                                     <tr>
-                                        <th style="background-color: gray; color: white;"> Items </th>
-                                        <th style="background-color: gray; color: white;"> Unit </th>
-                                        <th style="background-color: gray; color: white;"> Qty </th>
+                                        <td style="background-color: gray; color: white;"> Items </td>
+                                        <td style="background-color: gray; color: white;"> Unit </td>
+                                        <td style="background-color: gray; color: white;"> Qty </td>
                                     </tr>
                                     @foreach ($request_info->variable_request_items_table as $value)
                                         <tr>

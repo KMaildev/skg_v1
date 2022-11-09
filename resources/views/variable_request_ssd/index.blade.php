@@ -51,7 +51,7 @@
                 {
                     data: 'engineer_name',
                     name: 'engineer_name',
-                    // class: 'sticky-col second-col mytd',
+                    class: 'mytd',
                 },
                 {
                     data: 'customer_name',

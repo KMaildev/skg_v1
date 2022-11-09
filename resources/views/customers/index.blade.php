@@ -29,19 +29,21 @@
                     </div>
                 </div>
 
-                <div class="table-responsive text-nowrap">
-                    <table class="table" id="export_excel">
+                {{-- table-responsive text-nowrap --}}
+                <div class="table-responsive rowheaders table-scroll outer-wrapper" role="region"
+                    aria-labelledby="HeadersCol" tabindex="0">
+                    <table class="table table-bordered main-table">
                         <thead class="tbbg">
                             <tr>
-                                <th style="color: white; text-align: center; width: 1%;">#</th>
-                                <th style="color: white; text-align: center;">Name</th>
-                                <th style="color: white; text-align: center;">Site Location</th>
-                                <th style="color: white; text-align: center;">Building Area</th>
-                                <th style="color: white; text-align: center;">Construction Type</th>
-                                <th style="color: white; text-align: center;">Job Scope</th>
-                                <th style="color: white; text-align: center;">Date</th>
+                                <th style="background-color: #296166; color: white;  width: 1%;">#</th>
+                                <th style="background-color: #296166; color: white; width: 10%;">Name</th>
+                                <th style="background-color: #296166; color: white; width: 30%;">Site Location</th>
+                                <th style="background-color: #296166; color: white; width: 20%;">Building Area</th>
+                                <th style="background-color: #296166; color: white; width: 15%;">Construction Type</th>
+                                <th style="background-color: #296166; color: white; width: 10%;">Job Scope</th>
+                                <th style="background-color: #296166; color: white; width: 20%;">Date</th>
                                 @can('customer_edit_delete')
-                                    <th style="color: white; text-align: center;">Actions</th>
+                                    <th style="background-color: #296166; color: white; width: 20%;">Actions</th>
                                 @endcan
                             </tr>
                         </thead>

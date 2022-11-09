@@ -117,11 +117,12 @@
                                         {{ $i++ }}
                                     </td>
 
-                                    <td class="sticky-col second-col">
+                                    <th style="text-align: center; font-size: 13px; font-weight: bold; background-color: white;"
+                                        scope="row">
                                         {{ $request_info->user_table->name ?? '' }}
-                                    </td>
+                                    </th>
 
-                                    <td class="sticky-col three-col">
+                                    <td>
                                         {{ $request_info->customer_table->name ?? '' }}
                                         @
                                         {{ $request_info->customer_table->project_code ?? '' }}

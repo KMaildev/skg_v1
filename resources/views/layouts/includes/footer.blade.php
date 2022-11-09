@@ -305,6 +305,7 @@
             $('#userListId').val(user_id)
         });
     });
+
 </script>
 
 </html>
