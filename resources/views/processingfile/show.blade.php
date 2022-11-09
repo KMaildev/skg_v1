@@ -28,7 +28,7 @@
                             </td>
 
                             <td>
-                                <a href="{{ Storage::url($value->processing_file) }}" download>
+                                <a href="{{ Storage::url($value->processing_file) }}" download="{{ $value->original_name }}">
                                     <i class="fa fa-download fa-lg text-danger"></i>
                                     <strong>Download</strong>
                                 </a>

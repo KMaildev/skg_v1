@@ -8,7 +8,14 @@
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Fixed Assets</h5>
                         <div class="card-title-elements ms-auto">
-                            @include('layouts.includes.export')
+
+                            <form action="{{ route('fixedassets.index') }}" method="get">
+                                <input type="text" placeholder="Search: Item Name" name="q">
+                            </form>
+
+                            <a href="{{ route('fixedassets_export') }}" class="dt-button create-new btn btn-success btn-sm">
+                                Excel
+                            </a>
 
                             <a href="{{ route('fixedassets.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                                 <span>
@@ -16,6 +23,7 @@
                                     <span class="d-none d-sm-inline-block">Create</span>
                                 </span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -151,7 +159,6 @@
                             </th>
                         </tr>
                     </table>
-                    {{ $fixed_assets->links() }}
                 </div>
             </div>
         </div>

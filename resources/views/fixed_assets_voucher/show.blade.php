@@ -29,7 +29,7 @@
                             </td>
 
                             <td>
-                                <a href="{{ asset($value->voucher) }}" download>
+                                <a href="{{ asset($value->voucher) }}" download="{{ $value->original_name }}">
                                     <i class="fa fa-download fa-lg text-danger"></i>
                                     <strong>Download</strong>
                                 </a>

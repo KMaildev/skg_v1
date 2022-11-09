@@ -20,7 +20,7 @@
                     @foreach ($floor_plan_images as $key => $value)
                         <tr>
                             <td>
-                                {{ $key + 1 }}
+                                {{ $loop->iteration }}
                             </td>
 
                             <td>
@@ -28,7 +28,8 @@
                             </td>
 
                             <td>
-                                <a href="{{ Storage::url($value->floor_plan_image) }}" download>
+                                <a href="{{ Storage::url($value->floor_plan_image) }}"
+                                    download="{{ $value->original_name }}">
                                     <i class="fa fa-download fa-lg text-danger"></i>
                                     <strong>Download</strong>
                                 </a>

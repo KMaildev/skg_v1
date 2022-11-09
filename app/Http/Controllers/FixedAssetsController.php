@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FixedAssetsExport;
 use App\Http\Requests\StoreFixedAssets;
 use App\Http\Requests\UpdateFixedAssets;
 use App\Models\FixedAssets;
@@ -9,6 +10,7 @@ use App\Models\FixedAssetsPurchase;
 use App\Models\MainWarehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FixedAssetsController extends Controller
 {
@@ -17,9 +19,15 @@ class FixedAssetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fixed_assets = FixedAssets::paginate(1000);
+        $fixed_assets = FixedAssets::all();
+
+        if ($request->q) {
+            $fixed_assets = FixedAssets::where('item_name', 'like', '%' . $request->q . '%')
+                ->get();
+        }
+
         return view('fixed_assets.index', compact('fixed_assets'));
     }
 
@@ -108,5 +116,12 @@ class FixedAssetsController extends Controller
         $fixed_assets = FixedAssets::findOrFail($id);
         $fixed_assets->delete();
         return redirect()->back()->with('success', 'Deleted successfully.');
+    }
+
+
+    public function exportFixedAssets()
+    {
+        $fixed_assets = FixedAssets::all();
+        return Excel::download(new FixedAssetsExport($fixed_assets), 'fixed_assets_' . date("Y-m-d H:i:s") . '.xlsx');
     }
 }

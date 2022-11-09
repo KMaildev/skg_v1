@@ -1,12 +1,14 @@
-/* table {
+table {
     border-collapse: collapse;
     display: block;
-} */
+}
 
-/* .table-border-bottom-0,
+.table-border-bottom-0,
 .mytbody {
-    display: block;
-} */
+    border-collapse: collapse;
+    /* display: block; */
+}
+
 
 .table-border-bottom-0,
 .mytbody {
@@ -18,8 +20,8 @@
 
 /* table tr th:nth-child(2), */
 table tr td:nth-child(2) {
-    position: sticky;
-    left: 0;
-    z-index: 10;
-    background: white;
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 10 !important;
+    background: white !important;
 }

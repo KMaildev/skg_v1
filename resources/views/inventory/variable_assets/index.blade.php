@@ -9,6 +9,13 @@
                         <h5 class="m-0 me-2">Variable Assets</h5>
                         <div class="card-title-elements ms-auto">
                             <input id="myInput" type="text" placeholder="Search..">
+
+
+                            <a href="{{ route('variable_assets_export') }}" class="dt-button create-new btn btn-success btn-sm">
+                                Excel
+                            </a>
+
+
                             <a href="{{ route('variable_assets.create') }}"
                                 class="dt-button create-new btn btn-primary btn-sm">
                                 <span>
@@ -16,6 +23,8 @@
                                     <span class="d-none d-sm-inline-block">Create</span>
                                 </span>
                             </a>
+
+
                         </div>
                     </div>
                 </div>

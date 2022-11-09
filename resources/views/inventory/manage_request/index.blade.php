@@ -12,24 +12,25 @@
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
 
-                                <form action="{{ route('managerequest.index') }}" autocomplete="off" method="GET">
-                                    <select class="select2 form-select" data-allow-clear="false" name="user_id"
-                                        id="submit_form">
-                                        <option value="">--Please Select--</option>
-                                        @foreach ($users as $engineer)
-                                            <option value="{{ $engineer->id }}">
-                                                {{ $engineer->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <form action="{{ route('managerequest.index') }}" method="get">
+                                    <input type="text" placeholder="Search: Request code" name="q"
+                                        value="{{ old('q') }}">
                                 </form>
+
+                                <form action="{{ route('managerequest.index') }}" method="get">
+                                    @include('components.user_datalist')
+                                    <input type="submit" value="Find">
+                                </form>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="table-responsive text-nowrap table-scroll outer-wrapper wrapper">
-                    <table class="table table-bordered table-layout" id="display-table">
+                {{-- text-nowrap table-scroll outer-wrapper wrapper --}}
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+
                         <thead class="tbbg">
                             <tr>
                                 <th style="color: white; background-color: #296166; text-align: center; width: 1%">#</th>
@@ -68,45 +69,46 @@
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody class="mytbody">
                             @php
                                 $i = 1;
                             @endphp
                             @foreach ($eng_request_infos as $key => $request_info)
                                 <tr>
-                                    <td class="sticky-col first-col">
+                                    <td>
                                         {{ $i++ }}
                                     </td>
 
-                                    <td style="text-align: center" class="sticky-col second-col">
+                                    <td>
                                         {{ $request_info->user_table->name ?? '' }}
                                     </td>
 
-                                    <td style="text-align: center" class="sticky-col three-col">
+                                    <td>
                                         {{ $request_info->request_code }}
                                     </td>
 
-                                    <td style="text-align: center">
+                                    <td>
                                         {{ $request_info->request_date }}
                                     </td>
 
                                     {{-- Request Items --}}
                                     <td>
-                                        <table style="width: 100%" class="sub_table">
+                                        <table style="width: 100%">
                                             <tr>
-                                                <td style="background-color: #296166; color: white; width: 80%">
+                                                <th style="background-color: #296166; color: white; width: 80%">
                                                     Items
-                                                </td>
-                                                <td style="background-color: #296166; color: white; width: 20%">
+                                                </th>
+                                                <th style="background-color: #296166; color: white; width: 20%">
                                                     Qty
-                                                </td>
+                                                </th>
                                             </tr>
                                             @foreach ($request_info->eng_request_items_table as $value)
                                                 <tr>
                                                     <td style="text-align: left;">
                                                         {{ $value->fixed_assets_table->item_name ?? '' }}
                                                     </td>
-                                                    <td style="text-align: center;">
+                                                    <td style="text-align: right;">
                                                         {{ $value->quantity ?? 0 }}
                                                     </td>
                                                 </tr>
@@ -187,12 +189,9 @@
                     </table>
                 </div>
 
-                <div class="pseduo-track"></div>
             </div>
         </div>
     </div>
 @endsection
-
 @section('script')
-    <script></script>
 @endsection

@@ -9,34 +9,34 @@
             <table class="table">
                 <thead class="tbbg">
                     <tr>
-                        <th style="color: white;">#</th>
-                        <th style="color: white;">File Name</th>
-                        <th style="color: white;">Download</th>
-                        <th style="color: white;">Upload Date</th>
-                        <th style="color: white;">Upload By</th>
+                        <th style="color: white; background-color: #296166; text-align: center; width: 1%">#</th>
+                        <th style="color: white; background-color: #296166; text-align: center; width: 20%">File Name</th>
+                        <th style="color: white; background-color: #296166; text-align: center; width: 20%">Download</th>
+                        <th style="color: white; background-color: #296166; text-align: center; width: 20%">Upload Date</th>
+                        <th style="color: white; background-color: #296166; text-align: center; width: 20%">Upload By</th>
                     </tr>
                 </thead>
-                <tbody class="table-border-bottom-0">
+                <tbody class="mytbody">
                     @foreach ($quotationproposal_files as $key => $value)
                         <tr>
-                            <td>
+                            <td style="width: 1%;">
                                 {{ $key + 1 }}
                             </td>
 
-                            <td>
+                            <td style="width: 20%;">
                                 <strong>{{ $value->original_name }}</strong>
                             </td>
-                            <td>
-                                <a href="{{ Storage::url($value->quotation_file) }}" download="">
+                            <td style="width: 20%;">
+                                <a href="{{ Storage::url($value->quotation_file) }}" download="{{ $value->original_name }}">
                                     <i class="fa fa-download fa-lg text-danger"></i>
                                     <strong>Download</strong>
                                 </a>
                             </td>
-                            <td>
+                            <td style="width: 20%;">
                                 <i class="fa fa-calendar fa-lg text-success"></i>
                                 <strong>{{ $value->created_at }}</strong>
                             </td>
-                            <td>
+                            <td style="width: 20%;">
                                 <i class="fa fa-user fa-lg text-success"></i>
                                 <strong>{{ $value->users_table->name ?? '' }}</strong>
                             </td>

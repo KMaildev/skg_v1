@@ -11,12 +11,16 @@
                         </h5>
                         <div class="card-title-elements ms-auto">
                             <div class="card-header-elements ms-auto">
-                                <form action="#" method="GET" autocomplete="off">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
-                                        name="search" />
+                                <form action="{{ route('fixed_assets_completed_list') }}" method="get">
+                                    <input type="text" placeholder="Search: Request code" name="q"
+                                        value="{{ old('q') }}">
+                                </form>
+
+                                <form action="{{ route('fixed_assets_completed_list') }}" method="get">
+                                    @include('components.user_datalist')
+                                    <input type="submit" value="Find">
                                 </form>
                             </div>
-                            @include('layouts.includes.export')
                         </div>
                     </div>
                 </div>

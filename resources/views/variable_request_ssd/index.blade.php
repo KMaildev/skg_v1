@@ -11,7 +11,7 @@
         display: table-header-group !important;
     }
 </style>
-<div class="outer-wrapper" style="width: 100%; background-color: white;">
+<div class="" style="width: 100%; background-color: white;">
     <div class="py-5 tableFixHead">
         <table id="datatable" class="display nowrap yajra-datatable">
             @include('variable_request_ssd.table_shared.thead')

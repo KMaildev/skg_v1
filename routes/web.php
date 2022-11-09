@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FixedAssetsController;
+use App\Http\Controllers\Inventory\VariableAssetsController;
 use App\Http\Controllers\ManageVariableRequest\VariableAcceptRejectStatusController;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Auth;
@@ -228,7 +230,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('warehouseplan', 'Inventory\WarehousePlanController');
     Route::resource('mainwarehouse', 'MainWarehouseController');
+
     Route::resource('fixedassets', 'FixedAssetsController');
+
+
+
     Route::resource('accept_reject_status', 'Inventory\AcceptRejectStatusController');
     Route::resource('qs_team_check', 'Inventory\QsTeamCheckController');
     Route::get('qs_team_check_create/{id}', [
@@ -394,6 +400,11 @@ Route::middleware('auth')->group(function () {
     Route::post('update_fixed_assets_received_remark', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedRemark')->name('update_fixed_assets_received_remark');
 
 
-
     Route::resource('testing', 'Testing\TestingController');
+
+
+
+    // Export 
+    Route::get('fixedassets_export', [FixedAssetsController::class, 'exportFixedAssets'])->name('fixedassets_export');
+    Route::get('variable_assets_export', [VariableAssetsController::class, 'exportVariableAssets'])->name('variable_assets_export');
 });

@@ -19,17 +19,23 @@ class ManageRequestController extends Controller
     {
         $users = User::all();
         $eng_request_infos = RequestInfo::with('eng_request_items_table')
-            ->orderBy('id', 'DESC')->get()
             ->where('received_by_engineer_status', NULL)
-            ->where('request_status', NULL);
-
+            ->where('request_status', NULL)
+            ->orderBy('id', 'DESC')->get();
 
         if ($request->user_id) {
             $eng_request_infos = RequestInfo::with('eng_request_items_table')
-                ->where('received_by_engineer_status', NULL)
-                ->where('request_status', NULL)
-                ->where('user_id', 'Like', '%' . $request->user_id . '%')
+                // ->where('received_by_engineer_status', NULL)
+                // ->orWhere('request_status', NULL)
+                ->where('user_id', $request->user_id)
                 ->orderBy('id', 'DESC')->get();
+        }
+
+        if ($request->q) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table', 'user_table')
+                ->where('request_code', 'LIKE', "%{$request->q}%")
+                ->orWhere('work_scope', 'LIKE', "%{$request->q}%")
+                ->get();
         }
 
         return view('inventory.manage_request.index', compact('eng_request_infos', 'users'));
@@ -41,10 +47,28 @@ class ManageRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fixed_assets_completed_list()
+    public function fixed_assets_completed_list(Request $request)
     {
-        $eng_request_infos = RequestInfo::with('eng_request_items_table')->orderBy('id', 'DESC')->get()->where('received_by_engineer_status', 'received');
-        return view('inventory.manage_request.completed.index', compact('eng_request_infos'));
+        $users = User::all();
+        $eng_request_infos = RequestInfo::with('eng_request_items_table')
+            ->where('received_by_engineer_status', 'received')
+            ->orderBy('id', 'DESC')->get();
+
+        if ($request->user_id) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table')
+                ->where('user_id', $request->user_id)
+                ->orderBy('id', 'DESC')->get();
+        }
+
+        if ($request->q) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table', 'user_table')
+                ->where('received_by_engineer_status', 'received')
+                ->where('request_code', 'LIKE', "%{$request->q}%")
+                ->orWhere('work_scope', 'LIKE', "%{$request->q}%")
+                ->get();
+        }
+
+        return view('inventory.manage_request.completed.index', compact('eng_request_infos', 'users'));
     }
 
 
@@ -53,10 +77,29 @@ class ManageRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fixed_assets_reject_list()
+    public function fixed_assets_reject_list(Request $request)
     {
-        $eng_request_infos = RequestInfo::with('eng_request_items_table')->orderBy('id', 'DESC')->get()->where('accept_reject_status', 'reject');
-        return view('inventory.manage_request.reject.index', compact('eng_request_infos'));
+        $users = User::all();
+        $eng_request_infos = RequestInfo::with('eng_request_items_table')
+            ->where('accept_reject_status', 'reject')
+            ->orderBy('id', 'DESC')->get();
+
+        if ($request->user_id) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table')
+                ->where('user_id', $request->user_id)
+                ->where('accept_reject_status', 'reject')
+                ->orderBy('id', 'DESC')->get();
+        }
+
+        if ($request->q) {
+            $eng_request_infos = RequestInfo::with('eng_request_items_table', 'user_table')
+                ->where('accept_reject_status', 'reject')
+                ->where('request_code', 'LIKE', "%{$request->q}%")
+                ->orWhere('work_scope', 'LIKE', "%{$request->q}%")
+                ->get();
+        }
+
+        return view('inventory.manage_request.reject.index', compact('eng_request_infos', 'users'));
     }
 
     /**

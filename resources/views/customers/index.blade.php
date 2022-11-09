@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered table-sm" id="export_excel">
+                    <table class="table" id="export_excel">
                         <thead class="tbbg">
                             <tr>
                                 <th style="color: white; text-align: center; width: 1%;">#</th>
@@ -43,28 +43,28 @@
                                 @endcan
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="mytbody table-border-bottom-0">
                             @foreach ($customers as $key => $customer)
                                 <tr>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $key + 1 }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->name }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->site_location }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->building_area }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->construction_type }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->job_scope }}
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $customer->created_date }}
                                     </td>
 

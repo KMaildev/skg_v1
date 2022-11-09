@@ -27,7 +27,7 @@
                                 <strong>{{ $value->original_name }}</strong>
                             </td>
                             <td>
-                                <a href="{{ Storage::url($value->archi_exterior_design_file) }}" download="">
+                                <a href="{{ Storage::url($value->archi_exterior_design_file) }}" download="{{ $value->original_name }}">
                                     <i class="fa fa-download fa-lg text-danger"></i>
                                     <strong>Download</strong>
                                 </a>

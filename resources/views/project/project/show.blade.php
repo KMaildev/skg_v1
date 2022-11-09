@@ -389,7 +389,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->processing_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -459,7 +459,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->floor_plan_image) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -528,7 +528,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->quotation_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -600,7 +600,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->exterior_design_fees) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -673,7 +673,7 @@
 
                                                         <td>
                                                             <a href="{{ Storage::url($value->structure_design_fees) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -747,7 +747,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->approved_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -819,7 +819,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->archi_exterior_design_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -894,7 +894,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->structure_design_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -968,7 +968,7 @@
 
                                                         <td>
                                                             <a href="{{ Storage::url($value->permit_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>
@@ -1041,7 +1041,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ Storage::url($value->contract_file) }}"
-                                                                download="">
+                                                                download="{{ $value->original_name }}">
                                                                 <i class="fa fa-download fa-lg text-danger"></i>
                                                                 <strong>Download</strong>
                                                             </a>

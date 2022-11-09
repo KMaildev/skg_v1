@@ -297,4 +297,14 @@
     }
 </script>
 
+<script>
+    $(function() {
+        $('#ListUserId').change(function() {
+            var user_id = $("#users_lists option[value='" + $('#ListUserId').val() + "']").attr(
+                'data-id');
+            $('#userListId').val(user_id)
+        });
+    });
+</script>
+
 </html>

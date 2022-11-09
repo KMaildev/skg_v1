@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Inventory;
 
+use App\Exports\VariableAssetsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVariableAssets;
 use App\Http\Requests\UpdateVariableAssets;
@@ -10,6 +11,7 @@ use App\Models\VariableAssets;
 use App\Models\VariableAssetsSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VariableAssetsController extends Controller
 {
@@ -180,5 +182,15 @@ class VariableAssetsController extends Controller
     {
         $variable_assets_data = VariableAssets::findOrFail($id);
         return json_encode($variable_assets_data);
+    }
+
+    public function exportVariableAssets()
+    {
+        $categories = VariableAssets::select('category')
+            ->groupBy('category')
+            ->get();
+
+        $exports = VariableAssets::orderBy('display_order', 'ASC')->get();
+        return Excel::download(new VariableAssetsExport($exports, $categories), 'export_' . date("Y-m-d H:i:s") . '.xlsx');
     }
 }
