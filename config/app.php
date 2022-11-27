@@ -181,6 +181,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
 
     ],
 

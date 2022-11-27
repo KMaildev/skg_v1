@@ -145,7 +145,7 @@
                                                         Details
                                                     </a>
                                                 </li>
-
+                                                @can('fixed_assets_delete')
                                                 <li>
                                                     <form action="{{ route('fixedassets.destroy', $fixed_asset->id) }}"
                                                         method="POST">
@@ -157,6 +157,7 @@
                                                         </button>
                                                     </form>
                                                 </li>
+                                                @endcan
                                             </ul>
                                         </div>
                                     </td>
