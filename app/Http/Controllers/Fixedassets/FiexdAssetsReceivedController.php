@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fixedassets;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateFixedAssetsApproval;
 use App\Http\Requests\UpdateFixedAssetsReceived;
+use App\Http\Requests\UpdateFixedAssetsReceivedUpload;
 use App\Models\FixedAssetsBuyRequest;
 use Illuminate\Http\Request;
 
@@ -130,5 +131,23 @@ class FiexdAssetsReceivedController extends Controller
         return json_encode(array(
             "statusCode" => 200,
         ));
+    }
+
+    public function UpdateFixedAssetsReceivedUpload(UpdateFixedAssetsReceivedUpload $request)
+    {
+        if ($request->hasFile('received_file')) {
+            $file = $request->received_file;
+            $original_name = $file->getClientOriginalName();
+            $received_files = $file->move('public/fixed_assets_voucher', date('Y-m-d-H-i-s-') . $original_name);
+
+            // $received_file = $request->file('received_file');
+            // $received_files = $received_file->store('public/received_files');
+        }
+
+        $id = $request->fixed_assets_buy_request_id;
+        $fixed_assets_buy = FixedAssetsBuyRequest::findOrFail($id);
+        $fixed_assets_buy->received_files = $received_files ?? '';
+        $fixed_assets_buy->update();
+        return redirect()->back()->with('success', 'Your processing has been completed.');
     }
 }

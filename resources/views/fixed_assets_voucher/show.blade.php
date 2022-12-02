@@ -9,12 +9,14 @@
             <table class="table table-bordered">
                 <thead class="tbbg">
                     <tr>
-                        <th style="color: white">#</th>
-                        <th style="color: white">File Name</th>
-                        <th style="color: white">Download</th>
-                        <th style="color: white">Remark</th>
-                        <th style="color: white">Upload Date</th>
-                        <th style="color: white">Upload By</th>
+                        <th style="color: white; width: 1%;">#</th>
+                        <th style="color: white; width: 1%;">Approval Qty</th>
+                        <th style="color: white; width: 10%;">Approval Date</th>
+                        <th style="color: white; width: 10%;">File Name</th>
+                        <th style="color: white; width: 10%;">Download</th>
+                        <th style="color: white; width: 10%;">Remark</th>
+                        <th style="color: white; width: 10%;">Upload Date</th>
+                        <th style="color: white; width: 10%;">Upload By</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -24,8 +26,17 @@
                                 {{ $key + 1 }}
                             </td>
 
+                            <td style="text-align: right">
+                                {{ $value->fixed_assets_buy_requests_table->received_qty ?? '' }}
+                            </td>
+
                             <td>
-                                <strong>{{ $value->original_name }}</strong>
+                                {{ $value->fixed_assets_buy_requests_table->approval_date ?? '' }}
+                            </td>
+
+                            <td>
+                                <img src="{{ asset($value->voucher) }}" alt="" data-enlargeable=""
+                                    style="width: 70px; height: 70px;">
                             </td>
 
                             <td>
@@ -48,6 +59,8 @@
                                 <i class="fa fa-user fa-lg text-success"></i>
                                 <strong>{{ $value->users_table->name ?? '' }}</strong>
                             </td>
+
+
 
                         </tr>
                     @endforeach

@@ -11,4 +11,9 @@ class FixedAssetsVoucher extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function fixed_assets_buy_requests_table()
+    {
+        return $this->belongsTo(FixedAssetsBuyRequest::class, 'fixed_assets_buy_request_id', 'id');
+    }
 }

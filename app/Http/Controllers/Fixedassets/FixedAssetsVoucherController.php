@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fixedassets;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFixedAssetsVouchers;
 use App\Models\FixedAssets;
+use App\Models\FixedAssetsBuyRequest;
 use App\Models\FixedAssetsVoucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -51,6 +52,7 @@ class FixedAssetsVoucherController extends Controller
                 $insert[$key]['fixed_asset_id'] = $request->fixed_asset_id ?? 0;
                 $insert[$key]['remark'] = $request->remark;
                 $insert[$key]['voucher_date'] = $request->voucher_date;
+                $insert[$key]['fixed_assets_buy_request_id'] = $request->fixed_assets_buy_request_id;
                 $insert[$key]['user_id'] = auth()->user()->id;
                 $insert[$key]['created_at'] =  date('Y-m-d H:i:s');
                 $insert[$key]['updated_at'] =  date('Y-m-d H:i:s');
@@ -74,7 +76,8 @@ class FixedAssetsVoucherController extends Controller
      */
     public function show($id)
     {
-        $fixed_assets_vouchers = FixedAssetsVoucher::get()->where('fixed_asset_id', $id);
+        $fixed_assets_vouchers = FixedAssetsVoucher::where('fixed_asset_id', $id)
+            ->get();
         return view('fixed_assets_voucher.show', compact('fixed_assets_vouchers'));
     }
 
@@ -115,6 +118,9 @@ class FixedAssetsVoucherController extends Controller
     public function create_voucher($id = null)
     {
         $id = $id;
-        return view('fixed_assets_voucher.create', compact('id'));
+        $fixed_assets_buy_requests = FixedAssetsBuyRequest::where('fixed_asset_id', $id)
+            ->whereNotNull('approval_qty')
+            ->get();
+        return view('fixed_assets_voucher.create', compact('id', 'fixed_assets_buy_requests'));
     }
 }

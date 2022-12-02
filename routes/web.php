@@ -400,6 +400,7 @@ Route::middleware('auth')->group(function () {
     Route::get('fixed_assets_received_create/{id}', 'Fixedassets\FiexdAssetsReceivedController@receivedCreate')->name('fixed_assets_received_create');
     Route::post('update_fixed_assets_received_qty', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedQty')->name('update_fixed_assets_received_qty');
     Route::post('update_fixed_assets_received_remark', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedRemark')->name('update_fixed_assets_received_remark');
+    Route::post('fixed_assets_received_file_upload', 'Fixedassets\FiexdAssetsReceivedController@UpdateFixedAssetsReceivedUpload')->name('fixed_assets_received_file_upload');
 
 
     Route::resource('testing', 'Testing\TestingController');

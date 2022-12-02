@@ -1,24 +1,39 @@
 @extends('layouts.menus.inventory')
 @section('content')
     <div class="row justify-content-center">
-        <style>
-            .preview_images img {
-                width: 100px;
-                height: auto;
-                border: 1px solid #ddd;
-                margin: 7px;
-                object-position: center;
-                background-size: cover;
-            }
-        </style>
         <div class="col-md-6 col-lg-6 col-sm-12">
             <div class="col-xxl">
                 <div class="card mb-4">
                     <h5 class="card-header">Fixed Assets Voucher</h5>
-                    <form class="card-body" autocomplete="off" action="{{ route('fixed_assets_voucher.store') }}"
-                        method="POST" id="create-form" enctype="multipart/form-data">
+                    <form class="card-body" autocomplete="off" action="{{ route('fixed_assets_voucher.store') }}" method="POST"
+                        id="create-form" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" value="{{ $id }}" name="fixed_asset_id">
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label text-sm-end" for="alignment-full-name">
+                                Approval Qty & Date
+                            </label>
+                            <div class="col-sm-9">
+
+                                @if (count($fixed_assets_buy_requests) <= 0)
+                                    <span style="color: red;">
+                                        You don't have any approval.
+                                    </span>
+                                @endif
+
+                                <select name="fixed_assets_buy_request_id" id="" class="form-control">
+                                    @foreach ($fixed_assets_buy_requests as $fixed_assets_buy_request)
+                                        <option value="{{ $fixed_assets_buy_request->id }}">
+                                            {{ $fixed_assets_buy_request->approval_qty ?? '' }}
+                                            @
+                                            {{ $fixed_assets_buy_request->approval_date ?? '' }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label text-sm-end" for="alignment-full-name">File</label>
                             <div class="col-sm-9">
@@ -62,24 +77,4 @@
 
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\StoreFixedAssetsVouchers', '#create-form') !!}
-    <script>
-        $(function() {
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var fileLength = input.files.length;
-                    for (i = 0; i < fileLength; i++) {
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(
-                                imgPreviewPlaceholder);
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#files').on('change', function() {
-                previewImages(this, 'div.preview_images');
-            });
-        });
-    </script>
 @endsection

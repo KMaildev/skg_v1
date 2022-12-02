@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFixedAssetsVouchers extends FormRequest
+class UpdateFixedAssetsReceivedUpload extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class StoreFixedAssetsVouchers extends FormRequest
     public function rules()
     {
         return [
-            'files' => 'required',
-            'fixed_asset_id' => 'required',
             'fixed_assets_buy_request_id' => 'required',
+            'received_file' => 'required',
         ];
     }
 }

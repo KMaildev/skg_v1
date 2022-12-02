@@ -17,16 +17,17 @@
                         <thead class="tbbg">
                             <tr>
                                 <th style="color: white; text-align: center; width: 1%;">#</th>
-                                <th style="color: white; text-align: center; width: 10%;">Item Name</th>
-                                <th style="color: white; text-align: center; width: 10%;">Request Date</th>
-                                <th style="color: white; text-align: center; width: 5%;">Request Qty</th>
-                                <th style="color: white; text-align: center; width: 10%;">Request Remark</th>
-                                <th style="color: white; text-align: center; width: 10%;">Request User</th>
-                                <th style="color: white; text-align: center; width: 5%;">Approval Qty</th>
-                                <th style="color: white; text-align: center; width: 10%;">Approval Remark</th>
-                                <th style="color: white; text-align: center; width: 10%;">Approval Date</th>
-                                <th style="color: white; text-align: center; width: 5%;">Received Qty</th>
-                                <th style="color: white; text-align: center; width: 10%;">Received Remark</th>
+                                <th style="color: white; text-align: center; width: 10%;">Item <br> Name</th>
+                                <th style="color: white; text-align: center; width: 10%;">Request <br> Date</th>
+                                <th style="color: white; text-align: center; width: 5%;">Request <br> Qty</th>
+                                <th style="color: white; text-align: center; width: 10%;">Request <br> Remark</th>
+                                <th style="color: white; text-align: center; width: 10%;">Request <br> User</th>
+                                <th style="color: white; text-align: center; width: 5%;">Approval <br> Qty</th>
+                                <th style="color: white; text-align: center; width: 10%;">Approval <br> Remark</th>
+                                <th style="color: white; text-align: center; width: 10%;">Approval <br> Date</th>
+                                <th style="color: white; text-align: center; width: 5%;">Received <br> Qty</th>
+                                <th style="color: white; text-align: center; width: 10%;">Received <br> Remark</th>
+                                <th style="color: white; text-align: center; width: 10%;">Received <br> File</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -68,29 +69,106 @@
                                         {{ $fixed_assets_buy_request->approval_date ?? '' }}
                                     </td>
 
-                                    <td>
-                                        <input type="text" placeholder="Received Qty"
-                                            style="width: 100%; text-align: right;" class="ReceivedQty"
-                                            data-id="{{ $fixed_assets_buy_request->id }}"
-                                            value="{{ $fixed_assets_buy_request->received_qty ?? '' }}">
+                                    <td style="text-align: right">
+                                        @if ($fixed_assets_buy_request->received_qty == null)
+                                            <input type="text" placeholder="Received Qty"
+                                                style="width: 100%; text-align: right;" class="ReceivedQty"
+                                                data-id="{{ $fixed_assets_buy_request->id }}"
+                                                value="{{ $fixed_assets_buy_request->received_qty ?? '' }}">
+                                        @else
+                                            {{ $fixed_assets_buy_request->received_qty ?? '' }}
+                                        @endif
                                     </td>
 
                                     <td>
-                                        <input type="text" placeholder="Remark" style="width: 100%;"
-                                            class="ReceivedRemark" data-id="{{ $fixed_assets_buy_request->id }}"
-                                            value="{{ $fixed_assets_buy_request->received_remark ?? '' }}">
+                                        @if ($fixed_assets_buy_request->received_remark == null)
+                                            <input type="text" placeholder="Remark" style="width: 100%;"
+                                                class="ReceivedRemark" data-id="{{ $fixed_assets_buy_request->id }}"
+                                                value="{{ $fixed_assets_buy_request->received_remark ?? '' }}">
+                                        @else
+                                            {{ $fixed_assets_buy_request->received_remark ?? '' }}
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($fixed_assets_buy_request->received_files)
+                                            <img src="{{ asset($fixed_assets_buy_request->received_files) }}"
+                                                alt="" data-enlargeable="" style="width: 70px; height: 70px;">
+                                        @else
+                                            <button class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#modalCenter-{{ $fixed_assets_buy_request->id }}">
+                                                Upload
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
+
+                                <div class="col-lg-4 col-md-6">
+                                    <form action="{{ route('fixed_assets_received_file_upload') }}" method="POST"
+                                        id="create-form" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" value="{{ $fixed_assets_buy_request->id }}"
+                                            name="fixed_assets_buy_request_id">
+                                        <div>
+                                            <div class="modal fade" id="modalCenter-{{ $fixed_assets_buy_request->id }}"
+                                                tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalCenterTitle">
+                                                                Received File Upload
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="mb-3">
+                                                                    <input type="hidden"
+                                                                        value="{{ $fixed_assets_buy_request->id }}"
+                                                                        name="fixed_asset_id" required>
+
+                                                                    <input type="file" class="form-control"
+                                                                        name="received_file">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-label-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px;">
+                        <a href="{{ route('fixedassets.index') }}" class="btn btn-primary">
+                            <i class="fa fa-arrow-left"></i>
+                            Back
+                        </a>
+
+                        <a href="" class="btn btn-success">
+                            Confirm
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
+
 @section('script')
+    {!! JsValidator::formRequest('App\Http\Requests\UpdateFixedAssetsReceivedUpload', '#create-form') !!}
     <script>
         var fixed_assets_buy_request_id = 0;
         var received_qty = 0;
