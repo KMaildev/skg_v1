@@ -24,7 +24,10 @@ class EngineerVariableAssetsController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')->where('engineer_id', $user_id)->paginate(50);
+        $eng_request_infos = VariableRequestInfo::with('variable_request_items_table')
+            ->where('engineer_id', $user_id)
+            ->orderBy('id', 'DESC')
+            ->paginate(50);
         return view('engineer.variable_assets.index', compact('eng_request_infos'));
     }
 
@@ -67,8 +70,11 @@ class EngineerVariableAssetsController extends Controller
 
         $variable_asset = new VariableRequestInfo();
         $variable_asset->code = $increment;
-        $variable_asset->date = $request->date;
-        $variable_asset->need_date = $request->need_date;
+
+        $variable_asset->date = date('Y-m-d H:i a'); //$request->date;
+        $variable_asset->need_date = date('Y-m-d H:i a', strtotime(' +2 day')); //$request->need_date;
+
+
         $variable_asset->customer_id = $request->customer_id;
         $variable_asset->engineer_id = $user_id;
 

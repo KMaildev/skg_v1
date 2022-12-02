@@ -142,14 +142,16 @@
                                         </select>
 
                                         @error('work_scope_id')
-                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" hidden>
                                 <div class="row">
                                     <div class="">
                                         <label class="form-label" for="flatpickr-human-friendly"
@@ -163,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" hidden>
                                 <div class="row">
                                     <div class="">
                                         <label class="form-label" for="flatpickr-human-friendly"
@@ -182,7 +184,7 @@
                                     <div class="">
                                         <label class="form-label" for="flatpickr-human-friendly"
                                             style="font-weight: bold">Remark</label>
-                                        <input type="text" class="form-control"  name="remark" />
+                                        <input type="text" class="form-control" name="remark" />
                                         @error('remark')
                                             <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror

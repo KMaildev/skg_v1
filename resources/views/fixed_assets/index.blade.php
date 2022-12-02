@@ -146,17 +146,17 @@
                                                     </a>
                                                 </li>
                                                 @can('fixed_assets_delete')
-                                                <li>
-                                                    <form action="{{ route('fixedassets.destroy', $fixed_asset->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="dropdown-item del_confirm"
-                                                            id="confirm-text" data-toggle="tooltip">
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </li>
+                                                    <li>
+                                                        <form action="{{ route('fixedassets.destroy', $fixed_asset->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="dropdown-item del_confirm"
+                                                                id="confirm-text" data-toggle="tooltip">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </li>
                                                 @endcan
                                             </ul>
                                         </div>
@@ -164,7 +164,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>
