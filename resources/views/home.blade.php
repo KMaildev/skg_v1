@@ -219,7 +219,7 @@
 
 
                 <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
-                    <a href="{{ route('weekly_photo.index') }}">
+                    <a href="{{ route('elfinder.index') }}">
                         <div class="card">
                             <div class="card-body text-center">
                                 <div class="avatar avatar-md mx-auto mb-3">
@@ -264,10 +264,9 @@
                         </div>
                     </a>
                 </div>
-
             </div>
 
-            <div class="row py-5">
+            <div class="row py-5" hidden>
                 <div class="col-md-12">
                     <a href="{{ asset('application/skg.apk') }}" download="">
                         Download Android App for <span style="color: red">Engineer</span>

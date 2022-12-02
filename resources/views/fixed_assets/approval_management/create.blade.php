@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered table-sm" id="export_excel">
+                    <table class="table table-bordered table-sm" id="export_excel" style="margin-bottom: 10px;">
                         <thead class="tbbg">
                             <tr>
                                 <th style="color: white; text-align: center; width: 1%;">#</th>
@@ -92,9 +92,14 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <a href="">
-                        
-                    </a>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px;">
+                        <a href="" class="btn btn-success">
+                            Confirm
+                        </a>
+                    </div>
+
+                    <br>
                 </div>
             </div>
         </div>
