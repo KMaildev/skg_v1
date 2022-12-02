@@ -82,7 +82,7 @@
                                             $received_qty = $fixed_asset->fixed_assets_buy_requests_table->sum('received_qty');
                                             $fixed_asset_qty = $fixed_asset->qty;
                                             $total_fixed_asset_qty = $received_qty + $fixed_asset_qty;
-                                            echo number_format($total_fixed_asset_qty, 2);
+                                            echo number_format($total_fixed_asset_qty);
                                             $all_total_fixed_asset_qty[] = $total_fixed_asset_qty;
                                         @endphp
                                     </td>
@@ -164,15 +164,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        <tr>
-                            <th colspan="3">Total</th>
-                            <th style="text-align: center; font-weight: bold">
-                                @php
-                                    $all_total_fixed_asset_qty = array_sum($all_total_fixed_asset_qty);
-                                    echo number_format($all_total_fixed_asset_qty, 2);
-                                @endphp
-                            </th>
-                        </tr>
+                        
                     </table>
                 </div>
             </div>

@@ -11,6 +11,7 @@
         display: table-header-group !important;
     }
     
+    
 </style>
 <div class="" style="width: 100%; background-color: white;">
     <div class="py-5 tableFixHead">
@@ -66,6 +67,7 @@
                 {
                     data: 'work_scope',
                     name: 'work_scope',
+                    class: 'work_scope_p',
                 },
                 {
                     data: 'date',

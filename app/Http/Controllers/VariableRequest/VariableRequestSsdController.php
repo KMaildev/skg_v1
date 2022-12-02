@@ -59,12 +59,15 @@ class VariableRequestSsdController extends Controller
                 $project_code = $each->customer_table ? $each->customer_table->project_code : '';
                 return $customer_name . '@' . $project_code;
             })
-
+            
             ->editColumn('work_scope', function ($each) {
                 $html = '';
                 $html .= $each->work_scope;
+                
                 return $html;
             })
+
+     
 
             ->editColumn('request_item', function ($each) {
                 $html = '';

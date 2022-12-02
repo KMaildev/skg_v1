@@ -22,12 +22,14 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::query();
+        $employees = User::where('is_banned', 1)->orderBy('id', 'ASC')->get();
         if (request('q')) {
-            $employees->where('name', 'Like', '%' . request('q') . '%');
-            $employees->orWhere('employee_id', 'Like', '%' . request('q') . '%');
+            $employees = User::where('is_banned', 1)
+            ->where('name', 'Like', '%' . request('q') . '%')
+            ->orWhere('employee_id', 'Like', '%' . request('q') . '%')
+            ->orderBy('id', 'ASC')
+            ->get();
         }
-        $employees = $employees->orderBy('id', 'ASC')->get();
 
         return view('employee.index', compact('employees'));
     }

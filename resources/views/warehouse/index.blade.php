@@ -17,16 +17,16 @@
                             <table class="table table-bordered main-table">
                                 <thead class="tbbg">
                                     <tr>
-                                        <th style="background-color: #296166; color: white; width: 1%">#</th>
-                                        <th style="background-color: #296166; color: white; width: 14%">Items Name</th>
-                                        <th style="background-color: #296166; color: white; width: 14%">Main Warehouse</th>
-                                        <th style="background-color: #296166; color: white; width: 14%">
+                                        <th style="background-color: #296166; color: white; width: 1%; text-align: center;">#</th>
+                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Items Name</th>
+                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Main Warehouse</th>
+                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">
                                             {{-- Request Total --}}
                                             Site On Hand [Total]
                                         </th>
-                                        <th style="background-color: #296166; color: white; width: 14%">Return [Total]</th>
-                                        <th style="background-color: #296166; color: white; width: 14%">Remaining Balance</th>
-                                        <th style="background-color: #296166; color: white; width: 14%">Action</th>
+                                        <th style="background-color: #296166; color: white; width: 14%" hidden>Return [Total]</th>
+                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Remaining Balance</th>
+                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mytbody">
@@ -37,7 +37,7 @@
                                     @endphp
                                     @foreach ($fixed_assets as $key => $fixed_asset)
                                         <tr>
-                                            <td>
+                                            <td style="text-align: center;">
                                                 {{ $key + 1 }}
                                             </td>
 
@@ -46,12 +46,12 @@
                                             </td>
 
                                             {{-- Main Warehouse --}}
-                                            <td style="font-weight: bold;">
+                                            <td style="font-weight: bold; text-align: center;">
                                                 {{ $fixed_asset->qty }}
                                             </td>
 
                                             {{-- Site On Hand --}}
-                                            <td style="font-weight: bold;">
+                                            <td style="font-weight: bold; text-align: center;">
                                                 {{-- {{ $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty') }} --}}
                                                 @php
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
@@ -65,7 +65,7 @@
                                             </td>
 
                                             {{-- Return [Total] --}}
-                                            <td style="font-weight: bold;">
+                                            <td style="font-weight: bold;" hidden>
                                                 @php
                                                     $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
                                                     echo number_format($return);
@@ -74,7 +74,7 @@
                                             </td>
 
                                             {{-- Remaining Balance --}}
-                                            <td style="font-weight: bold;">
+                                            <td style="font-weight: bold; text-align: center;">
                                                 @php
                                                     $main_warehouse = $fixed_asset->qty;
                                                     $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
@@ -104,36 +104,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tr>
-                                    <th colspan="2">Total</th>
-                                    {{-- Main Warehouse --}}
-                                    <th style="text-align: right; font-weight: bold">
-                                        {{ number_format($fixed_assets->sum('qty')) }}
-                                    </th>
-
-                                    {{-- Site On Hand [Total] --}}
-                                    <th style="text-align: right; font-weight: bold">
-                                        @php
-                                            echo number_format(array_sum($site_on_hand_total));
-                                        @endphp
-                                    </th>
-
-                                    {{-- Return [Total] --}}
-                                    <th style="text-align: right; font-weight: bold">
-                                        @php
-                                            echo number_format(array_sum($return_total));
-                                        @endphp
-                                    </th>
-
-                                    {{-- Remaining Balance --}}
-                                    <th style="text-align: right; font-weight: bold">
-                                        @php
-                                            echo number_format(array_sum($remaining_balance_total));
-                                        @endphp
-                                    </th>
-
-                                    <th></th>
-                                </tr>
+            
                             </table>
                         </div>
                     </div>

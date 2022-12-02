@@ -364,7 +364,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('work_scope', 'Bq\WorkScopeController');
 
 
-    // No 
+    // No Using 
     Route::post('add_variable_bq_temporaries', 'General\VariableBqTemporaryController@store');
     Route::get('get_variable_bq_temporaries', array('as' => 'get_variable_bq_temporaries', 'uses' => 'General\VariableBqTemporaryController@index'));
     Route::get('remove_variable_bq_temporaries/{id}', array('as' => 'remove_variable_bq_temporaries', 'uses' => 'General\VariableBqTemporaryController@remove_variable_assets_temporarie'));

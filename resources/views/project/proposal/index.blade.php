@@ -64,17 +64,21 @@
                                 @can('structure_design_fees_view')
                                     <th
                                         style="color: white; text-align: center; width: 16%; background-color: #2e696e !important">
-                                        Structure Design Fees</th>
+                                        <!--Structure Design Fees-->
+                                        Variation Work Order
+                                    </th>
                                 @endcan
 
                                 <th
-                                    style="color: white; text-align: center; width: 16%; background-color: #2e696e !important">
+                                    style="color: white; text-align: center; width: 16%; background-color: #2e696e !important" hidden>
                                     No Fees but Allowed</th>
 
                                 @can('archi_exterior_design_view')
                                     <th
                                         style="color: white; text-align: center; width: 16%; background-color: #2e696e !important">
-                                        Archi Exterior Design</th>
+                                        <!--Archi Exterior Design-->
+                                        Additional Work
+                                    </th>
                                 @endcan
 
                                 @can('structure_design_view')
@@ -163,7 +167,7 @@
                                     @endcan
 
                                     {{-- approved_by --}}
-                                    <td style="text-align: center; font-size: 13px;">
+                                    <td style="text-align: center; font-size: 13px;" hidden>
                                         @include('shared.project_status.approved_by', [
                                             'project' => $project,
                                         ])
