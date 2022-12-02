@@ -94,6 +94,12 @@
                     </table>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px;">
+
+                        <a href="{{ route('fixedassets.index') }}" class="btn btn-primary">
+                            <i class="fa fa-arrow-left"></i>
+                            Back
+                        </a>
+
                         <a href="" class="btn btn-success">
                             Confirm
                         </a>
