@@ -24,6 +24,7 @@
                                 <th style="color: white; text-align: center; width: 10%;">Request User</th>
                                 <th style="color: white; text-align: center; width: 5%;">Approval Qty</th>
                                 <th style="color: white; text-align: center; width: 10%;">Approval Remark</th>
+                                <th style="color: white; text-align: center; width: 5%;">Status</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -53,22 +54,47 @@
                                         {{ $fixed_assets_buy_request->user_table->name ?? '' }}
                                     </td>
 
-                                    <td>
-                                        <input type="text" placeholder="Approval Qty"
-                                            style="width: 100%; text-align: right;" class="ApprovalQty"
-                                            data-id="{{ $fixed_assets_buy_request->id }}"
-                                            value="{{ $fixed_assets_buy_request->approval_qty ?? '' }}">
+                                    <td style="text-align: right">
+                                        @if ($fixed_assets_buy_request->approval_qty == null)
+                                            <input type="text" placeholder="Approval Qty"
+                                                style="width: 100%; text-align: right;" class="ApprovalQty"
+                                                data-id="{{ $fixed_assets_buy_request->id }}"
+                                                value="{{ $fixed_assets_buy_request->approval_qty ?? '' }}">
+                                        @else
+                                            {{ $fixed_assets_buy_request->approval_qty ?? '' }}
+                                        @endif
                                     </td>
 
                                     <td>
-                                        <input type="text" placeholder="Remark" style="width: 100%;"
-                                            class="ApprovalRemark" data-id="{{ $fixed_assets_buy_request->id }}"
-                                            value="{{ $fixed_assets_buy_request->approval_remark ?? '' }}">
+                                        @if ($fixed_assets_buy_request->approval_remark == null)
+                                            <input type="text" placeholder="Remark" style="width: 100%;"
+                                                class="ApprovalRemark" data-id="{{ $fixed_assets_buy_request->id }}"
+                                                value="{{ $fixed_assets_buy_request->approval_remark ?? '' }}">
+                                        @else
+                                            {{ $fixed_assets_buy_request->approval_remark ?? '' }}
+                                        @endif
+                                    </td>
+
+                                    <td style="text-align: center">
+                                        @if ($fixed_assets_buy_request->approval_qty == null)
+                                            <span class="badge bg-danger">
+                                                <i class="fa fa-x"></i>
+                                                Pending
+                                            </span>
+                                        @else
+                                            <span class="badge bg-success">
+                                                <i class="fa fa-check-double"></i>
+                                                Done
+                                            </span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <a href="">
+                        
+                    </a>
                 </div>
             </div>
         </div>
@@ -87,13 +113,6 @@
                 return false;
             }
             updateFixedAssetsBuyRequestsQty()
-        });
-
-        var approval_remark = '';
-        $(document).on("keyup", ".ApprovalRemark", function() {
-            fixed_assets_buy_request_id = $(this).data('id');
-            approval_remark = $(this).val();
-            updateFixedAssetsBuyRequestsQtyRemark()
         });
 
         function updateFixedAssetsBuyRequestsQty() {
@@ -119,6 +138,15 @@
                 }
             });
         }
+
+
+
+        var approval_remark = '';
+        $(document).on("keyup", ".ApprovalRemark", function() {
+            fixed_assets_buy_request_id = $(this).data('id');
+            approval_remark = $(this).val();
+            updateFixedAssetsBuyRequestsQtyRemark()
+        });
 
         function updateFixedAssetsBuyRequestsQtyRemark() {
             var url = '{{ url('update_fixed_assets_approval_remark') }}';
