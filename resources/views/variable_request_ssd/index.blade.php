@@ -234,7 +234,7 @@
                 }
             });
         });
-        
+
 
         // Submit Management Show Accept Reject 
         $('.management_accept_reject_ajax_save').submit(function(e) {

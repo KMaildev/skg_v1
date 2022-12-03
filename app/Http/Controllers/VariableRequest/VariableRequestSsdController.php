@@ -8,6 +8,7 @@ use App\Models\VariablePayment;
 use App\Models\VariableRequestInfo;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Str;
 
 
 class VariableRequestSsdController extends Controller
@@ -59,8 +60,16 @@ class VariableRequestSsdController extends Controller
 
             ->editColumn('work_scope', function ($each) {
                 $html = '';
-                $html .= $each->work_scope;
-
+                // $html .= $each->work_scope;
+                $html .=  Str::substr($each->work_scope, 0, 20);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 20, 40);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 40, 60);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 60, 80);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 80, 100);
                 return $html;
             })
 
