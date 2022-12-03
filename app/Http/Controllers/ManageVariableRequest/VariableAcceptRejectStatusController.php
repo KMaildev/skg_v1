@@ -148,7 +148,6 @@ class VariableAcceptRejectStatusController extends Controller
         // $info = VariableRequestInfo::findOrFail($id);
         // $remark = $info->accept_reject_remark ?? '';
 
-
         $request_info = VariableRequestInfo::findOrFail($id);
         $request_info->accept_reject_status = $request->value;
         $request_info->accept_reject_date = date('Y-m-d H:i:sa');

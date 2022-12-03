@@ -93,7 +93,6 @@ class VariableRequestSsdController extends Controller
                             </label>
                         </div>
                         
-                        
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '"  value="reject" onclick="javascript: return false;">
                             <label class="form-check-label" for="reject_' . $id . '">
@@ -134,7 +133,6 @@ class VariableRequestSsdController extends Controller
                             </label>
                         </div>';
                 }
-
 
                 $html .= '
                     <br>
@@ -236,73 +234,77 @@ class VariableRequestSsdController extends Controller
                 return $html;
             })
 
-            ->editColumn('management_accept_reject_status', function ($each) {
 
+            ->editColumn('management_accept_reject_status', function ($each) {
+                $remark = $each->manage_accept_reject_remark;
                 $management_accept_reject_status = ucfirst($each->management_accept_reject_status);
                 $management_accept_reject_date = $each->management_accept_reject_date;
                 $id = $each->id;
 
                 $html = '';
 
-                if (auth()->user()->can('management_accept_reject')) {
-                    $manage_permission_accept_reject = 'ManagementAssetRejectShowModel';
-                } else {
-                    $manage_permission_accept_reject = 'permission_denied';
-                }
-
                 if ($each->management_accept_reject_status == 'accept') {
                     $html .= '
-                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>' . $management_accept_reject_status . '</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-success" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px;">
-                                ' . $management_accept_reject_date . '
-                                </span>
-                            </div>
-                        </a>
-                        ';
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="manage_accept_' . $id . '"  value="accept" checked onclick="javascript: return false;">
+                            <label class="form-check-label" for="manage_accept_' . $id . '">
+                                Accept
+                            </label>
+                        </div>
+                        
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="manage_reject_' . $id . '"  value="reject" onclick="javascript: return false;">
+                            <label class="form-check-label" for="manage_reject_' . $id . '">
+                                Reject
+                            </label>
+                        </div>';
                 } else if ($each->management_accept_reject_status == 'reject') {
                     $html .= '
-                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>' . $management_accept_reject_status . '</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-danger" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px;">
-                                ' . $management_accept_reject_date . '
-                                </span>
-                            </div>
-                        </a>
-                        ';
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="manage_accept_' . $id . '"  value="accept" onclick="javascript: return false;">
+                            <label class="form-check-label" for="manage_accept_' . $id . '">
+                                Accept
+                            </label>
+                        </div>
+                        
+                        
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="manage_reject_' . $id . '"  value="reject" checked onclick="javascript: return false;">
+                            <label class="form-check-label" for="manage_reject_' . $id . '">
+                                Reject
+                            </label>
+                        </div>';
                 } else {
+
                     $html .= '
-                        <a class="' . $manage_permission_accept_reject . '" href="#" id="' . $manage_permission_accept_reject . '" data-id="' . $id . '">
-                            <div class="d-flex flex-column w-100">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>Unknown</span>
-                                </div>
-                                <div class="progress" style="height: 3px;">
-                                    <div class="progress-bar bg-danger" style="width: 100%" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="100" aria-valuemax="100"></div>
-                                </div>
-                                <span style="font-size: 12px;">
-                                </span>
-                            </div>
-                        </a>
-                        ';
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="manageaccept_' . $id . '" onclick="updateManageAcceptRejectStatus(this);" value="accept">
+                            <label class="form-check-label" for="manageaccept_' . $id . '">
+                                Accept
+                            </label>
+                        </div>
+                        
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="manage_accept_reject_status_' . $id . '" id="managereject_' . $id . '" onclick="updateManageAcceptRejectStatus(this);" value="reject">
+                            <label class="form-check-label" for="managereject_' . $id . '">
+                                Reject
+                            </label>
+                        </div>';
                 }
+
+                $html .= '
+                    <br>
+                    <input type="text" placeholder="Remark" value="' . $remark . '" class="updateManageAcceptRejectRemark" data-id="' . $id . '"/>
+                    <br>
+                    <span style="font-size: 12px;">
+                        ' . $management_accept_reject_date . '
+                    </span>
+                ';
+
                 return $html;
             })
+
+
 
             ->editColumn('logistics_team_send_status', function ($each) {
 

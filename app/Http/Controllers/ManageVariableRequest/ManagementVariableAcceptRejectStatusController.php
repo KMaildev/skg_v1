@@ -121,4 +121,44 @@ class ManagementVariableAcceptRejectStatusController extends Controller
             "statusCode" => 200
         ));
     }
+
+
+
+    public function updateManageAcceptRejectStatus(Request $request)
+    {
+        $id = $request->id;
+        $value = $request->value;
+
+        // $info = VariableRequestInfo::findOrFail($id);
+        // $remark = $info->accept_reject_remark ?? '';
+
+        $request_info = VariableRequestInfo::findOrFail($id);
+        $request_info->management_accept_reject_status = $request->value;
+        $request_info->management_accept_reject_date = date('Y-m-d H:i:sa');
+        $request_info->update();
+
+
+        $accept_reject = new ManagementVariableAcceptRejectStatus();
+        $accept_reject->user_id = auth()->user()->id;
+        $accept_reject->management_accept_reject_status = $value;
+        $accept_reject->management_accept_reject_date = date('Y-m-d H:i:sa');
+        $accept_reject->variable_request_info_id = $id;
+        $accept_reject->remark = $remark ?? '';
+        $accept_reject->save();
+        return json_encode(array(
+            "statusCode" => 200,
+        ));
+    }
+
+    public function updateManageAcceptRejectRemark(Request $request)
+    {
+        $id = $request->id;
+        $value = $request->value;
+        $temp = VariableRequestInfo::findOrFail($id);
+        $temp->manage_accept_reject_remark = $value;
+        $temp->update();
+        return json_encode(array(
+            "statusCode" => 200,
+        ));
+    }
 }

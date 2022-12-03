@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FixedAssetsController;
 use App\Http\Controllers\Inventory\VariableAssetsController;
+use App\Http\Controllers\ManageVariableRequest\ManagementVariableAcceptRejectStatusController;
 use App\Http\Controllers\ManageVariableRequest\VariableAcceptRejectStatusController;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Auth;
@@ -99,6 +100,10 @@ Route::middleware('auth')->group(function () {
         'as' => 'save_management_reject',
         'uses' => 'ManageVariableRequest\ManagementVariableAcceptRejectStatusController@save_management_variable_accept_reject'
     ]);
+    Route::get('manage_variable_accept_reject_remark', [ManagementVariableAcceptRejectStatusController::class, 'updateManageAcceptRejectRemark'])->name('manage_variable_accept_reject_remark');
+    Route::get('manage_variable_accept_reject_status', [ManagementVariableAcceptRejectStatusController::class, 'updateManageAcceptRejectStatus'])->name('manage_variable_accept_reject_status');
+
+
 
     Route::resource('variable_actual_voucher', 'ManageVariableRequest\VariableActualVoucherController');
     Route::get('variable_actual_voucher_upload/{id}', [

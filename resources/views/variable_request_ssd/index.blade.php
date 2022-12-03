@@ -10,8 +10,6 @@
     tfoot {
         display: table-header-group !important;
     }
-    
-    
 </style>
 <div class="" style="width: 100%; background-color: white;">
     <div class="py-5 tableFixHead">
@@ -44,7 +42,9 @@
             ajax: {
                 url: "{{ route('get_variable_request_ssd') }}",
             },
-            lengthMenu: [50, 100, 250, 350, 450, 550, 650, 750, 850, 950, 1100, 1200, 1300, 1500, 1700, 1900, 2000],
+            lengthMenu: [50, 100, 250, 350, 450, 550, 650, 750, 850, 950, 1100, 1200, 1300, 1500, 1700,
+                1900, 2000
+            ],
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -234,6 +234,7 @@
                 }
             });
         });
+        
 
         // Submit Management Show Accept Reject 
         $('.management_accept_reject_ajax_save').submit(function(e) {
