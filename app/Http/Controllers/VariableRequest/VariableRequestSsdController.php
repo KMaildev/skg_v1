@@ -27,11 +27,9 @@ class VariableRequestSsdController extends Controller
     public function getVariableRequest(Request $request)
     {
         $data = VariableRequestInfo::with('user_table', 'customer_table')
-            // ->where('accept_reject_status', 'accept')
+            ->where('accept_reject_status', 'accept')
+            ->orWhere('accept_reject_status', NULL)
             ->orderBy('id', 'DESC');
-        // ->whereIn('accept_reject_status', ['accept', NULL]);
-        // ->where('accept_reject_status', 'accept')
-        // ->orWhere('accept_reject_status', NULL);
 
         return Datatables::of($data)
 
@@ -86,28 +84,27 @@ class VariableRequestSsdController extends Controller
                 $id = $each->id;
                 $html = '';
 
-
                 if ($each->accept_reject_status == 'accept') {
                     $html .= '
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept" checked>
-                        <label class="form-check-label" for="accept_' . $id . '">
-                            Accept
-                        </label>
-                    </div>
-                    
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject">
-                        <label class="form-check-label" for="reject_' . $id . '">
-                            Reject
-                        </label>
-                    </div>';
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '"  value="accept" checked onclick="javascript: return false;">
+                            <label class="form-check-label" for="accept_' . $id . '">
+                                Accept
+                            </label>
+                        </div>
+                        
+                        
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '"  value="reject" onclick="javascript: return false;">
+                            <label class="form-check-label" for="reject_' . $id . '">
+                                Reject
+                            </label>
+                        </div>';
                 } else if ($each->accept_reject_status == 'reject') {
 
                     $html .= '
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '"  value="accept" onclick="javascript: return false;">
                         <label class="form-check-label" for="accept_' . $id . '">
                             Accept
                         </label>
@@ -115,28 +112,27 @@ class VariableRequestSsdController extends Controller
                     
                     
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject" checked>
+                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '"  value="reject" checked onclick="javascript: return false;">
                         <label class="form-check-label" for="reject_' . $id . '">
                             Reject
                         </label>
                     </div>';
                 } else {
-
                     $html .= '
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
-                        <label class="form-check-label" for="accept_' . $id . '">
-                            Accept
-                        </label>
-                    </div>
-                    
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject">
-                        <label class="form-check-label" for="reject_' . $id . '">
-                            Reject
-                        </label>
-                    </div>';
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
+                            <label class="form-check-label" for="accept_' . $id . '">
+                                Accept
+                            </label>
+                        </div>
+                        
+                        
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="reject">
+                            <label class="form-check-label" for="reject_' . $id . '">
+                                Reject
+                            </label>
+                        </div>';
                 }
 
 

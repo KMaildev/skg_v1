@@ -45,7 +45,10 @@
                                     </td>
                                     <td style="text-align: center;">
                                         @foreach ($value->permissions as $permission)
-                                            <span class="badge bg-primary">{{ $permission->name }}</span>
+                                            <span class="badge bg-primary">
+                                                {{ $permission->name }}
+                                            </span>
+                                            <br> <br>
                                         @endforeach
                                     </td>
 

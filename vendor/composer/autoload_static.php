@@ -801,6 +801,7 @@ class ComposerStaticInita824448a002a3fe67d28a9c81a6aa012
         'App\\Http\\Requests\\UpdateFixedAssetsApproval' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateFixedAssetsApproval.php',
         'App\\Http\\Requests\\UpdateFixedAssetsPurchase' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateFixedAssetsPurchase.php',
         'App\\Http\\Requests\\UpdateFixedAssetsReceived' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateFixedAssetsReceived.php',
+        'App\\Http\\Requests\\UpdateFixedAssetsReceivedUpload' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateFixedAssetsReceivedUpload.php',
         'App\\Http\\Requests\\UpdateLabour' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateLabour.php',
         'App\\Http\\Requests\\UpdateMainWarehouse' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateMainWarehouse.php',
         'App\\Http\\Requests\\UpdateMaterial' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateMaterial.php',

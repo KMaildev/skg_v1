@@ -8,12 +8,6 @@
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Permission</h5>
                         <div class="card-title-elements ms-auto">
-                            <div class="card-header-elements ms-auto">
-                                <input type="text" class="form-control form-control-sm" placeholder="Search" />
-                            </div>
-
-                            @include('layouts.includes.export')
-
                             <a href="{{ route('permission.create') }}" class="dt-button create-new btn btn-primary btn-sm">
                                 <span>
                                     <i class="bx bx-plus me-sm-2"></i>
@@ -30,6 +24,7 @@
                             <tr>
                                 <th style="color: white; text-align: center; width: 1%;">#</th>
                                 <th style="color: white; text-align: center;">Name</th>
+                                <th style="color: white; text-align: center;">Status</th>
                                 <th style="color: white; text-align: center;">Actions</th>
                             </tr>
                         </thead>
@@ -39,8 +34,13 @@
                                     <td style="text-align: center;">
                                         {{ $key + 1 }}
                                     </td>
+
                                     <td style="text-align: center;">
                                         {{ $value->name }}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{ $value->status ?? '' }}
                                     </td>
 
                                     <td style="text-align: center;">

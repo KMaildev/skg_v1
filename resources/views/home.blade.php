@@ -4,7 +4,7 @@
         <div class="col-md-8 col-sm-12 col-lg-8">
             <div class="row">
 
-                @can('accept_inventory_module')
+                @can('warehouse_module')
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
                         <a href="{{ route('managerequest.index') }}">
                             <div class="card">
