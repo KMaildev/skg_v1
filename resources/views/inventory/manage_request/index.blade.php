@@ -120,8 +120,8 @@
                                     </td>
 
                                     {{-- Accept / Reject --}}
-                                    <td style="text-align: center;">
-                                        @include('shared.managerequest.accept_reject_status', [
+                                    <td>
+                                        @include('shared.managerequest.accept_reject_status_update', [
                                             'request_info' => $request_info,
                                         ])
                                     </td>

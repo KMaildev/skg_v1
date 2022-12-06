@@ -774,6 +774,7 @@ class ComposerStaticInita824448a002a3fe67d28a9c81a6aa012
         'App\\Http\\Requests\\StoreQsTeamCheck' => __DIR__ . '/../..' . '/app/Http/Requests/StoreQsTeamCheck.php',
         'App\\Http\\Requests\\StoreQuotationProposal' => __DIR__ . '/../..' . '/app/Http/Requests/StoreQuotationProposal.php',
         'App\\Http\\Requests\\StoreReceivedByEngineer' => __DIR__ . '/../..' . '/app/Http/Requests/StoreReceivedByEngineer.php',
+        'App\\Http\\Requests\\StoreReceivedByEngineerValidate' => __DIR__ . '/../..' . '/app/Http/Requests/StoreReceivedByEngineerValidate.php',
         'App\\Http\\Requests\\StoreRequestInfo' => __DIR__ . '/../..' . '/app/Http/Requests/StoreRequestInfo.php',
         'App\\Http\\Requests\\StoreRetrunQsTeamCheckPasses' => __DIR__ . '/../..' . '/app/Http/Requests/StoreRetrunQsTeamCheckPasses.php',
         'App\\Http\\Requests\\StoreRole' => __DIR__ . '/../..' . '/app/Http/Requests/StoreRole.php',

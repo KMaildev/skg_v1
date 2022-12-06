@@ -191,6 +191,7 @@ return array(
     'App\\Http\\Requests\\StoreQsTeamCheck' => $baseDir . '/app/Http/Requests/StoreQsTeamCheck.php',
     'App\\Http\\Requests\\StoreQuotationProposal' => $baseDir . '/app/Http/Requests/StoreQuotationProposal.php',
     'App\\Http\\Requests\\StoreReceivedByEngineer' => $baseDir . '/app/Http/Requests/StoreReceivedByEngineer.php',
+    'App\\Http\\Requests\\StoreReceivedByEngineerValidate' => $baseDir . '/app/Http/Requests/StoreReceivedByEngineerValidate.php',
     'App\\Http\\Requests\\StoreRequestInfo' => $baseDir . '/app/Http/Requests/StoreRequestInfo.php',
     'App\\Http\\Requests\\StoreRetrunQsTeamCheckPasses' => $baseDir . '/app/Http/Requests/StoreRetrunQsTeamCheckPasses.php',
     'App\\Http\\Requests\\StoreRole' => $baseDir . '/app/Http/Requests/StoreRole.php',

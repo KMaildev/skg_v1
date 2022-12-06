@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FixedAssetsController;
+use App\Http\Controllers\Inventory\AcceptRejectStatusController;
 use App\Http\Controllers\Inventory\VariableAssetsController;
 use App\Http\Controllers\ManageVariableRequest\ManagementVariableAcceptRejectStatusController;
 use App\Http\Controllers\ManageVariableRequest\VariableAcceptRejectStatusController;
@@ -243,6 +244,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('accept_reject_status', 'Inventory\AcceptRejectStatusController');
+    Route::get('fixed_assets_accept_reject_remark', [AcceptRejectStatusController::class, 'updateFixedAssetsAcceptRejectRemark'])->name('fixed_assets_accept_reject_remark');
+    Route::get('fixed_assets_accept_reject_status', [AcceptRejectStatusController::class, 'fixedAssetsAcceptRejectStatus'])->name('fixed_assets_accept_reject_status');
+
     Route::resource('qs_team_check', 'Inventory\QsTeamCheckController');
     Route::get('qs_team_check_create/{id}', [
         'as' => 'qs_team_check_create',
