@@ -308,6 +308,11 @@ Route::middleware('auth')->group(function () {
         'uses' => 'Engineer\VariableReceivedByEngineerController@store_received_by_engineer'
     ]);
 
+    Route::get('variable_received_by_engineer_admin/{id}', [
+        'as' => 'variable_received_by_engineer_admin',
+        'uses' => 'Engineer\VariableReceivedByEngineerController@show_for_admin'
+    ]);
+
 
     Route::resource('weekly_photo', 'Engineer\WeeklyPhotoController');
 

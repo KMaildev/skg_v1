@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Engineer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreReceivedByEngineerValidate;
 use App\Http\Requests\VariableStoreReceivedByEngineer;
 use App\Models\VariableQsTeamCheck;
 use App\Models\VariableReceivedByEngineer;
@@ -61,7 +62,7 @@ class VariableReceivedByEngineerController extends Controller
     }
 
 
-    public function store_received_by_engineer(Request $request)
+    public function store_received_by_engineer(StoreReceivedByEngineerValidate $request)
     {
         $request_item_id = $request->request_item_id;
         $received_qty = $request->received_qty;
@@ -101,8 +102,17 @@ class VariableReceivedByEngineerController extends Controller
      */
     public function show($id)
     {
-        //
     }
+
+    public function show_for_admin($id)
+    {
+        $eng_request_items = VariableRequestInfo::with('variable_request_items_table')
+            ->get()
+            ->where('id', $id);
+        return view('engineer.variable_assets.received_by.show_for_admin', compact('eng_request_items'));
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

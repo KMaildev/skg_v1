@@ -191,7 +191,7 @@ class VariableRequestSsdController extends Controller
                         </a>
                         ';
                 } else {
-                    
+
                     $html .= '
                         <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">
@@ -385,10 +385,11 @@ class VariableRequestSsdController extends Controller
 
             ->editColumn('received_by_engineer', function ($each) {
                 $received_date = $each->received_date ?? '';
+                $received_by_engineer_link = route('variable_received_by_engineer_admin', ['id' => $each->id]);
                 $html = '';
                 if ($each->received_by_engineer_status) {
                     $html .= '
-                    <a href="#">
+                    <a href="' . $received_by_engineer_link . '">
                         <div class="d-flex flex-column w-100">
                             <div class="d-flex justify-content-between mb-1">
                                 <span>Received</span>
@@ -405,7 +406,7 @@ class VariableRequestSsdController extends Controller
                     ';
                 } else {
                     $html .= '
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                    <a href="' . $received_by_engineer_link . '">
                         <div class="d-flex flex-column w-100">
                             <div class="d-flex justify-content-between mb-1">
                                 <span>No</span>
