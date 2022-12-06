@@ -28,8 +28,8 @@ class VariableRequestSsdController extends Controller
     public function getVariableRequest(Request $request)
     {
         $data = VariableRequestInfo::with('user_table', 'customer_table')
-            ->where('accept_reject_status', 'accept')
-            ->orWhere('accept_reject_status', NULL)
+            // ->where('accept_reject_status', 'accept')
+            // ->orWhere('accept_reject_status', NULL)
             ->orderBy('id', 'DESC');
 
         return Datatables::of($data)
@@ -63,13 +63,19 @@ class VariableRequestSsdController extends Controller
                 // $html .= $each->work_scope;
                 $html .=  Str::substr($each->work_scope, 0, 20);
                 $html .=  '<br>';
-                $html .=  Str::substr($each->work_scope, 20, 40);
+                $html .=  Str::substr($each->work_scope, 20, 30);
                 $html .=  '<br>';
-                $html .=  Str::substr($each->work_scope, 40, 60);
+                $html .=  Str::substr($each->work_scope, 30, 40);
                 $html .=  '<br>';
-                $html .=  Str::substr($each->work_scope, 60, 80);
+                $html .=  Str::substr($each->work_scope, 40, 50);
                 $html .=  '<br>';
-                $html .=  Str::substr($each->work_scope, 80, 100);
+                $html .=  Str::substr($each->work_scope, 50, 70);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 70, 80);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 80, 90);
+                $html .=  '<br>';
+                $html .=  Str::substr($each->work_scope, 90, 100);
                 return $html;
             })
 
@@ -118,7 +124,6 @@ class VariableRequestSsdController extends Controller
                         </label>
                     </div>
                     
-                    
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="reject_' . $id . '"  value="reject" checked onclick="javascript: return false;">
                         <label class="form-check-label" for="reject_' . $id . '">
@@ -126,6 +131,7 @@ class VariableRequestSsdController extends Controller
                         </label>
                     </div>';
                 } else {
+
                     $html .= '
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="accept_reject_status_' . $id . '" id="accept_' . $id . '" onclick="updateAcceptRejectStatus(this);" value="accept">
@@ -169,7 +175,7 @@ class VariableRequestSsdController extends Controller
 
                 if ($each->qs_team_check_status) {
                     $html .= '
-                        <a href="#">
+                        <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">
                                 <div class="d-flex justify-content-between mb-1">
                                     <span>Finished</span>
@@ -185,6 +191,7 @@ class VariableRequestSsdController extends Controller
                         </a>
                         ';
                 } else {
+                    
                     $html .= '
                         <a class="' . $permission_accept . '" href="' . $link . '" target="_blank">
                             <div class="d-flex flex-column w-100">

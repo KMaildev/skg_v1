@@ -75,4 +75,10 @@ class VariableRequestInfo extends Model
     {
         return $this->belongsTo(VariableFinancePaymentSlip::class, 'id', 'variable_request_info_id');
     }
+
+
+    public function variable_qs_team_checks()
+    {
+        return $this->belongsTo(VariableQsTeamCheck::class, 'id', 'variable_request_info_id')->latest();
+    }
 }

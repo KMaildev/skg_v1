@@ -26,7 +26,9 @@ class VariableQsTeamCheckController extends Controller
      */
     public function create($id = null)
     {
-        $eng_request_items = VariableRequestInfo::with('variable_request_items_table')->get()->where('id', $id);
+        $eng_request_items = VariableRequestInfo::with('variable_request_items_table')
+            ->get()
+            ->where('id', $id);
         return view('variable_assets_request.qs_team_check.create', compact('eng_request_items'));
     }
 

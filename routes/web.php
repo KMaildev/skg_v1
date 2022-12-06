@@ -299,9 +299,17 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('engineer_variable_assets', 'Engineer\EngineerVariableAssetsController');
     Route::resource('variable_engineer_received', 'Engineer\VariableReceivedByEngineerController');
+    Route::get('variable_received_by_engineer/{id}', [
+        'as' => 'variable_received_by_engineer',
+        'uses' => 'Engineer\VariableReceivedByEngineerController@create'
+    ]);
+    Route::post('store_variable_received_by_engineer', [
+        'as' => 'store_variable_received_by_engineer',
+        'uses' => 'Engineer\VariableReceivedByEngineerController@store_received_by_engineer'
+    ]);
+
 
     Route::resource('weekly_photo', 'Engineer\WeeklyPhotoController');
-
 
 
     // Purchase

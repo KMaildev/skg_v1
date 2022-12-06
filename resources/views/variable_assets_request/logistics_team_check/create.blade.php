@@ -101,7 +101,7 @@
                                                 </td>
 
                                                 <td style="text-align: center;">
-                                                    <input class="price_entry" type="text" value=""
+                                                    <input class="price_entry form-control" type="text" value=""
                                                         style="text-align:right;" name="price[]"
                                                         oninput="setCalcTotalAmount({{ $qs_passed_qty }}, {{ $key + 1 }})"
                                                         id="price_{{ $key + 1 }}">
@@ -111,14 +111,15 @@
                                                 {{-- Total Amt --}}
                                                 <td style="text-align: center;">
                                                     <input readonly type="text" id="TotalAmount_{{ $key + 1 }}"
-                                                        style="text-align:right;">
+                                                        style="text-align:right;" class="form-control">
 
                                                     <input type="text" id="AntoherTotalAmount_{{ $key + 1 }}"
                                                         class="TotalAmountValue" hidden>
                                                 </td>
 
                                                 <td>
-                                                    <input type="text" style="width: 100%;" name="remark[]">
+                                                    <input type="text" style="width: 100%;" name="remark[]"
+                                                        class="form-control">
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -220,8 +221,8 @@
                                             </label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control"
-                                                    style="text-align:right; width: 90%" value="0"
-                                                    id="AllTotal" readonly>
+                                                    style="text-align:right; width: 90%" value="0" id="AllTotal"
+                                                    readonly>
                                             </div>
                                         </div>
 

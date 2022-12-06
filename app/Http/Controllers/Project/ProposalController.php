@@ -22,7 +22,9 @@ class ProposalController extends Controller
         //     ->orderByAsc("display_order")
         //     ->paginate(30);
 
-        $projects = Projects::orderBy('display_order', 'ASC')->paginate(50);
+        // $projects = Projects::orderBy('display_order', 'ASC')->paginate(50);
+        
+        $projects = Projects::paginate(50);
 
         if (request('search')) {
             $projects = Projects::where('project_status', 'Proposal')->where(function ($query) {

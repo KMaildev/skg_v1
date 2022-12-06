@@ -1,5 +1,5 @@
 @if ($request_info->received_by_engineer_status)
-    <a href="#">
+    <a href="{{ route('variable_received_by_engineer', $request_info->id) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span>Received</span>
@@ -14,7 +14,7 @@
         </div>
     </a>
 @else
-    <a href="#" data-bs-toggle="modal" data-bs-target="#modalCenter-{{ $request_info->id }}">
+    <a href="{{ route('variable_received_by_engineer', $request_info->id) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span>No</span>
@@ -27,6 +27,7 @@
     </a>
 @endif
 
+{{-- data-bs-toggle="modal" data-bs-target="#modalCenter-{{ $request_info->id }}" --}}
 <div class="col-lg-4 col-md-6">
     <form action="{{ route('variable_engineer_received.store') }}" method="POST" id="create-form">
         @csrf
