@@ -1,5 +1,5 @@
 @if ($request_info->received_by_engineer_status)
-    <a href="#">
+    <a href="{{ route('qs_team_check_create_by_engineer', ['id' => $request_info->id]) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span>Received</span>
@@ -11,7 +11,8 @@
         </div>
     </a>
 @else
-    <a href="#" data-bs-toggle="modal" data-bs-target="#modalCenter-{{ $request_info->id }}">
+    {{-- data-bs-toggle="modal" data-bs-target="#modalCenter-{{ $request_info->id }}" --}}
+    <a href="{{ route('qs_team_check_create_by_engineer', ['id' => $request_info->id]) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span>No</span>
@@ -45,12 +46,14 @@
                                     Received Date
                                 </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control date_picker" name="received_date" required>
+                                    <input type="text" class="form-control date_picker" name="received_date"
+                                        required>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-label-secondary"
+                                data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>

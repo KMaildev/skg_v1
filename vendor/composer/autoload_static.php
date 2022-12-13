@@ -704,6 +704,7 @@ class ComposerStaticInita824448a002a3fe67d28a9c81a6aa012
         'App\\Http\\Controllers\\Inventory\\VariableAssetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Inventory/VariableAssetsController.php',
         'App\\Http\\Controllers\\Inventory\\VariableAssetsSizeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Inventory/VariableAssetsSizeController.php',
         'App\\Http\\Controllers\\Inventory\\WarehousePlanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Inventory/WarehousePlanController.php',
+        'App\\Http\\Controllers\\ItemsInSiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemsInSiteController.php',
         'App\\Http\\Controllers\\MainWarehouseController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainWarehouseController.php',
         'App\\Http\\Controllers\\ManageVariableRequest\\ManagementVariableAcceptRejectStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManageVariableRequest/ManagementVariableAcceptRejectStatusController.php',
         'App\\Http\\Controllers\\ManageVariableRequest\\VariableAcceptRejectStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManageVariableRequest/VariableAcceptRejectStatusController.php',

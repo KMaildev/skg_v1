@@ -121,6 +121,7 @@ return array(
     'App\\Http\\Controllers\\Inventory\\VariableAssetsController' => $baseDir . '/app/Http/Controllers/Inventory/VariableAssetsController.php',
     'App\\Http\\Controllers\\Inventory\\VariableAssetsSizeController' => $baseDir . '/app/Http/Controllers/Inventory/VariableAssetsSizeController.php',
     'App\\Http\\Controllers\\Inventory\\WarehousePlanController' => $baseDir . '/app/Http/Controllers/Inventory/WarehousePlanController.php',
+    'App\\Http\\Controllers\\ItemsInSiteController' => $baseDir . '/app/Http/Controllers/ItemsInSiteController.php',
     'App\\Http\\Controllers\\MainWarehouseController' => $baseDir . '/app/Http/Controllers/MainWarehouseController.php',
     'App\\Http\\Controllers\\ManageVariableRequest\\ManagementVariableAcceptRejectStatusController' => $baseDir . '/app/Http/Controllers/ManageVariableRequest/ManagementVariableAcceptRejectStatusController.php',
     'App\\Http\\Controllers\\ManageVariableRequest\\VariableAcceptRejectStatusController' => $baseDir . '/app/Http/Controllers/ManageVariableRequest/VariableAcceptRejectStatusController.php',

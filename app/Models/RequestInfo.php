@@ -39,12 +39,10 @@ class RequestInfo extends Model
         return $this->belongsTo(RequestInfo::class, 'other_site_id', 'id');
     }
 
-
     public function request_infos_table_another()
     {
         return $this->belongsTo(RequestInfo::class, 'id', 'other_site_id');
     }
-
 
     public function qs_team_check_passes_table()
     {

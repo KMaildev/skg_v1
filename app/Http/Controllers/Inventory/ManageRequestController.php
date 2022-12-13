@@ -19,8 +19,8 @@ class ManageRequestController extends Controller
     {
         $users = User::all();
         $eng_request_infos = RequestInfo::with('eng_request_items_table')
-            ->where('received_by_engineer_status', NULL)
-            ->where('request_status', NULL)
+            // ->where('received_by_engineer_status', NULL)
+            // ->where('request_status', NULL)
             ->orderBy('id', 'DESC')->get();
 
         if ($request->user_id) {

@@ -90,6 +90,8 @@ Route::middleware('auth')->group(function () {
         'uses' => 'ManageVariableRequest\VariableQsTeamCheckController@create'
     ]);
 
+
+
     Route::resource('variable_logistics_team_check', 'ManageVariableRequest\VariableLogisticsTeamCheckController');
     Route::get('variable_logistics_check_create/{id}', [
         'as' => 'variable_logistics_check_create',
@@ -252,6 +254,22 @@ Route::middleware('auth')->group(function () {
         'as' => 'qs_team_check_create',
         'uses' => 'Inventory\QsTeamCheckController@create'
     ]);
+
+    Route::get('qs_team_check_create_by_engineer/{id}', [
+        'as' => 'qs_team_check_create_by_engineer',
+        'uses' => 'Inventory\QsTeamCheckController@create_by_engineer'
+    ]);
+
+    Route::get('show_received_items/{id}', [
+        'as' => 'show_received_items',
+        'uses' => 'Inventory\QsTeamCheckController@show_received_items'
+    ]);
+
+    Route::post('fixed_assets_received_by_engineer/', [
+        'as' => 'fixed_assets_received_by_engineer',
+        'uses' => 'Inventory\QsTeamCheckController@store_received_by_engineer'
+    ]);
+
 
     Route::resource('logistics_team_check', 'Inventory\LogisticsTeamCheckController');
     Route::get('logistics_team_check_create/{id}', [

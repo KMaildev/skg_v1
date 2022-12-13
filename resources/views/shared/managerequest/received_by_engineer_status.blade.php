@@ -1,5 +1,5 @@
 @if ($request_info->received_by_engineer_status)
-    <a href="#">
+    <a href="{{ route('show_received_items', ['id' => $request_info->id]) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span>Received</span>
@@ -14,7 +14,7 @@
         </div>
     </a>
 @else
-    <a href="#">
+    <a href="{{ route('show_received_items', ['id' => $request_info->id]) }}">
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between mb-1">
                 <span style="text-align: left">No</span>

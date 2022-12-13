@@ -7,14 +7,6 @@
                 <div class="card-body">
                     <div class="card-title header-elements">
                         <h5 class="m-0 me-2">Items in Site</h5>
-                        <div class="card-title-elements ms-auto">
-                            <div class="card-header-elements ms-auto">
-                                <form action="{{ route('items_in_site.index') }}" method="GET">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search"
-                                        name="search" />
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

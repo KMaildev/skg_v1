@@ -31,7 +31,6 @@ class EngRequestItem extends Model
         return $this->hasMany(QsTeamCheckPass::class, 'eng_request_item_id', 'id');
     }
 
-
     public function another_qs_team_check_passes_table()
     {
         return $this->belongsTo(QsTeamCheckPass::class, 'id', 'eng_request_item_id');
