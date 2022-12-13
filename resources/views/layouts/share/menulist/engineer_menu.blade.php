@@ -18,6 +18,12 @@
             </li>
 
             <li class="menu-item">
+                <a href="{{ route('items_in_site_by_engineer') }}" class="menu-link">
+                    Items in Site
+                </a>
+            </li>
+
+            <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <div data-i2n="Layouts">Manage Request</div>
                 </a>
@@ -41,15 +47,6 @@
                     <div data-i1n="Layouts">Engineer Return</div>
                 </a>
             </li>
-
-            <li class="menu-item">
-                <a href="{{ route('weekly_photo.index') }}" class="menu-link">
-                    <div data-i1n="Layouts">
-                        Weekly photo
-                    </div>
-                </a>
-            </li>
-
 
         </ul>
     </div>

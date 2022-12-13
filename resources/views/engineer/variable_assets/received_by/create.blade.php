@@ -199,7 +199,7 @@
                                         <td style="text-align: center; font-weight: bold">
                                             @php
                                                 $totla_received_qty = array_sum($totla_received_qty);
-                                                echo number_format($totla_received_qty);
+                                                echo number_format($totla_received_qty, 2);
                                             @endphp
                                         </td>
                                     </tr>

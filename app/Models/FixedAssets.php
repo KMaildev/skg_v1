@@ -31,4 +31,9 @@ class FixedAssets extends Model
     {
         return $this->hasMany(FixedAssetsBuyRequest::class, 'fixed_asset_id', 'id');
     }
+
+    public function unusable_fixed_assets_table()
+    {
+        return $this->hasMany(UnusableFixedAssets::class, 'fixed_asset_id', 'id');
+    }
 }

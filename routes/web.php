@@ -427,6 +427,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('testing', 'Testing\TestingController');
 
+    Route::resource('items_in_site', 'ItemsInSiteController');
+    Route::get('show_request_items/{id}', 'ItemsInSiteController@showItems')->name('show_request_items');
+    Route::get('items_in_site_by_engineer', 'ItemsInSiteController@items_in_site_by_engineer')->name('items_in_site_by_engineer');
 
 
     // Export 

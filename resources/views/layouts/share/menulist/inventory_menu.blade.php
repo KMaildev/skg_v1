@@ -50,6 +50,14 @@
                     </li>
 
                     <li class="menu-item">
+                        <a href="{{ route('items_in_site.index') }}" class="menu-link">
+                            <div data-i2n="Without menu">
+                                Items in site
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
                         <a href="{{ route('fixed_assets_reject_list') }}" class="menu-link">
                             <div data-i2n="Without menu">Rejected Request</div>
                         </a>

@@ -17,27 +17,45 @@
                             <table class="table table-bordered main-table">
                                 <thead class="tbbg">
                                     <tr>
-                                        <th style="background-color: #296166; color: white; width: 1%; text-align: center;">#</th>
-                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Items Name</th>
-                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Main Warehouse</th>
-                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">
-                                            {{-- Request Total --}}
-                                            Site On Hand [Total]
+                                        <th style="background-color: #296166; color: white; width: 1%; text-align: center;">
+                                            #
                                         </th>
-                                        <th style="background-color: #296166; color: white; width: 14%" hidden>Return [Total]</th>
-                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Remaining Balance</th>
-                                        <th style="background-color: #296166; color: white; width: 14%; text-align: center;">Action</th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Items Name
+                                        </th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Main Warehouse
+                                        </th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Total Damage
+                                        </th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Total Available
+                                        </th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Site On Hand
+                                        </th>
+
+                                        <th
+                                            style="background-color: #296166; color: white; width: 14%; text-align: center;">
+                                            Remaining Balance
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody class="mytbody">
-                                    @php
-                                        $site_on_hand_total = [];
-                                        $return_total = [];
-                                        $remaining_balance_total = [];
-                                    @endphp
+                                <tbody>
                                     @foreach ($fixed_assets as $key => $fixed_asset)
                                         <tr>
-                                            <td style="text-align: center;">
+                                            <td>
                                                 {{ $key + 1 }}
                                             </td>
 
@@ -46,65 +64,47 @@
                                             </td>
 
                                             {{-- Main Warehouse --}}
-                                            <td style="font-weight: bold; text-align: center;">
-                                                {{ $fixed_asset->qty }}
-                                            </td>
-
-                                            {{-- Site On Hand --}}
-                                            <td style="font-weight: bold; text-align: center;">
-                                                {{-- {{ $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty') }} --}}
+                                            <td style="text-align: right">
                                                 @php
-                                                    $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    echo $site_on_hand;
-                                                    $site_on_hand_total[] = $site_on_hand;
-                                                    
-                                                    // $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    // $site_on_hand = $site_on_hand - $return;
-                                                    
+                                                    $total_main_warehouse = $fixed_asset->qty;
+                                                    echo $total_main_warehouse;
                                                 @endphp
                                             </td>
 
-                                            {{-- Return [Total] --}}
-                                            <td style="font-weight: bold;" hidden>
+                                            {{-- Total Damage --}}
+                                            <td style="text-align: right">
                                                 @php
-                                                    $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    echo number_format($return);
-                                                    $return_total[] = $return;
+                                                    $total_damage = $fixed_asset->unusable_fixed_assets_table->sum('qty');
+                                                    echo $total_damage;
+                                                @endphp
+                                            </td>
+
+                                            {{-- Total Available --}}
+                                            <td style="text-align: right">
+                                                @php
+                                                    $total_available = $total_main_warehouse - $total_damage;
+                                                    echo $total_available;
+                                                @endphp
+                                            </td>
+
+                                            {{-- Site On Hand --}}
+                                            <td style="text-align: right">
+                                                @php
+                                                    $total_site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
+                                                    echo $total_site_on_hand;
                                                 @endphp
                                             </td>
 
                                             {{-- Remaining Balance --}}
-                                            <td style="font-weight: bold; text-align: center;">
+                                            <td style="text-align: right">
                                                 @php
-                                                    $main_warehouse = $fixed_asset->qty;
-                                                    $site_on_hand = $fixed_asset->qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    $return = $fixed_asset->return_qs_team_check_passes_table->sum('qs_passed_qty');
-                                                    $remaining_balance_calc = $site_on_hand - $return;
-                                                    echo $remaining_balance_calc;
-                                                    $remaining_balance_total[] = $remaining_balance_calc;
+                                                    $remaining_balance = $total_available - $total_site_on_hand;
+                                                    echo $remaining_balance;
                                                 @endphp
-                                            </td>
-
-                                            <td style="text-align: center;">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-info btn-xs dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('manage_warehouse_plan.show', $fixed_asset->id) }}">Details</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-            
                             </table>
                         </div>
                     </div>

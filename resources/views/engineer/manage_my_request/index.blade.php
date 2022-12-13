@@ -34,6 +34,10 @@
                         </th>
 
                         <th style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
+                            Request Items
+                        </th>
+
+                        <th style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
                             Accept / Reject
                         </th>
 
@@ -72,6 +76,30 @@
 
                             <td style="background-color: white;">
                                 {{ $request_info->request_date }}
+                            </td>
+
+                            {{-- Request Items --}}
+                            <td>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="background-color: #296166; color: white; width: 80%">
+                                            Items
+                                        </td>
+                                        <td style="background-color: #296166; color: white; width: 20%">
+                                            Qty
+                                        </td>
+                                    </tr>
+                                    @foreach ($request_info->eng_request_items_table as $value)
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                {{ $value->fixed_assets_table->item_name ?? '' }}
+                                            </td>
+                                            <td style="text-align: right;">
+                                                {{ $value->quantity ?? 0 }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
                             </td>
 
                             {{-- Accept / Reject --}}

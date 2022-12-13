@@ -218,7 +218,7 @@
                 @endcan
 
 
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4">
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 mb-4" hidden>
                     <a href="{{ route('elfinder.index') }}">
                         <div class="card">
                             <div class="card-body text-center">

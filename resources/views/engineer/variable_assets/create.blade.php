@@ -337,7 +337,7 @@
                     update_qty: qty,
                 },
                 success: function(data) {
-                    getVariableAssetsTemporarie();
+                    // getVariableAssetsTemporarie();
                 },
                 error: function(data) {}
             });
