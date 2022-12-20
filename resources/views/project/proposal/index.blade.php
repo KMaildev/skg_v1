@@ -52,8 +52,24 @@
                                 @can('quotation_proposal_view')
                                     <th
                                         style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
-                                        Quotation Proposal</th>
+                                        Quotation Proposal
+                                    </th>
                                 @endcan
+
+                                <th
+                                    style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
+                                    Survey
+                                </th>
+
+                                <th
+                                    style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
+                                    Soil Test
+                                </th>
+
+                                <th
+                                    style="color: white; text-align: center; width: 10%; background-color: #2e696e !important">
+                                    Additional work
+                                </th>
 
                                 @can('exterior_design_fees_view')
                                     <th
@@ -69,15 +85,16 @@
                                     </th>
                                 @endcan
 
-                                <th
-                                    style="color: white; text-align: center; width: 16%; background-color: #2e696e !important" hidden>
+                                <th style="color: white; text-align: center; width: 16%; background-color: #2e696e !important"
+                                    hidden>
                                     No Fees but Allowed</th>
 
                                 @can('archi_exterior_design_view')
                                     <th
                                         style="color: white; text-align: center; width: 16%; background-color: #2e696e !important">
-                                        <!--Archi Exterior Design-->
-                                        Additional Work
+                                        {{-- Archi Exterior Design --}}
+                                        Archi Design
+                                        {{-- Additional Work --}}
                                     </th>
                                 @endcan
 
@@ -147,6 +164,27 @@
                                             ])
                                         </td>
                                     @endcan
+
+                                    {{-- Survey --}}
+                                    <td style="text-align: center; font-size: 13px;">
+                                        @include('shared.project_status.survey_status', [
+                                            'project' => $project,
+                                        ])
+                                    </td>
+
+                                    {{-- Soil Test --}}
+                                    <td style="text-align: center; font-size: 13px;">
+                                        @include('shared.project_status.soil_test_status', [
+                                            'project' => $project,
+                                        ])
+                                    </td>
+
+                                    {{-- Additional work --}}
+                                    <td style="text-align: center; font-size: 13px;">
+                                        @include('shared.project_status.additional_work_status', [
+                                            'project' => $project,
+                                        ])
+                                    </td>
 
                                     {{-- Exterior Design Fees --}}
                                     @can('exterior_design_fees_view')

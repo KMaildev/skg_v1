@@ -145,6 +145,27 @@ Route::middleware('auth')->group(function () {
     ]);
 
 
+
+    Route::resource('additional_work', 'Proposal\AdditionalWorkController');
+    Route::get('additional_work_create/{id}', [
+        'as' => 'additional_work_create',
+        'uses' => 'Proposal\AdditionalWorkController@create'
+    ]);
+
+    Route::resource('soil_test', 'Proposal\SoilTestController');
+    Route::get('soil_test_create/{id}', [
+        'as' => 'soil_test_create',
+        'uses' => 'Proposal\SoilTestController@create'
+    ]);
+
+    Route::resource('survey', 'Proposal\SurveyController');
+    Route::get('survey_create/{id}', [
+        'as' => 'survey_create',
+        'uses' => 'Proposal\SurveyController@create'
+    ]);
+
+
+
     Route::resource('processingfile', 'ProcessingFileController');
     Route::get('processingfilecreate/{id}', [
         'as' => 'createprocessingfile.create',
