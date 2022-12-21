@@ -55,7 +55,6 @@ return [
             'visibility' => 'public',
         ],
 
-
         'filemanager' => [
             'driver' => 'local',
             'root' => storage_path('app/public/filemanager'),
